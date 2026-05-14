@@ -1,0 +1,11 @@
+{
+  "name": "healthlink360-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HealthLink360 marketing site + Stripe-backed founding member waitlist",
+  "type": "module",
+  "dependencies": {
+    "stripe": "^17.4.0",
+    "resend": "^4.0.1"
+  }
+}

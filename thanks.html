@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>You're in — HealthLink360</title>
+<meta name="description" content="You're on the HealthLink360 founding cohort list. Here's what happens next."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+<style>
+  body { background: var(--dark); color: #fff; }
+
+  .tx-page {
+    min-height: 100vh;
+    background:
+      radial-gradient(900px 600px at 50% -10%, rgba(var(--c-glow), 0.28), transparent 60%),
+      radial-gradient(700px 500px at 50% 110%, rgba(124,58,237,0.30), transparent 60%),
+      var(--dark);
+    padding: 120px var(--pad) 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tx-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px var(--pad);
+    background: rgba(8,3,15,0.78);
+    backdrop-filter: saturate(180%) blur(18px);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    color: #fff;
+  }
+
+  .tx-card {
+    max-width: 680px;
+    width: 100%;
+    text-align: center;
+    padding: 56px clamp(28px, 5vw, 64px);
+    background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: var(--r-xl);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+    position: relative;
+    isolation: isolate;
+  }
+  .tx-card::before {
+    content: ""; position: absolute; inset: -1px; z-index: -1;
+    background: linear-gradient(135deg, rgba(var(--c-glow),0.4), transparent 40%, rgba(168,85,247,0.3));
+    border-radius: var(--r-xl);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .tx-check {
+    width: 88px; height: 88px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--c-a), var(--c-c));
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+    box-shadow: 0 12px 40px rgba(var(--c-glow), 0.4), inset 0 1px 0 rgba(255,255,255,.3);
+    animation: tx-pop .6s cubic-bezier(.2,1.4,.4,1) .1s both;
+  }
+  @keyframes tx-pop {
+    0% { transform: scale(0.3); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .tx-check svg { width: 44px; height: 44px; color: #fff; }
+
+  .tx-kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em;
+    color: var(--c-a); padding: 6px 12px; border-radius: 999px;
+    background: rgba(var(--c-glow), 0.16);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .tx-headline {
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+    margin: 0 0 18px;
+    color: #fff;
+    text-wrap: balance;
+  }
+  .tx-headline .grad {
+    background: linear-gradient(120deg, var(--c-a) 0%, #fff 50%, var(--c-b) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  .tx-lede {
+    font-size: 17px; line-height: 1.55;
+    color: rgba(255,255,255,0.78);
+    margin: 0 auto 36px;
+    max-width: 480px;
+    text-wrap: pretty;
+  }
+
+  .tx-next {
+    text-align: left;
+    margin: 0 auto 36px;
+    max-width: 460px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .tx-next-item {
+    display: grid; grid-template-columns: 36px 1fr; gap: 16px;
+    align-items: start;
+  }
+  .tx-next-num {
+    width: 28px; height: 28px;
+    border-radius: 999px;
+    background: rgba(var(--c-glow), 0.18);
+    border: 1px solid rgba(var(--c-glow), 0.4);
+    color: var(--c-a);
+    font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .tx-next-body h4 {
+    margin: 0 0 4px;
+    font-size: 15px; font-weight: 600;
+    color: #fff;
+  }
+  .tx-next-body p {
+    margin: 0;
+    font-size: 14.5px; line-height: 1.5;
+    color: rgba(255,255,255,0.68);
+  }
+
+  .tx-actions {
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .tx-actions a { text-decoration: none; }
+
+  .tx-receipt {
+    font-family: var(--font-mono); font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 24px;
+  }
+  .tx-receipt b { color: rgba(255,255,255,0.7); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<nav class="tx-nav">
+  <a href="HealthLink360 Website.html" class="hl-logo hl-logo-nav" aria-label="HealthLink360 AI">
+    <img src="assets/logo.png" alt="HealthLink360 AI" style="object-fit:cover; padding:25px 0 0;"/>
+  </a>
+</nav>
+
+<main class="tx-page">
+  <div class="tx-card">
+    <div class="tx-check" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+
+    <div class="tx-kicker">Reservation confirmed</div>
+    <h1 class="tx-headline">You're in. <span class="grad">Welcome, founder.</span></h1>
+    <p class="tx-lede">
+      Your spot in the HealthLink360 founding cohort is locked in. A confirmation
+      email is on its way to your inbox with your receipt and what to expect next.
+    </p>
+
+    <div class="tx-next">
+      <div class="tx-next-item">
+        <span class="tx-next-num">01</span>
+        <div class="tx-next-body">
+          <h4>Check your inbox</h4>
+          <p>Confirmation + receipt arrive within a minute. If you don't see it, check spam for hello@healthlink360.ai.</p>
+        </div>
+      </div>
+      <div class="tx-next-item">
+        <span class="tx-next-num">02</span>
+        <div class="tx-next-body">
+          <h4>We'll reach out in waves</h4>
+          <p>You'll get an onboarding link as soon as your founding wave opens — typically 4–8 weeks.</p>
+        </div>
+      </div>
+      <div class="tx-next-item">
+        <span class="tx-next-num">03</span>
+        <div class="tx-next-body">
+          <h4>Tell us what to build</h4>
+          <p>Founding members get a short survey to shape priorities. We read every response.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tx-actions">
+      <a href="HealthLink360 Website.html" class="hl-cta lg">
+        Back to home
+        <span>→</span>
+      </a>
+    </div>
+
+    <div class="tx-receipt">
+      Questions? Email <b>info@healthlink360.ai</b>
+    </div>
+  </div>
+</main>
+
+<!--
+  ───────────────────────────────────────────────────────────────
+  CONFIRMATION EMAIL — DEV NOTES
+  ───────────────────────────────────────────────────────────────
+  This page is reached via Stripe Checkout's success_url after payment.
+  Stripe will append ?session_id={CHECKOUT_SESSION_ID} to the URL.
+
+  The actual confirmation EMAIL is NOT sent from this page — it's
+  triggered server-side from a Stripe webhook (checkout.session.completed)
+  so it always fires, even if the user closes their browser before
+  reaching this page.
+
+  Recommended stack:
+    - Webhook handler: serverless function (Vercel/Netlify/Cloudflare)
+    - Email send: Resend (resend.com) or Loops (loops.so) — both have
+      generous free tiers and great deliverability
+    - Suggested email contents:
+        Subject: You're in — HealthLink360 founding cohort
+        Body: thank-you note, receipt summary, what happens next (mirror
+              the 01/02/03 list above), CTA back to landing page
+
+  Optional: read ?session_id from URL on this page and fetch the
+  session's customer email to personalize the on-page message.
+  ───────────────────────────────────────────────────────────────
+-->
+
+</body>
+</html>

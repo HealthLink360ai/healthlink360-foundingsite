@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Join the Founding Wave — HealthLink360</title>
+<meta name="description" content="Reserve your spot in the HealthLink360 founding cohort. Be among the first to get a Digital Twin and Coach360 access."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+<style>
+  body { background: var(--dark); color: #fff; }
+
+  .wl-page {
+    min-height: 100vh;
+    background:
+      radial-gradient(900px 600px at 85% -10%, rgba(var(--c-glow), 0.22), transparent 60%),
+      radial-gradient(700px 500px at 0% 100%, rgba(124,58,237,0.28), transparent 60%),
+      var(--dark);
+    padding: 120px var(--pad) 80px;
+  }
+
+  .wl-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px var(--pad);
+    background: rgba(8,3,15,0.78);
+    backdrop-filter: saturate(180%) blur(18px);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    color: #fff;
+  }
+  .wl-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 14px; color: rgba(255,255,255,.7);
+    padding: 8px 14px; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.04);
+    transition: background .2s, border-color .2s, color .2s;
+  }
+  .wl-back:hover { color: #fff; background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.24); }
+
+  .wl-grid {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(32px, 5vw, 80px);
+    align-items: start;
+  }
+  @media (max-width: 920px) { .wl-grid { grid-template-columns: 1fr; } }
+
+  .wl-kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em;
+    color: var(--c-a); padding: 6px 12px; border-radius: 999px;
+    background: rgba(var(--c-glow), 0.16);
+    text-transform: uppercase;
+  }
+  .wl-kicker .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--c-a); box-shadow: 0 0 10px var(--c-a); }
+
+  .wl-headline {
+    font-family: var(--font-sans);
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+    margin: 18px 0 24px;
+    text-wrap: balance;
+  }
+  .wl-headline .grad {
+    background: linear-gradient(120deg, var(--c-a) 0%, #fff 50%, var(--c-b) 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  .wl-lede {
+    font-size: 19px; line-height: 1.55;
+    color: rgba(255,255,255,0.78);
+    max-width: 560px;
+    margin: 0 0 36px;
+    text-wrap: pretty;
+  }
+
+  .wl-bullets {
+    display: flex; flex-direction: column; gap: 16px;
+    margin: 0 0 8px; padding: 0; list-style: none;
+  }
+  .wl-bullets li {
+    display: grid; grid-template-columns: 28px 1fr; gap: 14px;
+    align-items: start;
+    color: rgba(255,255,255,0.88);
+    font-size: 15.5px; line-height: 1.5;
+  }
+  .wl-bullets .ic {
+    width: 24px; height: 24px; border-radius: 999px;
+    background: rgba(var(--c-glow), 0.18);
+    border: 1px solid rgba(var(--c-glow), 0.4);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--c-a); font-size: 12px; font-weight: 700;
+    margin-top: 1px;
+  }
+  .wl-bullets b { color: #fff; font-weight: 600; }
+
+  /* ========= Pay card ========= */
+  .wl-card {
+    position: sticky; top: 110px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: var(--r-xl);
+    padding: 36px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .wl-card::before {
+    content: ""; position: absolute; inset: -1px; z-index: -1;
+    background: linear-gradient(135deg, rgba(var(--c-glow),0.4), transparent 40%, rgba(168,85,247,0.3));
+    border-radius: var(--r-xl);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .wl-card-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+    color: var(--c-a); padding: 6px 12px; border-radius: 999px;
+    background: rgba(var(--c-glow), 0.16);
+    border: 1px solid rgba(var(--c-glow), 0.3);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .wl-price-row {
+    display: flex; align-items: baseline; gap: 14px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .wl-price {
+    font-family: var(--font-sans);
+    font-size: 56px; font-weight: 600;
+    letter-spacing: -0.03em;
+    color: #fff; line-height: 1;
+  }
+  .wl-price-old {
+    font-size: 28px; font-weight: 500;
+    color: rgba(255,255,255,0.35);
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: rgba(255,43,214,0.6);
+    line-height: 1;
+  }
+  .wl-price-badge {
+    display: inline-flex; align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+    padding: 5px 10px; border-radius: 999px;
+    background: rgba(var(--c-glow), 0.22);
+    color: var(--c-a);
+    border: 1px solid rgba(var(--c-glow), 0.4);
+    text-transform: uppercase;
+  }
+  .wl-price-unit { color: rgba(255,255,255,0.55); font-size: 16px; }
+  .wl-price-note {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px; margin: 0 0 28px;
+  }
+
+  .wl-includes {
+    list-style: none; margin: 0 0 28px; padding: 24px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .wl-includes li {
+    display: grid; grid-template-columns: 18px 1fr; gap: 12px;
+    align-items: start;
+    font-size: 14.5px; color: rgba(255,255,255,0.88);
+    line-height: 1.45;
+  }
+  .wl-includes .chk {
+    width: 18px; height: 18px;
+    color: var(--c-a);
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .wl-pay-btn {
+    width: 100%;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 18px 24px;
+    border: 0; border-radius: 999px;
+    background: linear-gradient(135deg, var(--c-a), var(--c-c));
+    color: #fff; font-weight: 600; font-size: 16px; letter-spacing: 0.01em;
+    box-shadow: 0 12px 32px rgba(var(--c-glow), 0.4), inset 0 1px 0 rgba(255,255,255,.25);
+    transition: transform .2s ease, box-shadow .2s ease;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .wl-pay-btn:hover { transform: translateY(-1px); box-shadow: 0 16px 40px rgba(var(--c-glow), 0.55); }
+  .wl-pay-btn:disabled { opacity: 0.6; cursor: progress; transform: none; }
+  .wl-pay-btn span.arrow { transition: transform .25s ease; }
+  .wl-pay-btn:hover span.arrow { transform: translateX(4px); }
+
+  .wl-trust {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    margin-top: 16px;
+    color: rgba(255,255,255,0.5); font-size: 12px;
+    font-family: var(--font-mono);
+  }
+  .wl-trust svg { width: 14px; height: 14px; }
+
+  /* FAQ */
+  .wl-faq {
+    max-width: var(--maxw); margin: 96px auto 0;
+    display: grid; grid-template-columns: 280px 1fr; gap: 64px;
+  }
+  @media (max-width: 760px) { .wl-faq { grid-template-columns: 1fr; gap: 32px; } }
+  .wl-faq h2 {
+    font-size: 36px; font-weight: 600;
+    letter-spacing: -0.02em; margin: 0;
+    color: #fff; line-height: 1.05;
+  }
+  .wl-faq-list { display: flex; flex-direction: column; }
+  .wl-faq-item {
+    border-top: 1px solid rgba(255,255,255,0.10);
+    padding: 24px 0;
+  }
+  .wl-faq-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.10); }
+  .wl-faq-q {
+    font-size: 17px; font-weight: 600;
+    color: #fff; margin: 0 0 10px;
+  }
+  .wl-faq-a {
+    font-size: 15px; line-height: 1.55;
+    color: rgba(255,255,255,0.7); margin: 0;
+    text-wrap: pretty;
+  }
+</style>
+</head>
+<body>
+
+<nav class="wl-nav">
+  <a href="HealthLink360 Website.html" class="hl-logo hl-logo-nav" aria-label="HealthLink360 AI">
+    <img src="assets/logo.png" alt="HealthLink360 AI" style="object-fit:cover; padding:25px 0 0;"/>
+  </a>
+  <a href="HealthLink360 Website.html" class="wl-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back
+  </a>
+</nav>
+
+<main class="wl-page">
+  <div class="wl-grid">
+
+    <!-- Left: description -->
+    <section class="wl-copy">
+      <div class="wl-kicker"><span class="dot"></span> Founding Cohort · Limited spots</div>
+      <h1 class="wl-headline">Reserve your <span class="grad">Digital Twin</span>.</h1>
+      <p class="wl-lede">
+        HealthLink360 opens to a small founding cohort first. Your $80 reservation locks in
+        early access to your Digital Twin and Coach360, and helps us train the new model of
+        preventative care on data that actually represents you.
+      </p>
+
+      <ul class="wl-bullets">
+        <li>
+          <span class="ic">1</span>
+          <span><b>Skip the line.</b> Founding members are invited in our first wave, weeks before public launch.</span>
+        </li>
+        <li>
+          <span class="ic">2</span>
+          <span><b>Lifetime founding rate.</b> Your monthly price is locked at the founding tier — forever.</span>
+        </li>
+        <li>
+          <span class="ic">3</span>
+          <span><b>Shape the product.</b> Direct line to our founders. We build with you, not at you.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Right: paid CTA card -->
+    <aside class="wl-card">
+      <div class="wl-card-tag">Founding Member</div>
+      <div class="wl-price-row">
+        <span class="wl-price">$80</span>
+        <span class="wl-price-old">$100</span>
+        <span class="wl-price-badge">Save 20%</span>
+      </div>
+      <p class="wl-price-note">USD · one-time · secures your founding spot.</p>
+
+      <ul class="wl-includes">
+        <li><svg class="chk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Priority access — first invite wave</li>
+        <li><svg class="chk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Lifetime founding price lock</li>
+        <li><svg class="chk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Founding-member onboarding session with our team</li>
+      </ul>
+
+      <button class="wl-pay-btn" id="wl-checkout" type="button">
+        <span>Reserve my spot</span>
+        <span class="arrow">→</span>
+      </button>
+
+      <div class="wl-trust">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Secure checkout · powered by Stripe
+      </div>
+    </aside>
+  </div>
+
+  <!-- FAQ -->
+  <section class="wl-faq">
+    <h2>Common questions.</h2>
+    <div class="wl-faq-list">
+      <div class="wl-faq-item">
+        <h3 class="wl-faq-q">When will I actually get access?</h3>
+        <p class="wl-faq-a">Founding members are invited in waves starting Q3 2026. You'll receive an email with onboarding instructions as soon as your wave opens, typically within 4–8 weeks of reserving.</p>
+      </div>
+      <div class="wl-faq-item">
+        <h3 class="wl-faq-q">Is my $80 refundable?</h3>
+        <p class="wl-faq-a">If we can't deliver access within 12 months, we will refund you in full, no questions. Otherwise the reservation is non-refundable once your founding spot is locked in.</p>
+      </div>
+      <div class="wl-faq-item">
+        <h3 class="wl-faq-q">What is the "founding price lock"?</h3>
+        <p class="wl-faq-a">Our public monthly price will rise over time as the product grows. Founding members keep the founding-tier price for as long as their subscription stays active. Forever.</p>
+      </div>
+      <div class="wl-faq-item">
+        <h3 class="wl-faq-q">I want this for my clinic, not myself.</h3>
+        <p class="wl-faq-a">Send us a note at <a href="mailto:info@healthlink360.ai" style="color:var(--c-a)">info@healthlink360.ai</a> — clinic pilots have a different onboarding path and we'd rather scope it with you directly.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  // Stripe Checkout — POSTs to /api/create-checkout-session which returns
+  // a hosted Stripe URL. See SETUP.md for env vars + webhook setup.
+
+  const btn = document.getElementById('wl-checkout');
+  const btnLabel = btn.querySelector('span:not(.arrow)');
+
+  btn.addEventListener('click', async () => {
+    btn.disabled = true;
+    btnLabel.textContent = 'Redirecting…';
+
+    try {
+      const res = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!res.ok) throw new Error('Checkout session failed');
+      const { url } = await res.json();
+      if (!url) throw new Error('No checkout URL returned');
+      window.location.href = url;
+    } catch (e) {
+      console.error(e);
+      btn.disabled = false;
+      btnLabel.textContent = 'Reserve my spot';
+      alert('Sorry — we couldn\'t start checkout. Please try again or email info@healthlink360.ai.');
+    }
+  });
+</script>
+
+</body>
+</html>
