@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/HealthLink360%20Website.html" }
+  ]
+}
