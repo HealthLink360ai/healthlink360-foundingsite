@@ -9,7 +9,7 @@
 
 import Stripe from 'stripe';
 
-const stripe = new Stripe(' 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 ', {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { 
   apiVersion: '2024-06-20',
 });
 
