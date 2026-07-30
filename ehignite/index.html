@@ -271,12 +271,18 @@ h2.title {
   background: var(--bg-soft);
 }
 
-/* tall source photo — a contained card, not a wide band, so both people stay in frame */
+/* text left, photo right — same pattern as .problem-grid */
+.partner-grid {
+  display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(40px,6vw,84px); align-items: center;
+  margin-bottom: clamp(40px,5vw,64px);
+}
+.partner-grid .sec-head { max-width: none; text-align: left; margin: 0; }
 .partner-photo {
-  width: min(380px, 78vw); aspect-ratio: 4/5; margin: 8px auto 0; border-radius: 20px; overflow: hidden;
+  aspect-ratio: 4/5; border-radius: 20px; overflow: hidden; position: relative;
   background: url("assets/vb-chw-homevisit.jpg") center 30% / cover no-repeat;
   box-shadow: 0 24px 50px rgba(19,28,92,.12);
 }
+@media (max-width: 900px){ .partner-grid{ grid-template-columns: 1fr; } }
 
 /* hero image — sits right under the fixed top bar + nav, above "The ASTP/ONC..." */
 .visual-break.vb-hero {
@@ -582,14 +588,16 @@ h2.title {
 <!-- ============================== PITCH — relocated from the hero, now that "how it works" has set up the story ============================== -->
 <section class="pitch sec-pad" id="partner">
   <div class="shell">
-    <div class="sec-head center">
-      <span class="eyebrow on-light reveal"><span class="dot"></span>Partner with us</span>
-      <h2 class="title reveal d1">Help us close the gaps in care, <span class="grad-text">before they become emergencies.</span></h2>
-      <p class="lead reveal d2">Every fact we surface comes scored and sourced, then turned into a next step someone can act on. We're looking for health systems, FQHCs, CHW organizations, and payers ready to pilot this trust layer with their own community. Every phase of the EHIgnite Challenge funds the next piece of that system.</p>
-    </div>
+    <div class="partner-grid">
+      <div class="sec-head">
+        <span class="eyebrow on-light reveal"><span class="dot"></span>Partner with us</span>
+        <h2 class="title reveal d1">Help us close the gaps in care, <span class="grad-text">before they become emergencies.</span></h2>
+        <p class="lead reveal d2">Every fact we surface comes scored and sourced, then turned into a next step someone can act on. We're looking for health systems, FQHCs, CHW organizations, and payers ready to pilot this trust layer with their own community. Every phase of the EHIgnite Challenge funds the next piece of that system.</p>
+      </div>
 
-    <!-- community health worker doing a home visit with a tablet -->
-    <div class="partner-photo reveal" role="img" aria-label="A community health worker reviewing a tablet with a patient during a home visit"></div>
+      <!-- community health worker doing a home visit with a tablet -->
+      <div class="partner-photo reveal" role="img" aria-label="A community health worker reviewing a tablet with a patient during a home visit"></div>
+    </div>
 
     <div class="partner-cards reveal d3">
       <div class="partner-card primary">
