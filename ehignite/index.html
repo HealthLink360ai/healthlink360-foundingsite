@@ -270,9 +270,12 @@ h2.title {
   display: flex; align-items: center; justify-content: center;
   background: var(--bg-soft);
 }
-.visual-break.vb-chw-home {
-  height: clamp(300px, 42vw, 480px);
-  background: url("assets/vb-chw-homevisit.jpg") center 20% / cover no-repeat;
+
+/* tall source photo — a contained card, not a wide band, so both people stay in frame */
+.partner-photo {
+  width: min(380px, 78vw); aspect-ratio: 4/5; margin: 8px auto 0; border-radius: 20px; overflow: hidden;
+  background: url("assets/vb-chw-homevisit.jpg") center 30% / cover no-repeat;
+  box-shadow: 0 24px 50px rgba(19,28,92,.12);
 }
 
 /* hero image — sits right under the fixed top bar + nav, above "The ASTP/ONC..." */
@@ -584,12 +587,10 @@ h2.title {
       <h2 class="title reveal d1">Help us close the gaps in care, <span class="grad-text">before they become emergencies.</span></h2>
       <p class="lead reveal d2">Every fact we surface comes scored and sourced, then turned into a next step someone can act on. We're looking for health systems, FQHCs, CHW organizations, and payers ready to pilot this trust layer with their own community. Every phase of the EHIgnite Challenge funds the next piece of that system.</p>
     </div>
-  </div>
 
-  <!-- community health worker doing a home visit with a tablet -->
-  <div class="visual-break vb-chw-home reveal" role="img" aria-label="A community health worker reviewing a tablet with a patient during a home visit"></div>
+    <!-- community health worker doing a home visit with a tablet -->
+    <div class="partner-photo reveal" role="img" aria-label="A community health worker reviewing a tablet with a patient during a home visit"></div>
 
-  <div class="shell">
     <div class="partner-cards reveal d3">
       <div class="partner-card primary">
         <span class="k">Start a pilot</span>
