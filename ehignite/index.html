@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HealthLink360 · The trust layer between health data and the moment it matters</title>
+<meta name="description" content="Your health record shouldn't need a translator. HealthLink360 turns fragmented charts into one trusted picture, with every fact scored and every answer cited. HHS EHIgnite Phase 1 winner.">
+
+<!-- Brand design system: Poppins @font-face + full color/type tokens -->
+<link rel="stylesheet" href="_ds/healthlink360-design-system-3336cfa1-1754-4c63-bcab-0d6b643361ce/colors_and_type.css">
+
+<style>
+/* ============================================================
+   HealthLink360 · Landing page — v3
+   One system, top to bottom: white / soft off-white content
+   sections, brand magenta + indigo as the only accents, Poppins
+   throughout (no second typeface). Dark cinematic treatment is
+   reserved for exactly two bookends — the hero and the closing
+   CTA — everything else is light and calm.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --nav-h: 74px;
+  --topbar-h: 44px;
+  --maxw: 1200px;
+  --gutter: clamp(20px, 5vw, 64px);
+
+  /* brand (fallbacks; design-system css is source of truth) */
+  --magenta: #C8208E;
+  --magenta-bright: #E11FA0;
+  --magenta-deep: #9E1872;
+  --indigo: #1F2F8C;
+  --indigo-bright: #2D40B5;
+  --indigo-deep: #131C5C;
+  --violet: #6928A0;
+  --ink-900: #0B0B12;
+  --ink-700: #2A2A36;
+  --ink-600: #4A4A57;
+  --ink-500: #6B6B78;
+  --ink-200: #E4E4EA;
+
+  /* light content canvas — alternates white / soft off-white, no warm sand */
+  --bg-soft: #F7F7FB;
+  --tint-indigo: #EEF0FA;
+  --tint-magenta: #FDEBF5;
+
+  --mono: var(--font-mono, ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--ink-900);
+  font-family: var(--font-sans, 'Poppins', system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img, video { display: block; max-width: 100%; }
+.shell { max-width: var(--maxw); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+
+.grad-text {
+  background: linear-gradient(105deg, var(--magenta-bright) 0%, var(--magenta) 42%, var(--violet) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  border-radius: 999px; font-weight: 600; font-size: 15.5px; line-height: 1;
+  padding: 15px 26px; cursor: pointer; border: 1.5px solid transparent;
+  font-family: inherit; white-space: nowrap;
+  transition: transform .2s var(--ease-out, cubic-bezier(.2,.7,.2,1)), box-shadow .25s ease, background .25s ease, border-color .25s ease, color .2s ease;
+}
+.btn svg { transition: transform .25s cubic-bezier(.2,.7,.2,1); }
+.btn:hover svg.arrow { transform: translateX(4px); }
+.btn-primary {
+  color: #fff;
+  background: linear-gradient(135deg, var(--indigo) 0%, var(--violet) 50%, var(--magenta) 100%);
+  background-size: 180% 180%; background-position: 0% 50%;
+  box-shadow: 0 12px 30px rgba(200,32,142,.28), 0 2px 8px rgba(19,28,92,.22);
+}
+.btn-primary:hover { transform: translateY(-2px); background-position: 100% 50%; box-shadow: 0 18px 44px rgba(200,32,142,.4); }
+.btn-primary:active { transform: translateY(0) scale(.99); }
+.btn-solid { background: var(--magenta); color: #fff; box-shadow: 0 10px 24px rgba(200,32,142,.26); }
+.btn-solid:hover { background: var(--magenta-bright); transform: translateY(-2px); }
+.btn-ghost-light { color: #fff; border-color: rgba(255,255,255,.34); background: rgba(255,255,255,.04); backdrop-filter: blur(6px); }
+.btn-ghost-light:hover { border-color: rgba(255,255,255,.85); background: rgba(255,255,255,.1); }
+.btn-sm { padding: 11px 20px; font-size: 14.5px; }
+
+/* ---------- Eyebrow ---------- */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+}
+.eyebrow.on-dark { color: #C9CFEE; }
+.eyebrow.on-light { color: var(--magenta-deep); }
+.eyebrow .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--magenta); box-shadow: 0 0 12px var(--magenta-bright); }
+
+/* ============================================================ NAV — always light now that the page opens straight into content, no dark hero behind it ============================================================ */
+.nav {
+  position: fixed; top: var(--topbar-h); left: 0; right: 0; z-index: 100; height: var(--nav-h);
+  display: flex; align-items: center;
+  background: rgba(255,255,255,.86); backdrop-filter: saturate(180%) blur(16px);
+  border-bottom: 1px solid var(--ink-200);
+  transition: box-shadow .3s ease;
+}
+.nav .shell { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.nav-logo { height: 30px; }
+.nav.scrolled { box-shadow: 0 1px 24px rgba(19,28,92,.07); }
+.nav-links { display: flex; align-items: center; gap: 30px; }
+.nav-links a.link { font-size: 14.5px; font-weight: 500; color: var(--ink-700); opacity: .9; transition: color .2s, opacity .2s; }
+.nav-links a.link:hover { opacity: 1; color: var(--magenta-deep); }
+@media (max-width: 860px) { .nav-links a.link { display: none; } }
+
+/* ============================================================ TOP BAR — persistent EHIgnite credibility pill, fixed above the nav ============================================================ */
+.top-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 101; height: var(--topbar-h);
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--indigo) 0%, var(--violet) 55%, var(--magenta) 100%);
+}
+
+/* winner badge */
+.badge {
+  display: inline-flex; align-items: center; gap: 11px;
+  border: 1px solid rgba(225,31,160,.5); background: rgba(225,31,160,.1);
+  border-radius: 999px; padding: 7px 8px 7px 15px;
+  backdrop-filter: blur(8px);
+}
+.badge .b-label { font-size: 11.5px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: #F4D7EA; }
+.badge .b-pill { font-size: 10.5px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; color: #fff; background: var(--magenta); border-radius: 999px; padding: 5px 11px; }
+/* on the top bar itself */
+.top-bar .badge { border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.14); }
+.top-bar .badge .b-label { color: #fff; }
+.top-bar .badge .b-pill { background: #fff; color: var(--magenta-deep); }
+
+/* ---------- product mockup (shared — used in "how it works") ---------- */
+.mockup {
+  background: #fff; border-radius: 18px; overflow: hidden; text-align: left;
+  border: 1px solid rgba(255,255,255,.5);
+  box-shadow: 0 40px 90px rgba(6,9,40,.5), 0 12px 30px rgba(6,9,40,.35);
+}
+.mk-head { background: var(--indigo-deep); padding: 13px 18px; display: flex; align-items: center; justify-content: space-between; }
+.mk-brand { display: flex; align-items: center; gap: 10px; }
+.mk-brand img { width: 30px; height: 30px; border-radius: 8px; }
+.mk-brand .t { font-size: 13.5px; font-weight: 700; color: #fff; line-height: 1.2; }
+.mk-brand .s { font-size: 10.5px; color: #C9CFEE; }
+.mk-chip { background: var(--magenta); color: #fff; border-radius: 999px; padding: 6px 12px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.mk-body { padding: 15px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
+.mk-patient .name { font-size: 15px; font-weight: 700; color: var(--ink-900); }
+.mk-patient .src { font-family: var(--mono); font-size: 11px; color: var(--ink-500); margin-top: 2px; }
+.mk-tabs { display: flex; background: #F2F1F6; border-radius: 999px; padding: 4px; gap: 3px; }
+.mk-tabs span { flex: 1; text-align: center; padding: 7px 0; font-size: 11.5px; font-weight: 500; color: #4A4A57; border-radius: 999px; }
+.mk-tabs span.active { background: var(--indigo); color: #fff; font-weight: 600; }
+.mk-alert { background: #FBF1DA; border: 1.5px solid #E0B24B; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
+.mk-alert .h { font-size: 13px; font-weight: 700; color: #7E580A; display: flex; align-items: center; gap: 7px; }
+.mk-alert .d { font-size: 11.5px; line-height: 1.45; color: #2A2A36; }
+.mk-alert .row { display: flex; align-items: center; gap: 10px; margin-top: 2px; }
+.mk-mini { background: var(--indigo); color: #fff; border-radius: 999px; padding: 5px 12px; font-size: 11.5px; font-weight: 600; }
+.mk-muted { font-family: var(--mono); font-size: 10.5px; color: #7E580A; }
+.mk-line { border: 1px solid #ECEAF2; border-radius: 12px; padding: 11px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.mk-line .k { font-size: 13.5px; font-weight: 700; color: var(--ink-900); display:flex; align-items:center; gap:8px;}
+.mk-line .sub { font-family: var(--mono); font-size: 10.5px; color: var(--ink-500); margin-top: 3px; }
+.mk-conf { border-radius: 999px; padding: 5px 11px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.mk-conf.ok { background: #E4F4EC; color: #145E3E; }
+.mk-good { background: #E4F4EC; border: 1.5px solid #37B57D; border-radius: 12px; padding: 11px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.mk-good .k { font-size: 13.5px; font-weight: 700; color: #145E3E; }
+.mk-good .sub { font-size: 11.5px; color: #2A2A36; margin-top: 2px; }
+.mk-good .cta { background: #1F8A5B; color: #fff; border-radius: 999px; padding: 6px 13px; font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+.spark { display: inline-flex; gap: 2px; align-items: flex-end; height: 16px; }
+.spark i { width: 3px; border-radius: 2px; background: #1F8A5B; opacity: .85; }
+
+/* hero credential row (Function bottom-stats) */
+.hero-cred {
+  position: relative; z-index: 2; margin-top: clamp(40px, 6vw, 66px);
+  display: flex; flex-wrap: wrap; align-items: center; gap: clamp(18px, 4vw, 44px);
+  padding-top: 26px; border-top: 1px solid rgba(255,255,255,.14);
+}
+.cred { display: flex; flex-direction: column; gap: 3px; }
+.cred .n { font-size: clamp(22px, 2.6vw, 30px); font-weight: 700; color: #fff; letter-spacing: -.02em; }
+.cred .n.accent { color: #F06FC0; }
+.cred .l { font-size: 12px; color: #A6ADD6; letter-spacing: .01em; }
+.cred-div { width: 1px; height: 34px; background: rgba(255,255,255,.16); }
+@media (max-width: 620px){ .cred-div{ display:none } }
+/* light-bg variant — used by the relocated .pitch section */
+.pitch .hero-cred { justify-content: center; border-top-color: var(--ink-200); }
+.pitch .cred { align-items: center; }
+.pitch .cred .n { color: var(--indigo); }
+.pitch .cred .n.accent { color: var(--magenta-deep); }
+.pitch .cred .l { color: var(--ink-600); }
+.pitch .cred-div { background: var(--ink-200); }
+
+/* ============================================================ Pitch section — the closing ask, reframed around partnering to close gaps in care ============================================================ */
+.pitch { background: var(--bg-soft); }
+.pitch .sec-head.center { max-width: 720px; }
+.partner-cards {
+  display: grid; grid-template-columns: 1.1fr 1fr .9fr; gap: 20px;
+  max-width: 1000px; margin: 40px auto 0; text-align: left;
+}
+.partner-card {
+  background: #fff; border: 1px solid var(--ink-200); border-radius: 16px;
+  padding: 26px 28px; display: flex; flex-direction: column; gap: 10px;
+}
+.partner-card.primary { background: var(--tint-magenta); border-color: rgba(200,32,142,.18); }
+.partner-card .k { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--magenta-deep); }
+.partner-card p { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--ink-600); }
+.partner-card .btn { align-self: flex-start; margin-top: 6px; }
+.partner-card .mail { font-size: 14.5px; font-weight: 600; color: var(--magenta-deep); align-self: flex-start; }
+.partner-card .mail:hover { color: var(--magenta-bright); }
+@media (max-width: 900px){ .partner-cards{ grid-template-columns: 1fr; } }
+
+.mc-form { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+.mc-form input[type=email] {
+  width: 100%; border: 1.5px solid var(--ink-200); background: #fff; border-radius: 999px;
+  padding: 11px 18px; font-size: 14.5px; font-family: inherit; color: var(--ink-900); outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.mc-form input[type=email]::placeholder { color: var(--ink-400); }
+.mc-form input[type=email]:focus { border-color: var(--magenta-bright); box-shadow: 0 0 0 3px rgba(200,32,142,.15); }
+.mc-form .btn { align-self: flex-start; }
+
+/* ============================================================ Sections ============================================================ */
+section { position: relative; }
+.sec-pad { padding: clamp(72px, 10vw, 128px) 0; }
+.sec-head { max-width: 800px; }
+.sec-head.center { margin: 0 auto; text-align: center; }
+h2.title {
+  margin: 16px 0 0; font-weight: 700; letter-spacing: -.02em; line-height: 1.08;
+  font-size: clamp(30px, 4.4vw, 52px); color: var(--ink-900);
+}
+.lead { margin: 20px 0 0; max-width: 60ch; font-size: clamp(16px,1.5vw,19px); line-height: 1.65; color: var(--ink-600); }
+.sec-head.center .lead { margin-left: auto; margin-right: auto; }
+
+/* ============================================================ Credential strip ============================================================ */
+.credstrip { background: #fff; border-bottom: 1px solid var(--ink-200); }
+.credstrip .shell { padding-top: 40px; padding-bottom: 40px; }
+.credstrip .cs-label {
+  text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ink-500); margin-bottom: 22px;
+}
+.cs-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: clamp(20px, 5vw, 64px); }
+.cs-item { display: flex; align-items: center; gap: 10px; color: var(--ink-700); font-weight: 600; font-size: 15px; }
+.cs-item svg { flex: none; color: var(--magenta-deep); }
+.cs-item .sub { font-weight: 400; color: var(--ink-500); font-size: 13px; }
+@media (max-width: 720px){ .cs-item .sub { display:none; } }
+
+/* ============================================================ Problem ============================================================ */
+.problem { background: var(--bg-soft); }
+.problem-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(40px,6vw,84px); align-items: center; }
+.problem h2 { font-size: clamp(32px,4.4vw,54px); }
+.quote-rule { border-left: 2px solid var(--magenta); padding-left: 26px; margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+.quote-rule p { margin: 0; font-size: clamp(17px,1.8vw,20px); line-height: 1.6; color: var(--ink-600); }
+.quote-rule p.punch { font-weight: 700; font-size: clamp(20px,2.3vw,26px); color: var(--ink-900); line-height: 1.35; }
+/* emotional portrait slot — cool brand tint, ready for a licensed photo */
+.problem-photo {
+  aspect-ratio: 4/5; border-radius: 20px; overflow: hidden; position: relative;
+  background: linear-gradient(150deg, var(--tint-indigo) 0%, #F1E9F5 50%, var(--tint-magenta) 100%);
+  box-shadow: 0 24px 50px rgba(19,28,92,.1); display: flex; align-items: flex-end;
+}
+.problem-photo .pp-cap {
+  position: relative; z-index: 2; margin: 22px; padding: 14px 16px; border-radius: 12px;
+  background: rgba(255,255,255,.8); backdrop-filter: blur(8px);
+  font-size: 13px; color: var(--ink-700); line-height: 1.45; max-width: 62%;
+}
+.problem-photo .pp-cap b { color: var(--ink-900); font-weight: 700; }
+@media (max-width: 900px){ .problem-grid{ grid-template-columns: 1fr; } .problem-photo{ aspect-ratio: 16/11; } }
+
+/* ============================================================ Visual break — full-width placeholder image bands, pure pacing between text-heavy sections ============================================================ */
+.visual-break {
+  position: relative; overflow: hidden;
+  height: clamp(220px, 30vw, 380px);
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--tint-indigo) 0%, #F1E9F5 50%, var(--tint-magenta) 100%);
+}
+.visual-break::before {
+  content:""; position:absolute; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply; opacity: .5;
+}
+.vb-cap {
+  position: relative; z-index: 2; margin: 0 24px; padding: 14px 20px; border-radius: 12px;
+  background: rgba(255,255,255,.82); backdrop-filter: blur(8px);
+  font-size: 13.5px; color: var(--ink-700); line-height: 1.5; max-width: 480px; text-align: center;
+}
+.vb-cap b { color: var(--ink-900); font-weight: 700; }
+
+/* ============================================================ How it works ============================================================ */
+.how { background: #fff; }
+.how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,5vw,68px); align-items: center; margin-top: clamp(44px,5vw,64px); }
+.steps { display: flex; flex-direction: column; gap: 12px; }
+.step {
+  display: flex; gap: 18px; align-items: flex-start; padding: 18px 20px; border-radius: 16px;
+  background: #fff; border: 1px solid var(--ink-200); box-shadow: 0 1px 2px rgba(15,18,60,.04);
+  transition: transform .22s var(--ease-out, cubic-bezier(.2,.7,.2,1)), box-shadow .22s, border-color .22s;
+}
+.step:hover { transform: translateX(4px); box-shadow: 0 16px 34px rgba(15,18,60,.1); border-color: var(--magenta); }
+.step .num {
+  flex: none; width: 42px; height: 42px; border-radius: 999px; background: var(--indigo); color: #fff; font-weight: 700; font-size: 17px;
+  display: flex; align-items: center; justify-content: center;
+}
+.step .st { font-size: 18px; font-weight: 700; color: var(--ink-900); }
+.step .sd { font-size: 14.5px; line-height: 1.5; color: var(--ink-600); margin-top: 3px; }
+.step .sd .mono-cite { font-weight: 600; color: var(--magenta-deep); }
+.no-source {
+  margin-top: 6px; background: var(--tint-magenta); border: 1px solid rgba(200,32,142,.18); border-radius: 16px; padding: 22px 24px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.no-source .h { font-weight: 700; font-size: 19px; color: var(--ink-900); }
+.no-source .d { font-size: 13.5px; line-height: 1.5; color: var(--ink-600); }
+.demo-panel {
+  background: linear-gradient(160deg, var(--tint-indigo), #F1E9F5 55%, var(--tint-magenta)); border-radius: 26px; padding: clamp(22px,3vw,32px);
+  display: flex; flex-direction: column; gap: 14px; align-items: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 24px 50px rgba(19,28,92,.12);
+}
+.demo-panel .mockup { width: 100%; box-shadow: 0 26px 56px rgba(19,28,92,.2), 0 8px 16px rgba(19,28,92,.1); }
+.demo-cap { font-weight: 600; font-size: 15px; color: var(--ink-700); text-align: center; }
+@media (max-width: 900px){ .how-grid{ grid-template-columns: 1fr; } }
+
+/* ============================================================ Emotional statement ============================================================ */
+.statement { background: var(--bg-soft); overflow: hidden; }
+.statement::before {
+  content:""; position:absolute; inset:0;
+  background: radial-gradient(700px 460px at 80% 10%, rgba(200,32,142,.06), transparent 60%),
+              radial-gradient(700px 500px at 0% 100%, rgba(45,64,181,.08), transparent 60%);
+}
+.statement .shell { position: relative; }
+.statement .big {
+  max-width: 20ch; margin: 0 auto; text-align: center; font-weight: 300;
+  font-size: clamp(30px, 4.6vw, 56px); line-height: 1.18; letter-spacing: -.015em; color: var(--ink-900);
+}
+.statement .big strong { font-weight: 700; }
+.statement .attr { display: block; text-align: center; margin-top: 30px; font-size: 12.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500); }
+
+/* ============================================================ EHIgnite band — now the page's first section, needs clearance under the fixed top bar + nav ============================================================ */
+.band { background: #fff; }
+#challenge.sec-pad:first-of-type { padding-top: calc(var(--topbar-h) + var(--nav-h) + clamp(32px, 6vw, 64px)); }
+.win-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(40px,6vw,80px); align-items: center; }
+.win-copy h2 { color: var(--ink-900); }
+.win-copy .lead { color: var(--ink-600); }
+.win-copy .lead.strong { color: var(--ink-900); font-weight: 600; font-size: clamp(17px,1.8vw,20px); }
+.win-link { display: inline-flex; align-items: center; gap: 8px; font-size: 15.5px; font-weight: 600; color: var(--magenta-deep); margin-top: 18px; }
+.win-link:hover { color: var(--magenta-bright); }
+.stat-bento { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.stat-card {
+  background: var(--bg-soft); border: 1px solid var(--ink-200); border-radius: 18px;
+  padding: 26px 24px; display: flex; flex-direction: column; gap: 6px;
+  transition: transform .25s cubic-bezier(.2,.7,.2,1), border-color .25s, box-shadow .25s;
+}
+.stat-card:hover { transform: translateY(-4px); border-color: var(--magenta); box-shadow: 0 16px 34px rgba(15,18,60,.08); }
+.stat-card .big { font-size: clamp(36px, 4.6vw, 50px); font-weight: 700; line-height: 1; letter-spacing: -.02em; color: var(--indigo); }
+.stat-card .big.accent { color: var(--magenta-deep); }
+.stat-card .cap { font-size: 13px; line-height: 1.45; color: var(--ink-600); }
+@media (max-width: 900px){ .win-grid{ grid-template-columns: 1fr; } }
+
+.timeline { margin-top: clamp(48px,6vw,76px); }
+.timeline .tl-eyebrow { color: var(--ink-500); margin-bottom: 22px; }
+.tl-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; }
+.tl-item { border-left: 2px solid var(--ink-200); padding: 4px 24px; display: flex; flex-direction: column; gap: 7px; }
+.tl-item.on { border-left-color: var(--magenta); }
+.tl-item .when { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-500); }
+.tl-item.on .when { color: var(--magenta-deep); }
+.tl-item .what { font-size: 16.5px; font-weight: 700; color: var(--ink-900); }
+.tl-item .desc { font-size: 13px; line-height: 1.5; color: var(--ink-600); }
+@media (max-width: 820px){ .tl-grid{ grid-template-columns: 1fr 1fr; gap: 24px 0; } }
+@media (max-width: 500px){ .tl-grid{ grid-template-columns: 1fr; } }
+
+/* ============================================================ ONC quote ============================================================ */
+.quote-sec { background: var(--bg-soft); }
+.quote-flex { display: flex; gap: 30px; align-items: flex-start; max-width: 940px; margin: 0 auto; }
+.quote-mark { flex: none; font-size: 100px; line-height: .7; font-weight: 700; margin-top: 12px;
+  background: linear-gradient(135deg, var(--indigo-bright), var(--violet) 50%, var(--magenta)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.quote-body p { margin: 0; font-weight: 500; font-size: clamp(20px,2.6vw,30px); line-height: 1.4; color: var(--ink-900); }
+.quote-body .attr { display: block; margin-top: 20px; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-500); }
+@media (max-width: 640px){ .quote-mark{ font-size: 64px; margin-top: 6px; } .quote-flex{ gap: 16px; } }
+
+/* ============================================================ Footer ============================================================ */
+.footer { background: #0A0C1E; color: #fff; padding: 56px 0 40px; }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
+.footer-brand img { height: 28px; margin-bottom: 14px; }
+.footer-brand p { margin: 0; font-size: 15px; color: #B9C0E4; max-width: 30ch; line-height: 1.5; }
+.footer-cols { display: flex; gap: 56px; flex-wrap: wrap; }
+.footer-col h4 { margin: 0 0 14px; font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: #6f77a3; font-weight: 600; }
+.footer-col a { display: block; font-size: 14.5px; color: #C4CBEC; margin-bottom: 10px; transition: color .2s; }
+.footer-col a:hover { color: #fff; }
+.footer-bottom { margin-top: 44px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12.5px; color: #8b93c2; }
+
+/* ============================================================ Scroll reveal ============================================================ */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal.d1 { transition-delay: .08s; } .reveal.d2 { transition-delay: .16s; } .reveal.d3 { transition-delay: .24s; } .reveal.d4 { transition-delay: .32s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================== TOP BAR — HHS EHIgnite pill, fixed at the very top of the page ============================== -->
+<div class="top-bar" id="top">
+  <div class="shell">
+    <a class="badge" href="https://healthit.gov/blog/interoperability/nine-teams-one-mission-meet-the-ehignite-phase-1-winners/" target="_blank" rel="noopener">
+      <span class="b-label">HHS EHIgnite Challenge</span>
+      <span class="b-pill">Phase 1 Winner</span>
+    </a>
+  </div>
+</div>
+
+<!-- ============================== NAV ============================== -->
+<nav class="nav" id="nav">
+  <div class="shell">
+    <a href="#top" aria-label="HealthLink360 home">
+      <img class="nav-logo" src="assets/logo-primary.png" alt="HealthLink360">
+    </a>
+    <div class="nav-links">
+      <a class="link" href="#how">How it works</a>
+      <a class="link" href="#challenge">The challenge</a>
+      <a class="btn btn-solid btn-sm" href="#subscribe">Subscribe</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================== EHIgnite CHALLENGE — now the page opener ============================== -->
+<section class="band sec-pad" id="challenge">
+  <div class="shell">
+    <div class="win-grid">
+      <div class="win-copy">
+        <span class="eyebrow on-light reveal"><span class="dot"></span>The ASTP/ONC EHIgnite Challenge</span>
+        <h2 class="title reveal d1">Nearly 100 teams answered the call. <span class="grad-text">Nine were chosen.</span></h2>
+        <p class="lead reveal d2">HHS challenged innovators nationwide to tame the single-patient EHI export, often hundreds of pages long and nearly impossible to use. Submissions faced rigorous evaluation by a multidisciplinary expert panel and internal ONC review.</p>
+        <p class="lead strong reveal d2">Phase 1 named HealthLink360 a winner.</p>
+        <p class="lead strong reveal d3">Phase 2 is where we prove it: turning this record into completed preventive action for the patients, care teams, and community health workers still stuck doing this work by hand.</p>
+        <a class="win-link reveal d3" href="https://healthit.gov/blog/interoperability/nine-teams-one-mission-meet-the-ehignite-phase-1-winners/" target="_blank" rel="noopener">Read the ONC announcement
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="stat-bento">
+        <div class="stat-card reveal"><span class="big">~100</span><span class="cap">proposals submitted nationwide</span></div>
+        <div class="stat-card reveal d1"><span class="big accent">9</span><span class="cap">Phase 1 winners selected by ONC</span></div>
+        <div class="stat-card reveal d2"><span class="big">$400K</span><span class="cap">Phase 2 prize pool now in play</span></div>
+        <div class="stat-card reveal d3"><span class="big accent">$250K</span><span class="cap">grand prize · Phase 2 concludes Mar 2027</span></div>
+      </div>
+    </div>
+
+    <div class="timeline reveal">
+      <span class="eyebrow on-light tl-eyebrow"><span class="dot"></span>What reviewers looked for, and what happens next</span>
+      <div class="tl-grid">
+        <div class="tl-item on"><span class="when">Jul 2026</span><span class="what">Phase 1 winner</span><span class="desc">Judged on summarization strength, clear use cases, and intuitive design</span></div>
+        <div class="tl-item on"><span class="when">Aug 6, 2026</span><span class="what">Winners showcase</span><span class="desc">Presenting the trust layer to ONC, peers, and press</span></div>
+        <div class="tl-item"><span class="when">Fall 2026</span><span class="what">Building Phase 2</span><span class="desc">Real, usable tools, co-designed with community health workers</span></div>
+        <div class="tl-item"><span class="when">Mar 2027</span><span class="what">Phase 2 finale</span><span class="desc">Competing for the $250K grand prize</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== ONC QUOTE — moved up to back the challenge section with third-party validation ============================== -->
+<section class="quote-sec sec-pad">
+  <div class="shell">
+    <div class="quote-flex reveal">
+      <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+      <div class="quote-body">
+        <p>[HealthLink360] makes raw EHI usable across the healthcare ecosystem by scoring facts for recency and consistency, then expanding into behavioral, biometric, and social determinants data.</p>
+        <span class="attr">ONC · announcing the Phase 1 winners · July 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== PROBLEM ============================== -->
+<section class="problem sec-pad">
+  <div class="shell">
+    <div class="problem-grid">
+      <div>
+        <span class="eyebrow on-light reveal"><span class="dot"></span>The problem</span>
+        <h2 class="title reveal d1">He downloaded his health record. <span class="grad-text">It made things worse.</span></h2>
+        <div class="quote-rule reveal d2">
+          <p>Two hospitals told him to take the same medication two different ways. Hundreds of pages, three systems that don't talk to each other, and one patient left to reconcile it all.</p>
+          <p class="punch">Access without trust isn't empowerment. It's homework.</p>
+        </div>
+      </div>
+      <div class="problem-photo reveal d2" role="img" aria-label="A person overwhelmed by health portals and paperwork">
+        <div class="pp-cap">Drop a portrait here: <b>someone overwhelmed by portals &amp; paperwork.</b> Warm, human, close-up. This slot is ready for a licensed photo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== VISUAL BREAK — placeholder, ready for a real photo ============================== -->
+<div class="visual-break">
+  <div class="vb-cap">Drop an image here: <b>a community health worker and a patient reviewing a reconciled record together.</b> Warm, collaborative, hands-on. This slot is ready for a licensed photo.</div>
+</div>
+
+<!-- ============================== HOW IT WORKS ============================== -->
+<section class="how sec-pad" id="how">
+  <div class="shell">
+    <div class="sec-head center">
+      <span class="eyebrow on-light reveal"><span class="dot"></span>How it works · The trust layer</span>
+      <h2 class="title reveal d1">Before we summarize a single sentence, we reconcile the record and preserve the <span class="grad-text">evidence behind every fact.</span></h2>
+    </div>
+
+    <div class="how-grid">
+      <div class="steps">
+        <div class="step reveal"><span class="num">1</span><div><div class="st">Ingest</div><div class="sd">The full export: FHIR, C-CDA, even the PDFs. <span class="mono-cite">Nothing left on the table.</span></div></div></div>
+        <div class="step reveal d1"><span class="num">2</span><div><div class="st">Reconcile</div><div class="sd">Three fragmented charts become one record, duplicates merged and conflicts kept.</div></div></div>
+        <div class="step reveal d2"><span class="num">3</span><div><div class="st">Score</div><div class="sd">Every fact rated for <span class="mono-cite">recency + consistency</span> across sources.</div></div></div>
+        <div class="step reveal d3"><span class="num">4</span><div><div class="st">Act</div><div class="sd">Conflicts surfaced, cited, and resolved by a person, never buried.</div></div></div>
+        <div class="no-source reveal d3">
+          <div class="h">"No source, no statement."</div>
+          <div class="d">Privacy-preserving AI, by design. Visible confidence and a cited source on every answer we give.</div>
+        </div>
+      </div>
+
+      <div class="demo-panel reveal d1">
+        <div class="mockup">
+          <div class="mk-head">
+            <div class="mk-brand">
+              <img src="assets/logo-mark-square.png" alt="HealthLink360 mark">
+              <div><div class="t">HealthLink360</div><div class="s">Reconciled record</div></div>
+            </div>
+            <span class="mk-chip">Every fact cited</span>
+          </div>
+          <div class="mk-body">
+            <div class="mk-line">
+              <div><div class="k"><span style="width:8px;height:8px;border-radius:999px;background:#1F8A5B;display:inline-block;"></span>Blood pressure 128/82</div><div class="sub">hospital_b · may_2026 · consistent_across_2_sources</div></div>
+              <span class="mk-conf ok">High confidence</span>
+            </div>
+            <div class="mk-line">
+              <div><div class="k">A1C trend</div><div class="sub">4_labs_reconciled · jan→jun_2026</div></div>
+              <span class="spark"><i style="height:6px"></i><i style="height:9px"></i><i style="height:8px"></i><i style="height:13px"></i><i style="height:11px"></i><i style="height:16px"></i></span>
+            </div>
+            <div class="mk-alert">
+              <div class="h">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+                1 conflict flagged, not hidden
+              </div>
+              <div class="d">Two dosing instructions disagree. We show both, cite each source, and route it to a person.</div>
+            </div>
+            <div class="mk-good">
+              <div><div class="k">Preventive step surfaced</div><div class="sub">Diabetic eye exam overdue</div></div>
+              <span class="cta">Take action</span>
+            </div>
+          </div>
+        </div>
+        <div class="demo-cap">One truth. Three roles. No competing versions of it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== EMOTIONAL STATEMENT — moved up, right before "Built for the standards" ============================== -->
+<section class="statement sec-pad">
+  <div class="shell">
+    <p class="big reveal">A record you don't have to decode. A record that <strong>earned</strong> your <span class="grad-text">trust.</span></p>
+    <span class="attr reveal d1">the 360 prevention system</span>
+  </div>
+</section>
+
+<!-- ============================== CREDENTIAL STRIP — "Built for the standards..." ============================== -->
+<section class="credstrip">
+  <div class="shell">
+    <p class="cs-label">Built for the standards that health data runs on</p>
+    <div class="cs-row">
+      <div class="cs-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+        HHS · ASTP/ONC EHIgnite <span class="sub">Phase 1 winner</span>
+      </div>
+      <div class="cs-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16"/></svg>
+        FHIR &amp; C-CDA <span class="sub">standards-native ingest</span>
+      </div>
+      <div class="cs-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M22 4 12 14.01l-3-3"/></svg>
+        Privacy-preserving AI <span class="sub">source provenance by design</span>
+      </div>
+      <div class="cs-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Co-designed with CHWs <span class="sub">community health workers</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== VISUAL BREAK — placeholder, ready for a real photo ============================== -->
+<div class="visual-break">
+  <div class="vb-cap">Drop an image here: <b>a patient checking a preventive next step on their phone.</b> Calm, everyday, the record working quietly in the background. This slot is ready for a licensed photo.</div>
+</div>
+
+<!-- ============================== PITCH — relocated from the hero, now that "how it works" has set up the story ============================== -->
+<section class="pitch sec-pad" id="partner">
+  <div class="shell">
+    <div class="sec-head center">
+      <span class="eyebrow on-light reveal"><span class="dot"></span>Partner with us</span>
+      <h2 class="title reveal d1">Help us close the gaps in care, <span class="grad-text">before they become emergencies.</span></h2>
+      <p class="lead reveal d2">Every fact we surface comes scored and sourced, then turned into a next step someone can act on. We're looking for health systems, FQHCs, CHW organizations, and payers ready to pilot this trust layer with their own community. Every phase of the EHIgnite Challenge funds the next piece of that system.</p>
+    </div>
+
+    <div class="partner-cards reveal d3">
+      <div class="partner-card primary">
+        <span class="k">Start a pilot</span>
+        <p>Health systems, FQHCs, CHW organizations, and payers: bring the trust layer to your own community this fall, starting with the populations who need it most.</p>
+        <a class="btn btn-primary btn-sm" href="mailto:partners@healthlink360.ai">Partner with us
+          <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="partner-card" id="subscribe">
+        <span class="k">Stay in the loop</span>
+        <p>Follow the EHIgnite build: pilots, milestones, and what's next as we move through Phase 2.</p>
+        <form action="https://healthlink360.us19.list-manage.com/subscribe/post?u=87d61eb57f32c4b7537b63a0b&amp;id=da9062d461&amp;f_id=006988e4f0" method="post" name="mc-embedded-subscribe-form" class="mc-form" target="_blank" novalidate>
+          <input type="email" name="EMAIL" placeholder="you@email.com" aria-label="Email address" required>
+          <div style="position:absolute;left:-5000px;" aria-hidden="true">
+            <input type="text" name="b_87d61eb57f32c4b7537b63a0b_da9062d461" tabindex="-1" value="">
+          </div>
+          <button type="submit" name="subscribe" class="btn btn-primary btn-sm">Subscribe</button>
+        </form>
+      </div>
+      <div class="partner-card">
+        <span class="k">Press &amp; inquiries</span>
+        <p>Covering the EHIgnite Challenge or health data interoperability? We'd love to talk.</p>
+        <a class="mail" href="mailto:press@healthlink360.ai">press@healthlink360.ai →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="footer">
+  <div class="shell">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/logo-on-dark.png" alt="HealthLink360">
+        <p>The trust layer between health data and the moment it matters.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#how">How it works</a>
+          <a href="#subscribe">Subscribe</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#challenge">The challenge</a>
+          <a href="https://healthit.gov/blog/interoperability/nine-teams-one-mission-meet-the-ehignite-phase-1-winners/" target="_blank" rel="noopener">ONC announcement</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:partners@healthlink360.ai">Partners</a>
+          <a href="mailto:press@healthlink360.ai">Press</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 HealthLink360 · healthlink360.ai</span>
+      <span>HHS EHIgnite Challenge · Phase 1 Winner</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Sticky nav state
+  var nav = document.getElementById('nav');
+  var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 24); };
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Scroll reveal
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.14 });
+    reveals.forEach(function (el) { io.observe(el); });
+    setTimeout(function () { reveals.forEach(function (el) { el.classList.add('in'); }); }, 1600);
+  } else {
+    reveals.forEach(function (el) { el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>

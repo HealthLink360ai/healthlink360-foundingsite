@@ -1,5 +1,9 @@
 {
+  "redirects": [
+    { "source": "/ehignite", "destination": "/ehignite/", "permanent": true }
+  ],
   "rewrites": [
-    { "source": "/", "destination": "/HealthLink360%20Website.html" }
+    { "source": "/", "destination": "/HealthLink360%20Website.html" },
+    { "source": "/ehignite/", "destination": "/ehignite/index.html" }
   ]
 }

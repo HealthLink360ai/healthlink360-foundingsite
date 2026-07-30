@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap');
+
+/* ============================================================
+   HealthLink360 · The 360 Prevention System
+   Core color + typography tokens
+   ============================================================ */
+
+/* ----- Fonts ------------------------------------------------- */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 100;
+  src: url('./fonts/Poppins-Thin.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 100;
+  src: url('./fonts/Poppins-ThinItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  src: url('./fonts/Poppins-ExtraLight.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 200;
+  src: url('./fonts/Poppins-ExtraLightItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  src: url('./fonts/Poppins-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 300;
+  src: url('./fonts/Poppins-LightItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/Poppins-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 400;
+  src: url('./fonts/Poppins-Italic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./fonts/Poppins-Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 500;
+  src: url('./fonts/Poppins-MediumItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./fonts/Poppins-SemiBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 600;
+  src: url('./fonts/Poppins-SemiBoldItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./fonts/Poppins-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 700;
+  src: url('./fonts/Poppins-BoldItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  src: url('./fonts/Poppins-ExtraBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 800;
+  src: url('./fonts/Poppins-ExtraBoldItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  src: url('./fonts/Poppins-Black.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 900;
+  src: url('./fonts/Poppins-BlackItalic.ttf') format('truetype');
+}
+
+:root {
+  /* ----- Brand palette (sampled from logo) ------------------- */
+  --brand-magenta: #C8208E;       /* primary "action" pink */
+  --brand-magenta-bright: #E11FA0; /* hover / highlight */
+  --brand-magenta-deep: #9E1872;   /* press / on-light text */
+  --brand-magenta-soft: #FBE5F2;   /* tint surface */
+
+  --brand-indigo: #1F2F8C;        /* deep navy / trust */
+  --brand-indigo-bright: #2D40B5; /* link */
+  --brand-indigo-deep: #131C5C;   /* night surface */
+  --brand-indigo-soft: #E5E8F5;   /* tint surface */
+
+  --brand-violet: #6928A0;        /* mid-gradient hinge */
+
+  /* The 360 gradient — used sparingly on the mark, accents,
+     and primary CTAs. Goes navy → violet → magenta. */
+  --brand-gradient-360: linear-gradient(
+    135deg,
+    var(--brand-indigo) 0%,
+    var(--brand-violet) 50%,
+    var(--brand-magenta) 100%
+  );
+  --brand-gradient-360-soft: linear-gradient(
+    135deg,
+    #E5E8F5 0%,
+    #F0E6F5 50%,
+    #FBE5F2 100%
+  ); /* @kind color */
+
+  /* ----- Neutrals ------------------------------------------- */
+  --ink-900: #0B0B12;   /* primary text */
+  --ink-800: #1A1A23;
+  --ink-700: #2A2A36;
+  --ink-600: #4A4A57;   /* secondary text */
+  --ink-500: #6B6B78;   /* tertiary text / captions */
+  --ink-400: #9A9AA6;   /* placeholders */
+  --ink-300: #C8C8D1;   /* dividers */
+  --ink-200: #E4E4EA;   /* borders */
+  --ink-150: #EFEFF3;   /* subtle fills */
+  --ink-100: #F6F6F9;   /* surface tint */
+  --ink-050: #FBFBFD;   /* canvas tint */
+  --paper:   #FFFFFF;   /* canvas */
+
+  /* ----- Semantic — health signals -------------------------- */
+  /* Prevention/positive signal */
+  --signal-ok:        #1F8A5B;
+  --signal-ok-bg:     #E4F4EC;
+  --signal-ok-deep:   #145E3E;
+
+  /* Watch / behavioral nudge */
+  --signal-watch:     #C68A12;
+  --signal-watch-bg:  #FBF1DA;
+  --signal-watch-deep:#7E580A;
+
+  /* Risk / clinical alert */
+  --signal-alert:     #D03A2D;
+  --signal-alert-bg:  #FBE4E1;
+  --signal-alert-deep:#7E1F17;
+
+  /* Info / educational */
+  --signal-info:      var(--brand-indigo-bright);
+  --signal-info-bg:   var(--brand-indigo-soft);
+  --signal-info-deep: var(--brand-indigo-deep);
+
+  /* ----- Foreground / background semantics ------------------ */
+  --fg-1: var(--ink-900);    /* primary */
+  --fg-2: var(--ink-600);    /* secondary */
+  --fg-3: var(--ink-500);    /* tertiary / metadata */
+  --fg-4: var(--ink-400);    /* placeholder, disabled */
+  --fg-on-brand: #FFFFFF;
+  --fg-link: var(--brand-magenta-deep);
+
+  --bg-1: var(--paper);      /* main canvas */
+  --bg-2: var(--ink-050);    /* off-white */
+  --bg-3: var(--ink-100);    /* card alt */
+  --bg-4: var(--ink-150);
+  --bg-brand-soft: var(--brand-magenta-soft);
+  --bg-trust-soft: var(--brand-indigo-soft);
+
+  --border-1: var(--ink-200);
+  --border-2: var(--ink-300);
+  --border-strong: var(--ink-700);
+
+  /* ----- Typography ----------------------------------------- */
+  --font-sans: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Poppins', system-ui, sans-serif; /* same family, heavier weight */
+  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+
+  /* Base size step ratio: 1.25 (major third) */
+  --fs-12: 0.75rem;
+  --fs-13: 0.8125rem;
+  --fs-14: 0.875rem;
+  --fs-15: 0.9375rem;
+  --fs-16: 1rem;
+  --fs-18: 1.125rem;
+  --fs-20: 1.25rem;
+  --fs-24: 1.5rem;
+  --fs-28: 1.75rem;
+  --fs-32: 2rem;
+  --fs-40: 2.5rem;
+  --fs-48: 3rem;
+  --fs-64: 4rem;
+
+  --lh-tight: 1.1;     /* @kind font */
+  --lh-snug: 1.25;     /* @kind font */
+  --lh-base: 1.5;      /* @kind font */
+  --lh-relaxed: 1.65;  /* @kind font */
+
+  --tracking-tight: -0.02em;
+  --tracking-base: 0;
+  --tracking-wide: 0.08em;       /* eyebrows, all-caps labels */
+  --tracking-wider: 0.18em;      /* tagline-style */
+
+  /* ----- Spacing scale (4px base) --------------------------- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+  --s-24: 96px;
+
+  /* ----- Radii ---------------------------------------------- */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;     /* cards, inputs */
+  --r-lg: 16px;     /* large surface */
+  --r-xl: 24px;     /* hero, panels */
+  --r-pill: 999px;  /* buttons, chips */
+
+  /* ----- Shadows -------------------------------------------- */
+  --shadow-1: 0 1px 2px rgba(15, 18, 60, 0.06), 0 1px 3px rgba(15, 18, 60, 0.04);
+  --shadow-2: 0 4px 12px rgba(15, 18, 60, 0.08), 0 2px 4px rgba(15, 18, 60, 0.04);
+  --shadow-3: 0 12px 28px rgba(15, 18, 60, 0.12), 0 4px 8px rgba(15, 18, 60, 0.06);
+  --shadow-4: 0 24px 56px rgba(15, 18, 60, 0.18), 0 8px 16px rgba(15, 18, 60, 0.08);
+  --shadow-brand: 0 10px 24px rgba(200, 32, 142, 0.25);
+  --shadow-trust: 0 10px 24px rgba(31, 47, 140, 0.20);
+  --ring-focus: 0 0 0 3px rgba(200, 32, 142, 0.35);
+
+  /* ----- Motion --------------------------------------------- */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);     /* @kind other */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);  /* @kind other */
+  --dur-fast: 120ms;   /* @kind other */
+  --dur-base: 200ms;   /* @kind other */
+  --dur-slow: 360ms;   /* @kind other */
+}
+
+/* ----- Semantic typography roles ----------------------------- */
+.h-display,
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-64);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+}
+
+.h1, .t-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-48);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+}
+
+.h2, .t-h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-32);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+}
+
+.h3, .t-h3 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--fs-24);
+  line-height: var(--lh-snug);
+  color: var(--fg-1);
+}
+
+.h4, .t-h4 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-20);
+  line-height: var(--lh-snug);
+  color: var(--fg-1);
+}
+
+.t-lead {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--fs-20);
+  line-height: var(--lh-relaxed);
+  color: var(--fg-2);
+}
+
+.p, .t-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--fs-16);
+  line-height: var(--lh-relaxed);
+  color: var(--fg-1);
+}
+
+.t-body-sm {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--fs-14);
+  line-height: var(--lh-base);
+  color: var(--fg-2);
+}
+
+.t-caption {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--fs-13);
+  line-height: var(--lh-base);
+  color: var(--fg-3);
+}
+
+.t-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--fs-12);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--brand-magenta-deep);
+}
+
+.t-tagline {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--fs-14);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--ink-900);
+}
+
+.t-mono, code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+/* Gradient text — use sparingly, headlines only */
+.t-gradient {
+  background: var(--brand-gradient-360);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
