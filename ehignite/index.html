@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HealthLink360 · The trust layer between health data and the moment it matters</title>
 <meta name="description" content="Your health record shouldn't need a translator. HealthLink360 turns fragmented charts into one trusted picture, with every fact scored and every answer cited. HHS EHIgnite Phase 1 winner.">
+<link rel="icon" type="image/png" href="assets/logo-mark-square.png">
 
 <!-- Brand design system: Poppins @font-face + full color/type tokens -->
 <link rel="stylesheet" href="_ds/healthlink360-design-system-3336cfa1-1754-4c63-bcab-0d6b643361ce/colors_and_type.css">
@@ -109,7 +110,7 @@ img, video { display: block; max-width: 100%; }
   transition: box-shadow .3s ease;
 }
 .nav .shell { display: flex; align-items: center; justify-content: space-between; width: 100%; }
-.nav-logo { height: 30px; }
+.nav-logo { height: 42px; }
 .nav.scrolled { box-shadow: 0 1px 24px rgba(19,28,92,.07); }
 .nav-links { display: flex; align-items: center; gap: 30px; }
 .nav-links a.link { font-size: 14.5px; font-weight: 500; color: var(--ink-700); opacity: .9; transition: color .2s, opacity .2s; }
@@ -254,38 +255,41 @@ h2.title {
 .quote-rule { border-left: 2px solid var(--magenta); padding-left: 26px; margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
 .quote-rule p { margin: 0; font-size: clamp(17px,1.8vw,20px); line-height: 1.6; color: var(--ink-600); }
 .quote-rule p.punch { font-weight: 700; font-size: clamp(20px,2.3vw,26px); color: var(--ink-900); line-height: 1.35; }
-/* emotional portrait slot — cool brand tint, ready for a licensed photo */
+/* emotional portrait slot */
 .problem-photo {
   aspect-ratio: 4/5; border-radius: 20px; overflow: hidden; position: relative;
-  background: linear-gradient(150deg, var(--tint-indigo) 0%, #F1E9F5 50%, var(--tint-magenta) 100%);
+  background: url("assets/problem-portrait.jpg") center / cover no-repeat;
   box-shadow: 0 24px 50px rgba(19,28,92,.1); display: flex; align-items: flex-end;
 }
-.problem-photo .pp-cap {
-  position: relative; z-index: 2; margin: 22px; padding: 14px 16px; border-radius: 12px;
-  background: rgba(255,255,255,.8); backdrop-filter: blur(8px);
-  font-size: 13px; color: var(--ink-700); line-height: 1.45; max-width: 62%;
-}
-.problem-photo .pp-cap b { color: var(--ink-900); font-weight: 700; }
 @media (max-width: 900px){ .problem-grid{ grid-template-columns: 1fr; } .problem-photo{ aspect-ratio: 16/11; } }
 
-/* ============================================================ Visual break — full-width placeholder image bands, pure pacing between text-heavy sections ============================================================ */
+/* ============================================================ Visual break — full-width photo bands, pure pacing between text-heavy sections ============================================================ */
 .visual-break {
   position: relative; overflow: hidden;
   height: clamp(220px, 30vw, 380px);
   display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, var(--tint-indigo) 0%, #F1E9F5 50%, var(--tint-magenta) 100%);
+  background: var(--bg-soft);
 }
-.visual-break::before {
-  content:""; position:absolute; inset:0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
-  mix-blend-mode: multiply; opacity: .5;
+
+/* text left, photo right — same pattern as .problem-grid */
+.partner-grid {
+  display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(40px,6vw,84px); align-items: center;
+  margin-bottom: clamp(40px,5vw,64px);
 }
-.vb-cap {
-  position: relative; z-index: 2; margin: 0 24px; padding: 14px 20px; border-radius: 12px;
-  background: rgba(255,255,255,.82); backdrop-filter: blur(8px);
-  font-size: 13.5px; color: var(--ink-700); line-height: 1.5; max-width: 480px; text-align: center;
+.partner-grid .sec-head { max-width: none; text-align: left; margin: 0; }
+.partner-photo {
+  aspect-ratio: 4/5; border-radius: 20px; overflow: hidden; position: relative;
+  background: url("assets/vb-chw-homevisit.jpg") center 30% / cover no-repeat;
+  box-shadow: 0 24px 50px rgba(19,28,92,.12);
 }
-.vb-cap b { color: var(--ink-900); font-weight: 700; }
+@media (max-width: 900px){ .partner-grid{ grid-template-columns: 1fr; } }
+
+/* hero image — sits right under the fixed top bar + nav, above "The ASTP/ONC..." */
+.visual-break.vb-hero {
+  height: clamp(320px, 44vw, 520px);
+  margin-top: calc(var(--topbar-h) + var(--nav-h));
+  background: url("assets/vb-patient-phone.jpg") center 45% / cover no-repeat;
+}
 
 /* ============================================================ How it works ============================================================ */
 .how { background: #fff; }
@@ -334,9 +338,8 @@ h2.title {
 .statement .big strong { font-weight: 700; }
 .statement .attr { display: block; text-align: center; margin-top: 30px; font-size: 12.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500); }
 
-/* ============================================================ EHIgnite band — now the page's first section, needs clearance under the fixed top bar + nav ============================================================ */
+/* ============================================================ EHIgnite band ============================================================ */
 .band { background: #fff; }
-#challenge.sec-pad:first-of-type { padding-top: calc(var(--topbar-h) + var(--nav-h) + clamp(32px, 6vw, 64px)); }
 .win-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(40px,6vw,80px); align-items: center; }
 .win-copy h2 { color: var(--ink-900); }
 .win-copy .lead { color: var(--ink-600); }
@@ -424,6 +427,9 @@ h2.title {
   </div>
 </nav>
 
+<!-- ============================== HERO IMAGE ============================== -->
+<div class="visual-break vb-hero" role="img" aria-label="A person at home checking their phone, the HealthLink360 mark glowing on the screen"></div>
+
 <!-- ============================== EHIgnite CHALLENGE — now the page opener ============================== -->
 <section class="band sec-pad" id="challenge">
   <div class="shell">
@@ -484,16 +490,10 @@ h2.title {
         </div>
       </div>
       <div class="problem-photo reveal d2" role="img" aria-label="A person overwhelmed by health portals and paperwork">
-        <div class="pp-cap">Drop a portrait here: <b>someone overwhelmed by portals &amp; paperwork.</b> Warm, human, close-up. This slot is ready for a licensed photo.</div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- ============================== VISUAL BREAK — placeholder, ready for a real photo ============================== -->
-<div class="visual-break">
-  <div class="vb-cap">Drop an image here: <b>a community health worker and a patient reviewing a reconciled record together.</b> Warm, collaborative, hands-on. This slot is ready for a licensed photo.</div>
-</div>
 
 <!-- ============================== HOW IT WORKS ============================== -->
 <section class="how sec-pad" id="how">
@@ -585,18 +585,18 @@ h2.title {
   </div>
 </section>
 
-<!-- ============================== VISUAL BREAK — placeholder, ready for a real photo ============================== -->
-<div class="visual-break">
-  <div class="vb-cap">Drop an image here: <b>a patient checking a preventive next step on their phone.</b> Calm, everyday, the record working quietly in the background. This slot is ready for a licensed photo.</div>
-</div>
-
 <!-- ============================== PITCH — relocated from the hero, now that "how it works" has set up the story ============================== -->
 <section class="pitch sec-pad" id="partner">
   <div class="shell">
-    <div class="sec-head center">
-      <span class="eyebrow on-light reveal"><span class="dot"></span>Partner with us</span>
-      <h2 class="title reveal d1">Help us close the gaps in care, <span class="grad-text">before they become emergencies.</span></h2>
-      <p class="lead reveal d2">Every fact we surface comes scored and sourced, then turned into a next step someone can act on. We're looking for health systems, FQHCs, CHW organizations, and payers ready to pilot this trust layer with their own community. Every phase of the EHIgnite Challenge funds the next piece of that system.</p>
+    <div class="partner-grid">
+      <div class="sec-head">
+        <span class="eyebrow on-light reveal"><span class="dot"></span>Partner with us</span>
+        <h2 class="title reveal d1">Help us close the gaps in care, <span class="grad-text">before they become emergencies.</span></h2>
+        <p class="lead reveal d2">Every fact we surface comes scored and sourced, then turned into a next step someone can act on. We're looking for health systems, FQHCs, CHW organizations, and payers ready to pilot this trust layer with their own community. Every phase of the EHIgnite Challenge funds the next piece of that system.</p>
+      </div>
+
+      <!-- community health worker doing a home visit with a tablet -->
+      <div class="partner-photo reveal" role="img" aria-label="A community health worker reviewing a tablet with a patient during a home visit"></div>
     </div>
 
     <div class="partner-cards reveal d3">
