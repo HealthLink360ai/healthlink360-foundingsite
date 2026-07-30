@@ -270,7 +270,10 @@ h2.title {
   display: flex; align-items: center; justify-content: center;
   background: var(--bg-soft);
 }
-.visual-break.vb-chw-home { background: url("assets/vb-chw-homevisit.jpg") center 30% / cover no-repeat; }
+.visual-break.vb-chw-home {
+  height: clamp(300px, 42vw, 480px);
+  background: url("assets/vb-chw-homevisit.jpg") center 20% / cover no-repeat;
+}
 
 /* hero image — sits right under the fixed top bar + nav, above "The ASTP/ONC..." */
 .visual-break.vb-hero {
