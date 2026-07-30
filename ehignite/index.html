@@ -270,8 +270,14 @@ h2.title {
   display: flex; align-items: center; justify-content: center;
   background: var(--bg-soft);
 }
-.visual-break.vb-chw { background: url("assets/vb-chw-tablet.jpg") center 25% / cover no-repeat; }
-.visual-break.vb-phone { background: url("assets/vb-patient-phone.jpg") center 45% / cover no-repeat; }
+.visual-break.vb-chw-home { background: url("assets/vb-chw-homevisit.jpg") center 30% / cover no-repeat; }
+
+/* hero image — sits right under the fixed top bar + nav, above "The ASTP/ONC..." */
+.visual-break.vb-hero {
+  height: clamp(320px, 44vw, 520px);
+  margin-top: calc(var(--topbar-h) + var(--nav-h));
+  background: url("assets/vb-patient-phone.jpg") center 45% / cover no-repeat;
+}
 
 /* ============================================================ How it works ============================================================ */
 .how { background: #fff; }
@@ -320,9 +326,8 @@ h2.title {
 .statement .big strong { font-weight: 700; }
 .statement .attr { display: block; text-align: center; margin-top: 30px; font-size: 12.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500); }
 
-/* ============================================================ EHIgnite band — now the page's first section, needs clearance under the fixed top bar + nav ============================================================ */
+/* ============================================================ EHIgnite band ============================================================ */
 .band { background: #fff; }
-#challenge.sec-pad:first-of-type { padding-top: calc(var(--topbar-h) + var(--nav-h) + clamp(32px, 6vw, 64px)); }
 .win-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(40px,6vw,80px); align-items: center; }
 .win-copy h2 { color: var(--ink-900); }
 .win-copy .lead { color: var(--ink-600); }
@@ -410,6 +415,9 @@ h2.title {
   </div>
 </nav>
 
+<!-- ============================== HERO IMAGE ============================== -->
+<div class="visual-break vb-hero" role="img" aria-label="A person at home checking their phone, the HealthLink360 mark glowing on the screen"></div>
+
 <!-- ============================== EHIgnite CHALLENGE — now the page opener ============================== -->
 <section class="band sec-pad" id="challenge">
   <div class="shell">
@@ -474,9 +482,6 @@ h2.title {
     </div>
   </div>
 </section>
-
-<!-- ============================== VISUAL BREAK — clinician and patient reviewing a record together ============================== -->
-<div class="visual-break vb-chw" role="img" aria-label="A clinician and an older patient smiling together while reviewing a tablet"></div>
 
 <!-- ============================== HOW IT WORKS ============================== -->
 <section class="how sec-pad" id="how">
@@ -568,9 +573,6 @@ h2.title {
   </div>
 </section>
 
-<!-- ============================== VISUAL BREAK — patient checking a preventive next step on their phone ============================== -->
-<div class="visual-break vb-phone" role="img" aria-label="A person at home checking their phone, the HealthLink360 mark glowing on the screen"></div>
-
 <!-- ============================== PITCH — relocated from the hero, now that "how it works" has set up the story ============================== -->
 <section class="pitch sec-pad" id="partner">
   <div class="shell">
@@ -579,7 +581,12 @@ h2.title {
       <h2 class="title reveal d1">Help us close the gaps in care, <span class="grad-text">before they become emergencies.</span></h2>
       <p class="lead reveal d2">Every fact we surface comes scored and sourced, then turned into a next step someone can act on. We're looking for health systems, FQHCs, CHW organizations, and payers ready to pilot this trust layer with their own community. Every phase of the EHIgnite Challenge funds the next piece of that system.</p>
     </div>
+  </div>
 
+  <!-- community health worker doing a home visit with a tablet -->
+  <div class="visual-break vb-chw-home reveal" role="img" aria-label="A community health worker reviewing a tablet with a patient during a home visit"></div>
+
+  <div class="shell">
     <div class="partner-cards reveal d3">
       <div class="partner-card primary">
         <span class="k">Start a pilot</span>
