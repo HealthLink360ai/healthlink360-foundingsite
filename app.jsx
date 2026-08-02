@@ -384,7 +384,7 @@ function TrustProof() {
             <div className="hl-trust-stats-note">Early program and pilot outcomes. Results may vary by population, program design, and level of support.</div>
           </Reveal>
           <Reveal delay={200} className="hl-trust-photo-wrap">
-            <Photo src="assets/trust-homevisit.jpg" alt="A community health worker checking a patient's blood pressure during a home visit" ratio="51 / 91" />
+            <Photo src="assets/trust-homevisit.jpg" alt="A community health worker sharing a warm conversation with a patient during a home visit" ratio="91 / 51" />
           </Reveal>
         </div>
         <Reveal delay={240} as="div" className="hl-logo-ticker-wrap"><LogoTicker /></Reveal>

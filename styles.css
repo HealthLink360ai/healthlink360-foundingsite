@@ -545,7 +545,7 @@ button { font: inherit; cursor: pointer; }
   gap: 32px; align-items: start;
 }
 @media (max-width: 980px) { .hl-trust-body { grid-template-columns: 1fr; } }
-.hl-trust-photo-wrap { max-width: 340px; margin: 0 auto; }
+.hl-trust-photo-wrap { max-width: 520px; margin: 0 auto; width: 100%; }
 .hl-trust-photo-wrap .hl-photo-slot.hl-photo-real img { object-position: center; }
 .hl-trust-stats {
   background: var(--bg-alt); border: 1px solid rgba(0,0,0,0.06); border-radius: var(--r-lg);
