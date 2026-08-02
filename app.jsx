@@ -66,6 +66,17 @@ function Photo({ src, alt, ratio = "4 / 5", className = "" }) {
 
 }
 
+function PhoneFrame({ src, className = "" }) {
+  return (
+    <div className={`hl-phone ${className}`}>
+      <div className="hl-phone-screen">
+        <video src={src} autoPlay loop muted playsInline preload="auto" aria-hidden="true"></video>
+        <div className="hl-phone-island"></div>
+      </div>
+    </div>);
+
+}
+
 /* ============== Sections ============== */
 
 function Logo({ variant = "nav" }) {
@@ -236,7 +247,7 @@ function Companion() {
           <div className="hl-tagline">One body · One connected health story</div>
         </Reveal>
         <Reveal delay={120} className="hl-companion-photo">
-          <Photo src="assets/story-companion.jpg" alt="Same person, later: cooking dinner at home, calm evening light" ratio="4 / 5" />
+          <PhoneFrame src="assets/companion.mp4" />
           <div className="hl-companion-card">
             <div className="ttl">Coach360 · this evening</div>
             <div className="msg">Your blood pressure is trending up. Not an emergency. Not nothing. A 10-minute walk after dinner is a good first move.</div>
