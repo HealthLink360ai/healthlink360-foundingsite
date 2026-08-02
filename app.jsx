@@ -1,6 +1,6 @@
 /* HealthLink360: single-page site
    Black / white / magenta / purple brand
-   Sections: Nav, Hero, Problem, Companion, Seasons, Care-teams bridge, Trust & Proof, Closing, Footer
+   Sections: Nav, Hero, Problem, Seasons, Companion, Care-teams bridge, Trust & Proof (with CTA), Footer
 */
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -355,7 +355,7 @@ function LogoTicker() {
 
 }
 
-function TrustProof() {
+function TrustProof({ onWaitlist }) {
   const stats = [
   { value: "93%", label: "engagement", context: "in a prior Food-as-Medicine program" },
   { value: "90%", label: "medication adherence", context: "in an adherence-focused pilot" },
@@ -390,35 +390,13 @@ function TrustProof() {
         </div>
         <Reveal delay={240} as="div" className="hl-logo-ticker-wrap"><LogoTicker /></Reveal>
         <Reveal delay={280} as="div" className="hl-trust-footnote">Technology should help you feel more informed, not more overwhelmed.</Reveal>
-      </div>
-    </section>);
-
-}
-
-function Closing({ onWaitlist }) {
-  return (
-    <section id="start" className="hl-waitlist">
-      <div className="hl-section-inner">
-        <div className="hl-waitlist-card">
-          <div className="hl-wl-bg"></div>
-          <div className="hl-wl-inner">
-            <Reveal as="h2" className="hl-h2">You deserve more than health information.<br />You deserve a way forward.</Reveal>
-            <Reveal as="p" delay={80} className="hl-lede">
-              HealthLink360 connects your medical history, everyday health, next
-              steps, and support into one continuing journey, so every change
-              does not require starting again.
-            </Reveal>
-            <Reveal as="p" delay={140} className="hl-wl-price">
-              Reserve your spot in the founding cohort for $80 (was $100). Founding
-              members get priority access and a lifetime price lock.
-            </Reveal>
-            <Reveal delay={200} className="hl-wl-cta-wrap">
-              <button className="hl-cta lg" onClick={onWaitlist}>Reserve my spot <span>→</span></button>
-              <a href="#companion" className="hl-ghost">Explore the experience</a>
-            </Reveal>
-            <Reveal delay={260} as="div" className="hl-tagline light">One body · One connected health story</Reveal>
+        <Reveal delay={320} className="hl-trust-cta">
+          <div className="hl-trust-cta-text">
+            <div className="hl-trust-cta-title">Ready to see it for yourself?</div>
+            <p>Reserve your spot in the founding cohort for $80 (was $100). Founding members get priority access and a lifetime price lock.</p>
           </div>
-        </div>
+          <button className="hl-cta lg" onClick={onWaitlist}>Reserve my spot <span>→</span></button>
+        </Reveal>
       </div>
     </section>);
 
@@ -479,11 +457,10 @@ function App() {
       <Nav onWaitlist={goWaitlist} />
       <Hero onWaitlist={goWaitlist} />
       <Problem />
-      <Companion />
       <Seasons />
+      <Companion />
       <CareTeamsBridge />
-      <TrustProof />
-      <Closing onWaitlist={goWaitlist} />
+      <TrustProof onWaitlist={goWaitlist} />
       <Footer />
 
       <TweaksPanel title="Tweaks">
