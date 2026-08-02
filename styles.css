@@ -482,18 +482,30 @@ button { font: inherit; cursor: pointer; }
 
 /* ================ Seasons ================ */
 .hl-seasons {
+  position: relative; isolation: isolate; overflow: hidden;
   padding: 120px 0 100px;
-  background: var(--bg-alt);
-  background-image: radial-gradient(800px 400px at 90% 10%, rgba(var(--c-glow),0.06), transparent 60%);
+  color: #fff;
 }
+.hl-seasons-bg { position: absolute; inset: 0; z-index: 0; }
+.hl-seasons-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; display: block; }
+.hl-seasons-scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(8,3,15,.88) 0%, rgba(8,3,15,.74) 35%, rgba(8,3,15,.9) 100%);
+}
+.hl-seasons > .hl-section-inner { position: relative; z-index: 1; }
 .hl-seasons-intro { max-width: 760px; margin: 0 auto 24px; text-align: center; }
 .hl-seasons-intro .hl-h2 { max-width: none; margin: 0 auto 18px; }
 .hl-seasons-intro .hl-lede { max-width: none; margin: 0 auto; }
 .hl-seasons-rule { height: 2.5px; border-radius: 3px; margin: 36px 0; background: linear-gradient(90deg, var(--c-c), var(--c-b), var(--c-a)); }
-.hl-seasons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+.hl-seasons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 @media (max-width: 860px) { .hl-seasons-grid { grid-template-columns: 1fr; } }
+.hl-season-col {
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14);
+  border-radius: var(--r-lg); padding: 28px;
+  -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%);
+}
 .hl-season-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-.hl-season-head h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; color: var(--ink); margin: 0; }
+.hl-season-head h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; color: #fff; margin: 0; }
 .hl-season-icon { display: inline-flex; width: 24px; height: 24px; }
 .hl-season-icon svg { width: 100%; height: 100%; }
 .hl-season-icon.c-a { color: var(--c-a); }
@@ -503,14 +515,15 @@ button { font: inherit; cursor: pointer; }
 .hl-season-sub.c-a { color: var(--c-a); }
 .hl-season-sub.c-b { color: var(--c-b); }
 .hl-season-sub.c-c { color: var(--c-c); }
-.hl-season-col p { font-size: 14.5px; line-height: 1.6; color: var(--ink-mute); margin: 0; }
+.hl-season-col p { font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,.72); margin: 0; }
 .hl-seasons-note {
   margin: 56px auto 0; max-width: 720px; text-align: center;
-  background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 16px;
-  padding: 22px 28px; box-shadow: 0 1px 0 rgba(0,0,0,.02);
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); border-radius: 16px;
+  padding: 22px 28px;
+  -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%);
 }
-.hl-seasons-note .ttl { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
-.hl-seasons-note p { font-size: 14px; line-height: 1.6; color: var(--ink-mute); margin: 0; }
+.hl-seasons-note .ttl { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.hl-seasons-note p { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.72); margin: 0; }
 
 /* ================ Care-teams bridge ================ */
 .hl-care-bridge { background: rgba(124,58,237,.07); }
@@ -528,12 +541,12 @@ button { font: inherit; cursor: pointer; }
 .hl-trust-intro .hl-h2 { max-width: none; }
 .hl-trust-intro .hl-lede { max-width: none; }
 .hl-trust-body {
-  display: grid; grid-template-columns: minmax(min(480px, 100%), 1fr) minmax(min(360px, 100%), 360px);
+  display: grid; grid-template-columns: minmax(min(360px, 100%), 360px) minmax(min(340px, 100%), 1fr);
   gap: 32px; align-items: start;
 }
 @media (max-width: 980px) { .hl-trust-body { grid-template-columns: 1fr; } }
-.hl-trust-photo-wrap { max-width: 420px; }
-.hl-trust-photo-wrap .hl-photo-slot.hl-photo-real img { object-position: center 22%; }
+.hl-trust-photo-wrap { max-width: 340px; margin: 0 auto; }
+.hl-trust-photo-wrap .hl-photo-slot.hl-photo-real img { object-position: center; }
 .hl-trust-stats {
   background: var(--bg-alt); border: 1px solid rgba(0,0,0,0.06); border-radius: var(--r-lg);
   padding: 28px;

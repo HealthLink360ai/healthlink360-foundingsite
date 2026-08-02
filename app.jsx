@@ -270,10 +270,14 @@ function Seasons() {
 
   return (
     <section className="hl-seasons">
+      <div className="hl-seasons-bg">
+        <img src="assets/seasons-bg.jpg" alt="" aria-hidden="true" />
+        <div className="hl-seasons-scrim"></div>
+      </div>
       <div className="hl-section-inner">
         <Reveal as="div" className="hl-seasons-intro">
-          <h2 className="hl-h2">Wherever you are in your health, you should not have to start over.</h2>
-          <p className="hl-lede">
+          <h2 className="hl-h2 light">Wherever you are in your health, you should not have to start over.</h2>
+          <p className="hl-lede light">
             Health is not a straight line. You may be recovering in one area, building
             new habits in another, and protecting progress somewhere else. HealthLink360
             keeps the story connected as those needs change.
@@ -369,10 +373,7 @@ function TrustProof() {
           </p>
         </Reveal>
         <div className="hl-trust-body">
-          <Reveal delay={100} className="hl-trust-photo-wrap">
-            <Photo src="assets/trust-homevisit.jpg" alt="A community health worker checking a patient's blood pressure during a home visit" ratio="4 / 5" />
-          </Reveal>
-          <Reveal delay={200} className="hl-trust-stats">
+          <Reveal delay={100} className="hl-trust-stats">
             <div className="hl-trust-stats-kicker">Experience behind the platform</div>
             {stats.map((s, i) =>
             <div key={i} className="hl-trust-stat-row">
@@ -381,6 +382,9 @@ function TrustProof() {
               </div>
             )}
             <div className="hl-trust-stats-note">Early program and pilot outcomes. Results may vary by population, program design, and level of support.</div>
+          </Reveal>
+          <Reveal delay={200} className="hl-trust-photo-wrap">
+            <Photo src="assets/trust-homevisit.jpg" alt="A community health worker checking a patient's blood pressure during a home visit" ratio="51 / 91" />
           </Reveal>
         </div>
         <Reveal delay={240} as="div" className="hl-logo-ticker-wrap"><LogoTicker /></Reveal>
