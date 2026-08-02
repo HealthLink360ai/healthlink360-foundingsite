@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>You're in — HealthLink360</title>
+<title>You're in | HealthLink360</title>
 <meta name="description" content="You're on the HealthLink360 founding cohort list. Here's what happens next."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -182,7 +182,7 @@
         <span class="tx-next-num">02</span>
         <div class="tx-next-body">
           <h4>We'll reach out in waves</h4>
-          <p>You'll get an onboarding link as soon as your founding wave opens — typically 4–8 weeks.</p>
+          <p>You'll get an onboarding link as soon as your founding wave opens, typically 4–8 weeks.</p>
         </div>
       </div>
       <div class="tx-next-item">
@@ -209,22 +209,22 @@
 
 <!--
   ───────────────────────────────────────────────────────────────
-  CONFIRMATION EMAIL — DEV NOTES
+  CONFIRMATION EMAIL: DEV NOTES
   ───────────────────────────────────────────────────────────────
   This page is reached via Stripe Checkout's success_url after payment.
   Stripe will append ?session_id={CHECKOUT_SESSION_ID} to the URL.
 
-  The actual confirmation EMAIL is NOT sent from this page — it's
+  The actual confirmation EMAIL is NOT sent from this page. It's
   triggered server-side from a Stripe webhook (checkout.session.completed)
   so it always fires, even if the user closes their browser before
   reaching this page.
 
   Recommended stack:
     - Webhook handler: serverless function (Vercel/Netlify/Cloudflare)
-    - Email send: Resend (resend.com) or Loops (loops.so) — both have
+    - Email send: Resend (resend.com) or Loops (loops.so), both have
       generous free tiers and great deliverability
     - Suggested email contents:
-        Subject: You're in — HealthLink360 founding cohort
+        Subject: You're in: HealthLink360 founding cohort
         Body: thank-you note, receipt summary, what happens next (mirror
               the 01/02/03 list above), CTA back to landing page
 
