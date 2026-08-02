@@ -321,13 +321,24 @@ function CareTeamsBridge() {
 
 }
 
-function TrustProof() {
-  const pillars = [
-  { icon: "search", title: "Grounded in evidence", body: "Understand what HealthLink360 is noticing, why it may matter, and where the information came from." },
-  { icon: "home", title: "Built around real life", body: "Guidance considers routines, cultures, food traditions, preferences, responsibilities, barriers, environments, and available support, not just an isolated data point." },
-  { icon: "lock", title: "You remain in control", body: "Privacy, security, transparency, permission, and your choices sit at the center. HealthLink360 supports and educates; it does not diagnose or replace medical care." },
-  { icon: "award", title: "Federal recognition", body: "Winner, HHS EHIgnite Challenge. Recognized for helping make fragmented electronic health information more trustworthy, understandable, and actionable." }];
+function LogoTicker() {
+  const logos = ["Johns Hopkins University", "NVIDIA", "AWS", "Halcyon", "Conscious Venture Labs", "Build In Tulsa", "Visible Hands"];
+  const renderSet = (key) =>
+  <div className="hl-logo-set" key={key}>
+      {logos.map((l, i) => <span className="hl-logo-item" key={i}>{l}</span>)}
+    </div>;
 
+  return (
+    <div className="hl-logo-ticker">
+      <div className="hl-logo-ticker-track">
+        {renderSet("a")}
+        {renderSet("b")}
+      </div>
+    </div>);
+
+}
+
+function TrustProof() {
   const stats = [
   { value: "93%", label: "engagement", context: "in a prior Food-as-Medicine program" },
   { value: "90%", label: "medication adherence", context: "in an adherence-focused pilot" },
@@ -345,14 +356,8 @@ function TrustProof() {
           </p>
         </Reveal>
         <div className="hl-trust-body">
-          <Reveal delay={100} className="hl-trust-grid">
-            {pillars.map((p, i) =>
-            <div key={i} className="hl-trust-card">
-                <div className="hl-trust-icon"><MiniIcon k={p.icon} /></div>
-                <h3>{p.title}</h3>
-                <p>{p.body}</p>
-              </div>
-            )}
+          <Reveal delay={100} className="hl-trust-photo-wrap">
+            <Photo src="assets/trust-homevisit.jpg" alt="A community health worker checking a patient's blood pressure during a home visit" ratio="4 / 5" />
           </Reveal>
           <Reveal delay={200} className="hl-trust-stats">
             <div className="hl-trust-stats-kicker">Experience behind the platform</div>
@@ -365,6 +370,7 @@ function TrustProof() {
             <div className="hl-trust-stats-note">Early program and pilot outcomes. Results may vary by population, program design, and level of support.</div>
           </Reveal>
         </div>
+        <Reveal delay={240} as="div" className="hl-logo-ticker-wrap"><LogoTicker /></Reveal>
         <Reveal delay={280} as="div" className="hl-trust-footnote">Technology should help you feel more informed, not more overwhelmed.</Reveal>
       </div>
     </section>);
