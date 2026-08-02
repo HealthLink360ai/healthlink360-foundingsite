@@ -395,7 +395,7 @@ button { font: inherit; cursor: pointer; }
 /* ================ Problem ================ */
 .hl-problem { padding: 120px 0 100px; background: var(--bg); }
 .hl-problem-split {
-  display: grid; grid-template-columns: minmax(min(320px, 100%), 4fr) minmax(min(380px, 100%), 7fr);
+  display: grid; grid-template-columns: minmax(min(320px, 100%), 5fr) minmax(min(380px, 100%), 6fr);
   gap: 56px; align-items: start;
 }
 @media (max-width: 920px) { .hl-problem-split { grid-template-columns: 1fr; } }
@@ -404,12 +404,11 @@ button { font: inherit; cursor: pointer; }
 .hl-problem-callout { font-size: 18px; font-weight: 700; color: var(--c-c); margin: 8px 0 0; }
 
 .hl-problem-photos {
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px;
 }
-@media (max-width: 720px) { .hl-problem-photos { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .hl-problem-photos { grid-template-columns: 1fr; } }
 .hl-problem-tile { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-.hl-problem-tile-photo { position: relative; height: 220px; min-width: 0; }
-.hl-problem-tile-photo .hl-photo-slot { position: absolute; inset: 0; }
+.hl-problem-tile-photo { position: relative; min-width: 0; }
 .hl-problem-time {
   position: absolute; top: 10px; left: 10px; z-index: 1;
   background: rgba(255,255,255,0.92); border-radius: 999px; padding: 4px 12px;
