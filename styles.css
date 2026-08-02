@@ -505,17 +505,17 @@ button { font: inherit; cursor: pointer; }
   -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%);
 }
 .hl-season-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-.hl-season-head h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; color: #fff; margin: 0; }
-.hl-season-icon { display: inline-flex; width: 24px; height: 24px; }
+.hl-season-head h3 { font-size: 27px; font-weight: 600; letter-spacing: -0.015em; color: #fff; margin: 0; }
+.hl-season-icon { display: inline-flex; width: 28px; height: 28px; }
 .hl-season-icon svg { width: 100%; height: 100%; }
 .hl-season-icon.c-a { color: var(--c-a); }
 .hl-season-icon.c-b { color: var(--c-b); }
 .hl-season-icon.c-c { color: var(--c-c); }
-.hl-season-sub { font-size: 13.5px; font-weight: 600; margin-bottom: 8px; }
+.hl-season-sub { font-size: 16px; font-weight: 600; margin-bottom: 10px; line-height: 1.35; }
 .hl-season-sub.c-a { color: var(--c-a); }
 .hl-season-sub.c-b { color: var(--c-b); }
 .hl-season-sub.c-c { color: var(--c-c); }
-.hl-season-col p { font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,.72); margin: 0; }
+.hl-season-col p { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,.72); margin: 0; }
 .hl-seasons-note {
   margin: 56px auto 0; max-width: 720px; text-align: center;
   background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); border-radius: 16px;
