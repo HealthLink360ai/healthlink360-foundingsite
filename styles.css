@@ -143,7 +143,7 @@ button { font: inherit; cursor: pointer; }
 .hl-hero {
   position: relative; isolation: isolate;
   min-height: 100vh;
-  padding: 140px var(--pad) 80px;
+  padding: 140px var(--pad) 124px;
   overflow: hidden;
   color: #fff;
 }
@@ -193,6 +193,46 @@ button { font: inherit; cursor: pointer; }
 @media (max-width: 760px) {
   .hl-hero-inner.over { grid-template-columns: 1fr; }
   .hl-hero-floats { display: none; }
+}
+
+/* Hero ticker: scrolling EHIgnite award strip pinned to the bottom of the hero */
+.hl-hero-ticker {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  display: block;
+  height: 44px;
+  overflow: hidden;
+  background: rgba(8,3,15,0.6);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  text-decoration: none;
+  cursor: pointer;
+}
+.hl-hero-ticker:hover .hl-hero-ticker-track { animation-play-state: paused; }
+.hl-hero-ticker-track {
+  display: flex; align-items: center; gap: 56px;
+  height: 100%;
+  width: max-content;
+  white-space: nowrap;
+  padding-left: 56px;
+  animation: hl-ticker-scroll 26s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hl-hero-ticker-track { animation: none; }
+}
+.hl-ticker-item {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: rgba(255,255,255,0.82);
+}
+.hl-ticker-item svg { width: 15px; height: 15px; flex: none; color: var(--c-a); }
+.hl-ticker-item .hl-ticker-link {
+  color: #fff; text-decoration: underline; text-underline-offset: 3px;
+}
+.hl-hero-ticker:hover .hl-ticker-item .hl-ticker-link { color: var(--c-a); }
+@keyframes hl-ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 .hl-hero-inner {
@@ -343,6 +383,13 @@ button { font: inherit; cursor: pointer; }
   max-width: 70%; text-align: center;
   font-family: var(--font-mono); font-size: 11.5px; line-height: 1.5;
   color: var(--ink-mute); letter-spacing: 0.01em;
+}
+.hl-photo-slot.hl-photo-real {
+  background: none; border: none;
+}
+.hl-photo-slot.hl-photo-real img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
+  display: block;
 }
 
 /* ================ Problem ================ */

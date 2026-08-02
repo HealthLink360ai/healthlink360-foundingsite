@@ -58,6 +58,14 @@ function PhotoPlaceholder({ label, ratio = "4 / 5", className = "" }) {
 
 }
 
+function Photo({ src, alt, ratio = "4 / 5", className = "" }) {
+  return (
+    <div className={`hl-photo-slot hl-photo-real ${className}`} style={{ aspectRatio: ratio }}>
+      <img src={src} alt={alt} loading="lazy" />
+    </div>);
+
+}
+
 /* ============== Sections ============== */
 
 function Logo({ variant = "nav" }) {
@@ -85,6 +93,23 @@ function Nav({ onWaitlist }) {
       </ul>
       <button className="hl-cta" onClick={onWaitlist}>Request Early Access <span>→</span></button>
     </nav>);
+
+}
+
+function HeroTicker() {
+  const label = "ONC's EHIgnite Phase 1 Winner. To learn more, click here.";
+  const chip = (key) =>
+  <span className="hl-ticker-item" key={key}>
+      <MiniIcon k="award" />
+      <span>ONC&rsquo;s EHIgnite Phase 1 Winner.</span>
+      <span className="hl-ticker-link">To learn more, click here.</span>
+    </span>;
+
+  const items = Array.from({ length: 12 }, (_, i) => chip(i));
+  return (
+    <a href="ehignite/" className="hl-hero-ticker" aria-label={label}>
+      <div className="hl-hero-ticker-track" aria-hidden="true">{items}</div>
+    </a>);
 
 }
 
@@ -135,16 +160,18 @@ function Hero({ onWaitlist }) {
           </div>
         </div>
       </div>
+
+      <HeroTicker />
     </header>);
 
 }
 
 function Problem() {
   const moments = [
-  { time: "9:10 AM", icon: "stethoscope", label: "The appointment" },
-  { time: "12:40 PM", icon: "utensils", label: "Food & routines" },
-  { time: "6:15 PM", icon: "footprints", label: "Movement & stress" },
-  { time: "10:05 PM", icon: "moon", label: "Rest & reflection" }];
+  { time: "9:10 AM", icon: "stethoscope", label: "The appointment", img: "assets/story-appointment.jpg" },
+  { time: "12:40 PM", icon: "utensils", label: "Food & routines", img: "assets/story-food.jpg" },
+  { time: "6:15 PM", icon: "footprints", label: "Movement & stress", img: "assets/story-movement.jpg" },
+  { time: "10:05 PM", icon: "moon", label: "Rest & reflection", img: "assets/story-rest.jpg" }];
 
   return (
     <section className="hl-problem">
@@ -166,7 +193,7 @@ function Problem() {
           {moments.map((m, i) =>
           <div key={i} className="hl-problem-tile">
               <div className="hl-problem-tile-photo">
-                <PhotoPlaceholder label={`Photo: ${m.label.toLowerCase()}`} ratio="4 / 5" />
+                <Photo src={m.img} alt={m.label} ratio="4 / 5" />
                 <span className="hl-problem-time">{m.time}</span>
               </div>
               <div className="hl-problem-tile-label"><MiniIcon k={m.icon} /><span>{m.label}</span></div>
@@ -209,7 +236,7 @@ function Companion() {
           <div className="hl-tagline">One body · One connected health story</div>
         </Reveal>
         <Reveal delay={120} className="hl-companion-photo">
-          <PhotoPlaceholder label="Same person, later: cooking dinner at home, calm evening light" ratio="4 / 5" />
+          <Photo src="assets/story-companion.jpg" alt="Same person, later: cooking dinner at home, calm evening light" ratio="4 / 5" />
           <div className="hl-companion-card">
             <div className="ttl">Coach360 · this evening</div>
             <div className="msg">Your blood pressure is trending up. Not an emergency. Not nothing. A 10-minute walk after dinner is a good first move.</div>
