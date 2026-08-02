@@ -322,10 +322,23 @@ function CareTeamsBridge() {
 }
 
 function LogoTicker() {
-  const logos = ["Johns Hopkins University", "NVIDIA", "AWS", "Halcyon", "Conscious Venture Labs", "Build In Tulsa", "Visible Hands"];
+  const logos = [
+  { name: "Johns Hopkins University", img: "assets/logos/johns-hopkins.png" },
+  { name: "University of Baltimore", img: "assets/logos/university-of-baltimore.png" },
+  { name: "NVIDIA" },
+  { name: "AWS" },
+  { name: "Halcyon", img: "assets/logos/halcyon.png" },
+  { name: "Conscious Venture Labs", img: "assets/logos/conscious-venture-labs.png" },
+  { name: "Build In Tulsa", img: "assets/logos/build-in-tulsa.png" },
+  { name: "Visible Hands" }];
+
   const renderSet = (key) =>
   <div className="hl-logo-set" key={key}>
-      {logos.map((l, i) => <span className="hl-logo-item" key={i}>{l}</span>)}
+      {logos.map((l, i) =>
+      <span className="hl-logo-item" key={i}>
+          {l.img ? <img src={l.img} alt={l.name} loading="lazy" /> : l.name}
+        </span>
+      )}
     </div>;
 
   return (

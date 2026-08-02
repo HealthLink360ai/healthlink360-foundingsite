@@ -564,13 +564,20 @@ button { font: inherit; cursor: pointer; }
 .hl-logo-set { display: flex; align-items: center; flex: none; }
 .hl-logo-item {
   position: relative;
-  font-family: var(--font-sans); font-weight: 700; font-size: 19px; letter-spacing: -0.01em;
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 38px;
+  font-family: var(--font-sans); font-weight: 700; font-size: 18px; letter-spacing: -0.01em;
   color: var(--ink-mute); opacity: 0.62;
-  white-space: nowrap; padding: 0 40px;
+  white-space: nowrap; padding: 0 26px;
 }
 .hl-logo-item::after {
   content: ""; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
   width: 4px; height: 4px; border-radius: 50%; background: var(--ink-mute); opacity: 0.5;
+}
+.hl-logo-item img {
+  height: 100%; width: auto; max-width: 150px; object-fit: contain;
+  filter: grayscale(1); opacity: 0.75;
+  display: block;
 }
 @keyframes hl-logo-scroll {
   from { transform: translateX(0); }
