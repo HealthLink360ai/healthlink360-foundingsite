@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>HealthLink360 for FQHCs — Turn Prevention Plans into Proven Action</title>
+<meta name="description" content="HealthLink360 helps FQHCs and community health centers activate prevention between visits and return source-linked evidence to the EHR. Estimate your prevention impact with our evidence-based calculator."/>
+<link rel="icon" type="image/png" href="assets/favicon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+<script defer src="/_vercel/insights/script.js"></script>
+<style>
+  /* ============ Providers page: scoped styles, shares tokens/components from styles.css ============ */
+  .prov-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--c-a); padding: 6px 12px; border-radius: 999px;
+    background: rgba(var(--c-glow), 0.16); margin-bottom: 20px;
+  }
+  .prov-section { padding: 100px 0; }
+  .prov-kicker { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-c); font-weight: 700; margin-bottom: 10px; }
+  .prov-h2 { font-size: clamp(28px, 3.6vw, 42px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; color: var(--ink); margin: 0 0 16px; max-width: 26ch; text-wrap: balance; }
+  .prov-lede { font-size: clamp(16px, 1.3vw, 18px); line-height: 1.6; color: var(--ink-soft); max-width: 62ch; }
+
+  /* ---- Hero ---- */
+  .prov-hero {
+    position: relative; isolation: isolate; overflow: hidden;
+    background:
+      radial-gradient(1000px 560px at 82% -8%, rgba(var(--c-glow),.28), transparent 60%),
+      radial-gradient(760px 460px at 6% 108%, rgba(124,58,237,.32), transparent 60%),
+      var(--dark);
+    padding: 160px var(--pad) 100px; color: #fff;
+  }
+  .prov-hero-grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; }
+  @media (max-width: 920px) { .prov-hero-grid { grid-template-columns: 1fr; } }
+  .prov-hero h1 { font-size: clamp(34px, 5vw, 58px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.08; margin: 0 0 22px; color: #fff; text-wrap: balance; }
+  .prov-hero h1 em { font-style: italic; font-family: var(--font-display); font-weight: 400; background: linear-gradient(120deg, var(--c-a) 0%, #fff 50%, var(--c-b) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .prov-hero .prov-lede { color: rgba(255,255,255,.75); margin-bottom: 30px; }
+  .prov-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 30px; }
+  .prov-trust { display: flex; gap: 10px 26px; flex-wrap: wrap; list-style: none; padding: 0; margin: 0; color: rgba(255,255,255,.72); font-size: 13.5px; padding-top: 26px; border-top: 1px solid rgba(255,255,255,.1); }
+  .prov-trust li { display: flex; gap: 8px; align-items: center; }
+  .prov-trust .tick { color: var(--c-a); font-weight: 800; }
+
+  .prov-loop-card {
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14);
+    border-radius: var(--r-lg); padding: 28px;
+    -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%);
+  }
+  .prov-loop-card h3 { font-size: 16px; font-weight: 700; color: #fff; margin: 0 0 4px; }
+  .prov-loop-card .small { font-size: 12.5px; color: rgba(255,255,255,.5); margin-bottom: 18px; }
+  .prov-loop-step { display: flex; gap: 14px; padding: 12px 10px; border-radius: 10px; align-items: flex-start; }
+  .prov-loop-step.active { background: rgba(255,255,255,.06); }
+  .prov-loop-dot {
+    flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+    font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: #fff;
+    background: linear-gradient(135deg, var(--c-a), var(--c-b));
+  }
+  .prov-loop-step:nth-child(even) .prov-loop-dot { background: linear-gradient(135deg, var(--c-b), var(--c-c)); }
+  .prov-loop-step b { display: block; font-size: 14px; color: #fff; }
+  .prov-loop-step span { font-size: 13px; color: rgba(255,255,255,.62); line-height: 1.45; }
+  .prov-loop-tag { margin-top: 14px; padding-top: 14px; border-top: 1px dashed rgba(255,255,255,.14); font-size: 12.5px; color: rgba(255,255,255,.6); }
+  .prov-loop-tag b { color: var(--c-a); }
+
+  /* ---- Generic light section card grids ---- */
+  .prov-cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+  .prov-diff { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 40px; }
+  @media (max-width: 860px) { .prov-cols-3, .prov-diff { grid-template-columns: 1fr; } }
+
+  .prov-card {
+    background: #fff; border: 1px solid rgba(0,0,0,.06); border-radius: var(--r-lg);
+    padding: 26px; box-shadow: 0 1px 0 rgba(0,0,0,.02);
+  }
+  .prov-card .num { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--c-c); margin-bottom: 10px; }
+  .prov-card h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); margin: 0 0 8px; }
+  .prov-card p { font-size: 14.5px; line-height: 1.6; color: var(--ink-mute); margin: 0; }
+  .prov-pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .prov-pill { font-size: 11.5px; font-weight: 600; background: rgba(var(--c-glow),.08); color: var(--c-c); border: 1px solid rgba(var(--c-glow),.18); border-radius: 999px; padding: 5px 11px; }
+
+  .prov-diff .prov-card { display: flex; gap: 16px; }
+  .prov-glyph { flex: none; width: 42px; height: 42px; border-radius: 12px; background: rgba(var(--c-glow),.1); display: grid; place-items: center; font-size: 19px; }
+
+  .prov-band { background: var(--bg-alt); }
+
+  /* ---- Calculator (dark) ---- */
+  .prov-calc { background: linear-gradient(180deg, var(--dark-2) 0%, var(--dark) 100%); color: #fff; }
+  .prov-calc .prov-kicker { color: var(--c-a); }
+  .prov-calc .prov-h2 { color: #fff; }
+  .prov-calc .prov-lede { color: rgba(255,255,255,.68); }
+  .prov-calc-shell { display: grid; grid-template-columns: 380px 1fr; gap: 24px; margin-top: 40px; align-items: start; }
+  @media (max-width: 940px) { .prov-calc-shell { grid-template-columns: 1fr; } }
+
+  .prov-calc-panel { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.14); border-radius: var(--r-lg); padding: 26px; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+  .prov-calc-panel h3 { font-size: 15px; font-weight: 700; color: #fff; margin: 0 0 18px; }
+  .prov-field { margin-bottom: 16px; }
+  .prov-field label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: rgba(255,255,255,.85); }
+  .prov-field label output { font-weight: 700; color: var(--c-a); }
+  .prov-field select {
+    width: 100%; padding: 10px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 8px;
+    font: inherit; font-size: 14px; background: rgba(255,255,255,.06); color: #fff;
+  }
+  .prov-field select option { color: #111; }
+  .prov-field input[type=number] {
+    width: 100%; padding: 10px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 8px;
+    font: inherit; font-size: 14px; background: rgba(255,255,255,.06); color: #fff;
+  }
+  .prov-field input[type=range] { width: 100%; accent-color: var(--c-a); }
+  .prov-field .hint { font-size: 11.5px; color: rgba(255,255,255,.45); margin-top: 4px; }
+  details.prov-adv { margin-top: 6px; border-top: 1px dashed rgba(255,255,255,.14); padding-top: 14px; }
+  details.prov-adv summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--c-a); }
+  details.prov-adv .prov-field { margin-top: 14px; }
+
+  .prov-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 560px) { .prov-tiles { grid-template-columns: 1fr 1fr; } }
+  .prov-tile { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.14); border-radius: 12px; padding: 16px 16px 14px; }
+  .prov-tile .t-label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.55); letter-spacing: 0.02em; }
+  .prov-tile .t-value { font-size: 24px; font-weight: 800; color: #fff; margin-top: 3px; letter-spacing: -0.01em; }
+  .prov-tile .t-note { font-size: 11px; color: rgba(255,255,255,.42); margin-top: 4px; }
+  .prov-tile.hero-tile { grid-column: span 3; background: rgba(var(--c-glow),.14); border-color: rgba(var(--c-glow),.35); }
+  @media (max-width: 560px) { .prov-tile.hero-tile { grid-column: span 2; } }
+  .prov-tile.hero-tile .t-value { font-size: 32px; }
+  .prov-tile.hero-tile .t-value small { font-size: 16px; font-weight: 700; color: var(--c-a); }
+
+  .prov-viz { margin-top: 18px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.14); border-radius: 12px; padding: 20px; }
+  .prov-viz h4 { font-size: 13.5px; color: #fff; margin-bottom: 2px; font-weight: 700; }
+  .prov-viz .viz-sub { font-size: 11.5px; color: rgba(255,255,255,.45); margin-bottom: 16px; }
+  .prov-bar-row { margin-bottom: 16px; }
+  .prov-bar-row .bar-head { display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,.65); margin-bottom: 6px; }
+  .prov-bar-row .bar-head b { color: #fff; }
+  .prov-bar-track { display: flex; height: 26px; border-radius: 6px; overflow: hidden; background: rgba(255,255,255,.06); }
+  .prov-seg { height: 100%; min-width: 2px; transition: width .35s ease; position: relative; }
+  .prov-seg.rev { background: linear-gradient(90deg, var(--c-c), var(--c-b)); border-radius: 5px 0 0 5px; }
+  .prov-seg.avoid { background: linear-gradient(90deg, var(--c-a), #ff8bd9); margin-left: 2px; border-radius: 0 5px 5px 0; }
+  .prov-legend { display: flex; gap: 20px; margin-top: 12px; font-size: 12px; color: rgba(255,255,255,.6); flex-wrap: wrap; }
+  .prov-legend .swatch { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+  .prov-seg-label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #1a0e2a; white-space: nowrap; overflow: hidden; }
+
+  .prov-assump { margin-top: 18px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.14); border-radius: 12px; }
+  .prov-assump summary { cursor: pointer; padding: 15px 18px; font-weight: 700; font-size: 13.5px; color: #fff; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .prov-assump summary::after { content: "+"; font-size: 18px; color: var(--c-a); }
+  .prov-assump[open] summary::after { content: "\2013"; }
+  .prov-assump-inner { padding: 0 18px 18px; overflow-x: auto; }
+  table.prov-atab { width: 100%; border-collapse: collapse; font-size: 12.5px; color: rgba(255,255,255,.82); }
+  table.prov-atab th { color: rgba(255,255,255,.5); text-align: left; font-weight: 700; padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,.16); }
+  table.prov-atab td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,.07); vertical-align: top; }
+  table.prov-atab td:nth-child(2) { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .prov-conf { font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+  .prov-conf.high { background: rgba(168,85,247,.18); color: #c9a4fb; }
+  .prov-conf.med { background: rgba(255,43,214,.16); color: #ff8bd9; }
+  .prov-disclaimer { font-size: 11.5px; color: rgba(255,255,255,.4); margin-top: 16px; max-width: 70ch; line-height: 1.5; }
+
+  /* ---- Evidence ---- */
+  .prov-ev-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+  @media (max-width: 860px) { .prov-ev-grid { grid-template-columns: 1fr; } }
+  .prov-honest {
+    background: var(--bg-alt); border-left: 4px solid var(--c-a); border-radius: 0 var(--r-lg) var(--r-lg) 0;
+    padding: 26px 28px; font-size: 16px; color: var(--ink-soft); font-weight: 500; margin: 0; line-height: 1.55;
+  }
+
+  /* ---- Final CTA ---- */
+  .prov-cta-final { text-align: center; }
+  .prov-cta-final .prov-lede { margin: 14px auto 28px; }
+  .prov-cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  .prov-footer { padding: 34px 0; border-top: 1px solid rgba(0,0,0,.08); color: var(--ink-mute); font-size: 13px; }
+  .prov-footer .row { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<nav class="hl-nav" id="provNav">
+  <a href="HealthLink360 Website.html" class="hl-logo hl-logo-nav" aria-label="HealthLink360 AI">
+    <img src="assets/logo.png" alt="HealthLink360 AI" style="object-fit:cover; padding:25px 0 0;"/>
+  </a>
+  <ul>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#why">Why HealthLink360</a></li>
+    <li><a href="#calculator">Impact calculator</a></li>
+    <li><a href="#evidence">Evidence</a></li>
+  </ul>
+  <a class="hl-cta" href="#book">Book a walkthrough <span>→</span></a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="prov-hero" id="top">
+  <div class="prov-hero-grid">
+    <div>
+      <span class="prov-eyebrow">For FQHCs &amp; Community Health Centers</span>
+      <h1>Your team knows what patients need.<br/><em>Prove it gets done.</em></h1>
+      <p class="prov-lede">
+        HealthLink360 connects a patient's health history, daily reality, and trusted care
+        ecosystem to turn prevention opportunities into completed actions, then returns a
+        source-linked record of what was attempted, completed, and blocked, right into your workflow.
+      </p>
+      <div class="prov-hero-ctas">
+        <a class="hl-cta lg" href="#calculator">See your prevention impact <span>→</span></a>
+        <a class="hl-ghost" href="#book">Book a walkthrough</a>
+      </div>
+      <ul class="prov-trust">
+        <li><span class="tick">✓</span> HHS EHIgnite Phase 1 Winner</li>
+        <li><span class="tick">✓</span> Works with your EHR, never replaces it</li>
+        <li><span class="tick">✓</span> Every ROI assumption published &amp; sourced</li>
+      </ul>
+    </div>
+    <aside class="prov-loop-card" aria-label="The prevention activation loop">
+      <h3>The prevention activation loop</h3>
+      <p class="small">From a known care gap to verified real-world action</p>
+      <div class="prov-loop-step active">
+        <div class="prov-loop-dot">1</div>
+        <div><b>Prevention Passport</b><span>Clinical history + patient-confirmed truth become one concise, portable baseline.</span></div>
+      </div>
+      <div class="prov-loop-step">
+        <div class="prov-loop-dot">2</div>
+        <div><b>Activate between visits</b><span>CHWs, Food-as-Medicine, coaching, and community partners act on patient-selected goals.</span></div>
+      </div>
+      <div class="prov-loop-step">
+        <div class="prov-loop-dot">3</div>
+        <div><b>Verify &amp; learn</b><span>Actions, barriers, and responses are captured with provenance, not lost to memory.</span></div>
+      </div>
+      <div class="prov-loop-step">
+        <div class="prov-loop-dot">4</div>
+        <div><b>Return the evidence</b><span>A clinician-reviewed Digital Twin Snapshot lands back in your EHR workflow.</span></div>
+      </div>
+      <div class="prov-loop-tag">North Star metric: <b>Meaningful Preventive Actions Completed</b></div>
+    </aside>
+  </div>
+</header>
+
+<!-- ============ PROBLEM ============ -->
+<section class="prov-section" id="problem">
+  <div class="hl-section-inner">
+    <p class="prov-kicker">The problem</p>
+    <h2 class="prov-h2">The gap isn't knowing what patients need.<br/>It's proving anything happened next.</h2>
+    <div class="prov-cols-3">
+      <div class="prov-card">
+        <div class="num">BETWEEN VISITS</div>
+        <h3>Prevention happens at home, not in the exam room</h3>
+        <p>Blood pressure, food, medications, sleep, stress: the work of prevention lives in daily life. Your EHR sees the visit. It doesn't see the 361 days between annual visits.</p>
+      </div>
+      <div class="prov-card">
+        <div class="num">AFTER THE REFERRAL</div>
+        <h3>Referrals leave. Evidence rarely comes back</h3>
+        <p>Screeners fire, care gaps close on paper, referrals go out, and follow-through disappears into phone tag, sticky notes, and systems that don't talk to yours.</p>
+      </div>
+      <div class="prov-card">
+        <div class="num">AT REPORTING TIME</div>
+        <h3>You can't fund what you can't show</h3>
+        <p>UDS, HEDIS, grants, and value-based contracts all ask the same question: what actually changed for the patient? Without action-level evidence, the answer costs you revenue.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="prov-section prov-band" id="how">
+  <div class="hl-section-inner">
+    <p class="prov-kicker">How it works</p>
+    <h2 class="prov-h2">From fragmented history to verified prevention, in three moves</h2>
+    <div class="prov-cols-3">
+      <div class="prov-card">
+        <div class="num">01</div>
+        <h3>Build the Prevention Passport</h3>
+        <p>We ingest authorized records (SMART on FHIR / EHI export) and pair them with patient-confirmed current truth: goals, food context, routines, barriers, and the people they trust. Out comes a concise baseline and a queue of real prevention opportunities.</p>
+        <div class="prov-pill-row"><span class="prov-pill">FHIR / EHI ingestion</span><span class="prov-pill">Patient-confirmed</span><span class="prov-pill">Source-linked</span></div>
+      </div>
+      <div class="prov-card">
+        <div class="num">02</div>
+        <h3>Activate safe, consented support</h3>
+        <p>CHWs, Food-as-Medicine programs, coaching, and community partners work one governed journey, with role integrity. AI agents act only inside Agent Readiness boundaries: required inputs, consent, exclusions, and an accountable human, declared per feature.</p>
+        <div class="prov-pill-row"><span class="prov-pill">CHW workflows</span><span class="prov-pill">Food as Medicine</span><span class="prov-pill">Agent Readiness</span></div>
+      </div>
+      <div class="prov-card">
+        <div class="num">03</div>
+        <h3>Return evidence to the chart</h3>
+        <p>Every offer, decision, action, barrier, and response is tracked through the preventive measure lifecycle. Your clinicians review a concise Digital Twin Snapshot, evidence in, not another portal to check.</p>
+        <div class="prov-pill-row"><span class="prov-pill">Clinician-reviewed write-back</span><span class="prov-pill">Digital Twin Snapshot</span><span class="prov-pill">Audit-ready</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIFFERENTIATION ============ -->
+<section class="prov-section" id="why">
+  <div class="hl-section-inner">
+    <p class="prov-kicker">Why HealthLink360</p>
+    <h2 class="prov-h2">Built to complement your stack, and to earn your community's trust</h2>
+    <div class="prov-diff">
+      <div class="prov-card">
+        <div class="prov-glyph">🔗</div>
+        <div><h3>Works with Oracle Health, Epic &amp; your EHR</h3>
+          <p>Your EHR stays the clinical system of record. HealthLink360 is the system of <b>action evidence</b>, read-only ingestion in, clinician-reviewed snapshots back. No second EHR, no swivel-chair workflow.</p></div>
+      </div>
+      <div class="prov-card">
+        <div class="prov-glyph">🛡️</div>
+        <div><h3>Governed AI, not a black box</h3>
+          <p>Every agent capability declares what it needs, what it may do, and who is accountable, before it acts. You can phase deployment feature by feature and audit every activation.</p></div>
+      </div>
+      <div class="prov-card">
+        <div class="prov-glyph">🤝</div>
+        <div><h3>Trust as infrastructure</h3>
+          <p>Fact-by-fact provenance, patient correction rights, granular consent and revocation, and CHW/CBO participation without collapsing role boundaries. Built for Medicaid populations and the communities FQHCs serve.</p></div>
+      </div>
+      <div class="prov-card">
+        <div class="prov-glyph">📏</div>
+        <div><h3>One metric that can't be gamed</h3>
+          <p>We measure <b>Meaningful Preventive Actions Completed</b>, with opportunity denominators, verification, barriers, and equity built into the definition. Not screens fired. Not referrals sent. Actions completed.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CALCULATOR ============ -->
+<section class="prov-section prov-calc" id="calculator">
+  <div class="hl-section-inner">
+    <p class="prov-kicker">See your prevention impact</p>
+    <h2 class="prov-h2">What is prevention activation worth to an organization like yours?</h2>
+    <p class="prov-lede">Every number below is computed live from published evidence, CMS rates, CDC prevalence, AHRQ utilization data, plus assumptions you can inspect and change. Conservative and expected scenarios are shown side by side.</p>
+
+    <div class="prov-calc-shell">
+      <div class="prov-calc-panel">
+        <h3>About your organization</h3>
+        <div class="prov-field">
+          <label for="orgType">Organization type</label>
+          <select id="orgType">
+            <option value="fqhc" selected>FQHC / Community Health Center</option>
+            <option value="vbc">Value-based care org / ACO</option>
+            <option value="hs">Health system</option>
+            <option value="plan">Health plan</option>
+          </select>
+        </div>
+        <div class="prov-field">
+          <label for="lives">Covered lives / active patients <output id="livesOut">10,000</output></label>
+          <input type="range" id="lives" min="1000" max="100000" step="500" value="10000"/>
+          <div class="hint">Unique patients served annually</div>
+        </div>
+        <div class="prov-field">
+          <label for="diab">Diabetes prevalence <output id="diabOut">12%</output></label>
+          <input type="range" id="diab" min="5" max="30" step="0.5" value="12"/>
+          <div class="hint">U.S. adult average ≈ 11.6% (CDC). Health-center populations often run higher.</div>
+        </div>
+        <div class="prov-field">
+          <label for="htn">Hypertension prevalence <output id="htnOut">35%</output></label>
+          <input type="range" id="htn" min="10" max="60" step="1" value="35"/>
+          <div class="hint">U.S. adult average ≈ 48% (CDC)</div>
+        </div>
+        <div class="prov-field">
+          <label for="edv">Annual ED visits (your population) <output id="edvOut">4,500</output></label>
+          <input type="range" id="edv" min="200" max="50000" step="100" value="4500"/>
+          <div class="hint">Total emergency department visits by your patients per year</div>
+        </div>
+        <details class="prov-adv">
+          <summary>Adjust assumptions</summary>
+          <div class="prov-field">
+            <label for="enroll">Care-management enrollment rate <output id="enrollOut">40%</output></label>
+            <input type="range" id="enroll" min="10" max="80" step="5" value="40"/>
+            <div class="hint">Share of eligible patients you enroll and engage</div>
+          </div>
+          <div class="prov-field">
+            <label for="edcost">Average cost per ED visit ($)</label>
+            <input type="number" id="edcost" min="200" max="3000" step="10" value="600"/>
+            <div class="hint">AHRQ HCUP: ~$530 avg (2017), inflation-adjusted upward</div>
+          </div>
+          <div class="prov-field">
+            <label for="platcost">Estimated annual platform cost ($)</label>
+            <input type="number" id="platcost" min="10000" max="1000000" step="5000" value="60000"/>
+            <div class="hint">Placeholder for ROI math, actual pricing scoped per deployment</div>
+          </div>
+        </details>
+      </div>
+
+      <div>
+        <div class="prov-tiles" role="group" aria-label="Estimated impact results">
+          <div class="prov-tile hero-tile">
+            <div class="t-label">Estimated total annual value (conservative → expected)</div>
+            <div class="t-value" id="totalVal">$—</div>
+            <div class="t-note">Care-coordination revenue floor + estimated ED cost avoidance</div>
+          </div>
+          <div class="prov-tile">
+            <div class="t-label">Eligible for care management</div>
+            <div class="t-value" id="eligVal">—</div>
+            <div class="t-note">Patients with diabetes + hypertension (2+ chronic conditions proxy)</div>
+          </div>
+          <div class="prov-tile">
+            <div class="t-label">Enrolled &amp; activated</div>
+            <div class="t-value" id="enrollVal">—</div>
+            <div class="t-note">At your selected enrollment rate</div>
+          </div>
+          <div class="prov-tile">
+            <div class="t-label">Estimated ROI</div>
+            <div class="t-value" id="roiVal">—</div>
+            <div class="t-note">Annual value ÷ annual platform cost</div>
+          </div>
+          <div class="prov-tile">
+            <div class="t-label">Revenue floor (conservative)</div>
+            <div class="t-value" id="revVal">$—</div>
+            <div class="t-note">CCM 99490 × 12 mo × 85% billing realization</div>
+          </div>
+          <div class="prov-tile">
+            <div class="t-label">Preventable ED visits avoided</div>
+            <div class="t-value" id="edAvoidVal">—</div>
+            <div class="t-note">Conservative → expected, engaged patients only</div>
+          </div>
+          <div class="prov-tile">
+            <div class="t-label">ED cost avoidance</div>
+            <div class="t-value" id="avoidVal">$—</div>
+            <div class="t-note">Avoided visits × average ED visit cost</div>
+          </div>
+        </div>
+
+        <div class="prov-viz">
+          <h4>Where the value comes from</h4>
+          <div class="viz-sub">Annual value by source, conservative vs. expected scenario</div>
+          <div class="prov-bar-row">
+            <div class="bar-head"><span>Conservative</span><b id="consTotal">$—</b></div>
+            <div class="prov-bar-track" id="consBar">
+              <div class="prov-seg rev" id="consRev" title=""><span class="prov-seg-label" id="consRevLbl"></span></div>
+              <div class="prov-seg avoid" id="consAvoid" title=""><span class="prov-seg-label" id="consAvoidLbl"></span></div>
+            </div>
+          </div>
+          <div class="prov-bar-row">
+            <div class="bar-head"><span>Expected</span><b id="expTotal">$—</b></div>
+            <div class="prov-bar-track" id="expBar">
+              <div class="prov-seg rev" id="expRev" title=""><span class="prov-seg-label" id="expRevLbl"></span></div>
+              <div class="prov-seg avoid" id="expAvoid" title=""><span class="prov-seg-label" id="expAvoidLbl"></span></div>
+            </div>
+          </div>
+          <div class="prov-legend">
+            <span><span class="swatch" style="background:var(--c-c)"></span>Care-coordination revenue (hard floor, billable today)</span>
+            <span><span class="swatch" style="background:var(--c-a)"></span>ED cost avoidance (evidence-based upside)</span>
+          </div>
+        </div>
+
+        <details class="prov-assump">
+          <summary>Assumption library, every value, sourced</summary>
+          <div class="prov-assump-inner">
+            <table class="prov-atab">
+              <thead><tr><th>Metric</th><th>Value</th><th>Source</th><th>Confidence</th><th>Ver.</th></tr></thead>
+              <tbody>
+                <tr><td>CCM base rate, CPT 99490 (per pt/mo)</td><td>$66.13</td><td>CMS Physician Fee Schedule, CY2026 national avg</td><td><span class="prov-conf high">High</span></td><td>v1</td></tr>
+                <tr><td>CCM add-on, CPT 99439 (per pt/mo)</td><td>$50.44</td><td>CMS Physician Fee Schedule, CY2026 national avg</td><td><span class="prov-conf high">High</span></td><td>v1</td></tr>
+                <tr><td>Billing realization (conservative / expected)</td><td>85% / 90%</td><td>HealthLink360 operating assumption</td><td><span class="prov-conf med">Medium</span></td><td>v1</td></tr>
+                <tr><td>Add-on eligibility (expected scenario)</td><td>30% of enrolled</td><td>HealthLink360 operating assumption</td><td><span class="prov-conf med">Medium</span></td><td>v1</td></tr>
+                <tr><td>Adults w/ diabetes who also have hypertension</td><td>~74%</td><td>CDC / NHANES</td><td><span class="prov-conf high">High</span></td><td>v1</td></tr>
+                <tr><td>U.S. adult diabetes prevalence (default)</td><td>11.6%</td><td>CDC National Diabetes Statistics</td><td><span class="prov-conf high">High</span></td><td>v1</td></tr>
+                <tr><td>U.S. adult hypertension prevalence (reference)</td><td>~48%</td><td>CDC</td><td><span class="prov-conf high">High</span></td><td>v1</td></tr>
+                <tr><td>ED utilization multiplier, multi-chronic patients</td><td>2.0×</td><td>Peer-reviewed utilization literature</td><td><span class="prov-conf med">Medium</span></td><td>v1</td></tr>
+                <tr><td>ED visit reduction w/ active navigation (conservative)</td><td>9%</td><td>CMS Accountable Health Communities Model evaluation</td><td><span class="prov-conf high">High</span></td><td>v1</td></tr>
+                <tr><td>ED visit reduction (expected)</td><td>17%</td><td>Published community-intervention literature</td><td><span class="prov-conf med">Medium</span></td><td>v1</td></tr>
+                <tr><td>Average ED visit cost (default)</td><td>$600</td><td>AHRQ HCUP Statistical Brief #268 ($530, 2017), inflation-adjusted</td><td><span class="prov-conf high">High</span></td><td>v1</td></tr>
+                <tr><td>HealthLink360 pilot outcomes</td><td>Coming v2</td><td>Internal pilots, published as validated</td><td><span class="prov-conf med">Growing</span></td><td>v2+</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        <p class="prov-disclaimer">
+          Estimates are directional and derived from published evidence and stated assumptions; they are not a guarantee of revenue, savings, or clinical outcomes. Reimbursement varies by locality, payer mix, and billing practices, FQHC care-management billing transitioned to individual PFS codes effective 2025. Assumption Library v1, reviewed August 2026.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EVIDENCE ============ -->
+<section class="prov-section" id="evidence">
+  <div class="hl-section-inner">
+    <p class="prov-kicker">Evidence &amp; validation</p>
+    <h2 class="prov-h2">We'd rather show our math than inflate a multiplier</h2>
+    <div class="prov-ev-grid">
+      <blockquote class="prov-honest">
+        "Most vendor ROI claims can't be audited. Ours can. Every assumption in our calculator has a citation, a confidence level, and a version, and as our pilots publish results, our own outcomes will replace the literature, in the open."
+      </blockquote>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div class="prov-card">
+          <h3>🏆 HHS EHIgnite Phase 1 Winner</h3>
+          <p>Recognized by the U.S. Department of Health &amp; Human Services for advancing electronic health information use in prevention.</p>
+        </div>
+        <div class="prov-card">
+          <h3>📚 Grounded in public evidence</h3>
+          <p>Our assumption library draws exclusively from CDC, CMS, AHRQ, USPSTF, and peer-reviewed sources, the same evidence your quality team already trusts for UDS, HEDIS, and value-based reporting.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="prov-section prov-band prov-cta-final" id="book">
+  <div class="hl-section-inner">
+    <h2 class="prov-h2" style="margin:0 auto 16px; text-align:center;">See the loop close on one of your own care gaps</h2>
+    <p class="prov-lede" style="text-align:center; margin-left:auto; margin-right:auto;">In a 30-minute walkthrough, we'll take a real prevention opportunity, a produce prescription, a BP follow-up, a benefits renewal, and show you the passport, the activation, and the snapshot that returns to your EHR.</p>
+    <div class="prov-cta-actions">
+      <a class="hl-cta lg" href="mailto:hello@healthlink360.ai?subject=Walkthrough%20request">Book a walkthrough <span>→</span></a>
+      <a class="hl-ghost" href="#calculator" style="border-color:rgba(0,0,0,.14); color:var(--ink); background:rgba(0,0,0,.03);">Re-run the numbers</a>
+    </div>
+  </div>
+</section>
+
+<footer class="prov-footer">
+  <div class="hl-section-inner row">
+    <div><b style="color:var(--ink)">HealthLink360</b> — the prevention activation &amp; evidence layer</div>
+    <div>© 2026 HealthLink360 · <a href="mailto:hello@healthlink360.ai" style="color:var(--c-c)">hello@healthlink360.ai</a> · Estimates powered by Assumption Library v1</div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var nav = document.getElementById('provNav');
+    var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 24); };
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+  })();
+</script>
+
+<script>
+/* ============================================================
+   "See Your Prevention Impact" — calculation engine (MVP v1)
+   Flow (per product spec):
+   1. Opportunity population  2. Intervention effect
+   3. Preventable utilization 4. Cost avoidance  5. ROI
+   ============================================================ */
+const A = {
+  ccmBase: 66.13,        // CPT 99490, CMS PFS CY2026 national avg, per pt/mo
+  ccmAddon: 50.44,       // CPT 99439, CY2026
+  realizationCons: 0.85, // conservative billing realization
+  realizationExp: 0.90,  // expected billing realization
+  addonShareExp: 0.30,   // expected: share of enrolled qualifying for one add-on unit
+  diabHtnOverlap: 0.736, // CDC/NHANES: ~74% of adults w/ diabetes also have HTN
+  edMultiplier: 2.0,     // multi-chronic patients use ED ~2x population average
+  edReduceCons: 0.09,    // CMS AHC Model: 9% fewer ED visits with navigation
+  edReduceExp: 0.17      // expected: community-intervention literature
+};
+
+const $ = id => document.getElementById(id);
+const fmtN = n => Math.round(n).toLocaleString('en-US');
+const fmtC = n => '$' + Math.round(n).toLocaleString('en-US');
+const fmtCk = n => n >= 1e6 ? '$' + (n/1e6).toFixed(2) + 'M' : '$' + Math.round(n/1000) + 'K';
+
+function compute(i){
+  const dual = i.lives * i.diab * A.diabHtnOverlap;
+  const eligible = Math.min(dual, i.lives * i.htn);
+  const enrolled = eligible * i.enroll;
+
+  const revCons = enrolled * A.ccmBase * 12 * A.realizationCons;
+  const revExp  = enrolled * (A.ccmBase + A.addonShareExp * A.ccmAddon) * 12 * A.realizationExp;
+
+  const engagedShare = i.lives > 0 ? enrolled / i.lives : 0;
+  const engagedEDVisits = Math.min(i.edv, i.edv * engagedShare * A.edMultiplier);
+  const edAvoidCons = engagedEDVisits * A.edReduceCons;
+  const edAvoidExp  = engagedEDVisits * A.edReduceExp;
+
+  const avoidCons = edAvoidCons * i.edcost;
+  const avoidExp  = edAvoidExp  * i.edcost;
+
+  const totalCons = revCons + avoidCons;
+  const totalExp  = revExp  + avoidExp;
+  const roiCons = i.platcost > 0 ? totalCons / i.platcost : 0;
+  const roiExp  = i.platcost > 0 ? totalExp  / i.platcost : 0;
+
+  return {eligible, enrolled, revCons, revExp, edAvoidCons, edAvoidExp,
+          avoidCons, avoidExp, totalCons, totalExp, roiCons, roiExp};
+}
+
+function readInputs(){
+  return {
+    lives: +$('lives').value,
+    diab: +$('diab').value / 100,
+    htn: +$('htn').value / 100,
+    edv: +$('edv').value,
+    enroll: +$('enroll').value / 100,
+    edcost: +$('edcost').value,
+    platcost: +$('platcost').value
+  };
+}
+
+function render(){
+  const i = readInputs();
+  $('livesOut').textContent = fmtN(i.lives);
+  $('diabOut').textContent = (i.diab*100).toFixed(1).replace('.0','') + '%';
+  $('htnOut').textContent = Math.round(i.htn*100) + '%';
+  $('edvOut').textContent = fmtN(i.edv);
+  $('enrollOut').textContent = Math.round(i.enroll*100) + '%';
+
+  const r = compute(i);
+  $('eligVal').textContent = fmtN(r.eligible);
+  $('enrollVal').textContent = fmtN(r.enrolled);
+  $('revVal').textContent = fmtCk(r.revCons);
+  $('edAvoidVal').textContent = fmtN(r.edAvoidCons) + ' → ' + fmtN(r.edAvoidExp);
+  $('avoidVal').textContent = fmtCk(r.avoidCons) + ' → ' + fmtCk(r.avoidExp);
+  $('totalVal').innerHTML = fmtCk(r.totalCons) + ' <small>→ ' + fmtCk(r.totalExp) + '</small>';
+  $('roiVal').textContent = r.roiCons.toFixed(1) + '× → ' + r.roiExp.toFixed(1) + '×';
+
+  const maxV = Math.max(r.totalExp, 1);
+  const w = (v)=> Math.max(0.5, v / maxV * 100).toFixed(2) + '%';
+  $('consRev').style.width = w(r.revCons);
+  $('consAvoid').style.width = w(r.avoidCons);
+  $('expRev').style.width = w(r.revExp);
+  $('expAvoid').style.width = w(r.avoidExp);
+  $('consTotal').textContent = fmtCk(r.totalCons);
+  $('expTotal').textContent = fmtCk(r.totalExp);
+  $('consRev').title = 'Care-coordination revenue (conservative): ' + fmtC(r.revCons);
+  $('consAvoid').title = 'ED cost avoidance (conservative): ' + fmtC(r.avoidCons);
+  $('expRev').title = 'Care-coordination revenue (expected): ' + fmtC(r.revExp);
+  $('expAvoid').title = 'ED cost avoidance (expected): ' + fmtC(r.avoidExp);
+  $('consRevLbl').textContent = fmtCk(r.revCons);
+  $('expRevLbl').textContent = fmtCk(r.revExp);
+  $('consAvoidLbl').textContent = r.avoidCons/maxV > 0.09 ? fmtCk(r.avoidCons) : '';
+  $('expAvoidLbl').textContent = r.avoidExp/maxV > 0.09 ? fmtCk(r.avoidExp) : '';
+}
+
+['lives','diab','htn','edv','enroll','edcost','platcost','orgType']
+  .forEach(id => { $(id).addEventListener('input', render); $(id).addEventListener('change', render); });
+
+$('orgType').addEventListener('change', e => {
+  const presets = {
+    fqhc: {lives:10000, diab:14, htn:38, edv:4500, enroll:40, platcost:60000},
+    vbc:  {lives:30000, diab:12, htn:35, edv:12000, enroll:35, platcost:120000},
+    hs:   {lives:60000, diab:11, htn:33, edv:30000, enroll:25, platcost:200000},
+    plan: {lives:80000, diab:11, htn:32, edv:35000, enroll:20, platcost:250000}
+  };
+  const p = presets[e.target.value];
+  if(p){ $('lives').value=p.lives; $('diab').value=p.diab; $('htn').value=p.htn;
+         $('edv').value=p.edv; $('enroll').value=p.enroll; $('platcost').value=p.platcost; render(); }
+});
+
+render();
+</script>
+</body>
+</html>
