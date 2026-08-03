@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>How It Works | HealthLink360</title>
-<meta name="description" content="How HealthLink360 connects your medical history, everyday health, and daily life into one story, and turns it into your next best step."/>
+<meta name="description" content="HealthLink360 is the trust layer between health data and preventive action. No source, no statement. See how it works."/>
 <link rel="icon" type="image/png" href="assets/favicon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -44,7 +44,7 @@
   .hiw-back:hover { color: #fff; background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.24); }
 
   .hiw-intro {
-    max-width: 720px; margin: 0 auto 80px; text-align: center;
+    max-width: 720px; margin: 0 auto 24px; text-align: center;
   }
   .hiw-kicker {
     display: inline-flex; align-items: center; gap: 8px;
@@ -56,59 +56,136 @@
   }
   .hiw-intro h1 {
     font-family: var(--font-sans); font-weight: 700; letter-spacing: -0.03em;
-    font-size: clamp(36px, 5vw, 56px); line-height: 1.05; margin: 0 0 20px; color: #fff;
+    font-size: clamp(32px, 4.6vw, 50px); line-height: 1.08; margin: 0 0 20px; color: #fff;
     text-wrap: balance;
   }
   .hiw-intro p {
     font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: rgba(255,255,255,0.72);
-    margin: 0 auto; max-width: 60ch;
+    margin: 0 auto; max-width: 62ch;
+  }
+  .hiw-refrain {
+    max-width: 720px; margin: 28px auto 64px; text-align: center;
+    font-family: var(--font-display); font-style: italic; font-size: clamp(18px, 2vw, 22px);
+    color: rgba(255,255,255,0.9);
+  }
+  .hiw-refrain span { color: var(--c-a); }
+
+  .hiw-hint {
+    text-align: center; font-size: 13px; color: rgba(255,255,255,.45);
+    margin-bottom: 28px; letter-spacing: 0.02em;
   }
 
-  .hiw-steps {
-    max-width: 860px; margin: 0 auto; position: relative;
+  .hiw-grid {
+    max-width: 980px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
   }
-  .hiw-steps::before {
-    content: ""; position: absolute; left: 27px; top: 12px; bottom: 12px; width: 2px;
-    background: linear-gradient(180deg, var(--c-a), var(--c-b), var(--c-c));
-    opacity: 0.35;
-  }
-  @media (max-width: 640px) { .hiw-steps::before { left: 21px; } }
+  @media (max-width: 860px) { .hiw-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .hiw-grid { grid-template-columns: 1fr; } }
 
-  .hiw-step {
-    position: relative;
-    display: grid; grid-template-columns: 56px 1fr; gap: 24px;
-    padding-bottom: 56px;
+  .hiw-card {
+    grid-column: span 1;
+    border-radius: 20px;
+    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    overflow: hidden;
+    transition: background .3s, border-color .3s;
   }
-  .hiw-step:last-child { padding-bottom: 0; }
-  @media (max-width: 640px) { .hiw-step { grid-template-columns: 44px 1fr; gap: 16px; } }
+  .hiw-card.open { grid-column: span 2; background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.22); }
+  @media (max-width: 860px) { .hiw-card.open { grid-column: span 2; } }
+  @media (max-width: 560px) { .hiw-card.open { grid-column: span 1; } }
 
-  .hiw-step-num {
-    position: relative; z-index: 1;
-    width: 56px; height: 56px; border-radius: 50%;
+  .hiw-card-trigger {
+    width: 100%; display: flex; align-items: center; gap: 16px;
+    padding: 22px 22px; background: none; border: none; cursor: pointer;
+    text-align: left; color: #fff; font-family: inherit;
+  }
+  .hiw-card-num {
+    flex: none; width: 40px; height: 40px; border-radius: 50%;
     display: grid; place-items: center;
-    font-family: var(--font-mono); font-size: 18px; font-weight: 600;
-    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16);
-    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-    color: #fff;
+    font-family: var(--font-mono); font-size: 15px; font-weight: 600;
+    background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.16);
+    transition: background .3s, border-color .3s;
   }
-  @media (max-width: 640px) { .hiw-step-num { width: 44px; height: 44px; font-size: 15px; } }
+  .hiw-card.open .hiw-card-num {
+    background: linear-gradient(135deg, var(--c-a), var(--c-b));
+    border-color: transparent;
+  }
+  .hiw-card-title { font-size: 16.5px; font-weight: 700; letter-spacing: -0.01em; flex: 1; }
+  .hiw-card-plus {
+    flex: none; width: 22px; height: 22px; position: relative;
+  }
+  .hiw-card-plus::before, .hiw-card-plus::after {
+    content: ""; position: absolute; background: rgba(255,255,255,.6);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    transition: transform .3s ease, opacity .3s ease;
+  }
+  .hiw-card-plus::before { width: 14px; height: 2px; }
+  .hiw-card-plus::after { width: 2px; height: 14px; }
+  .hiw-card.open .hiw-card-plus::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
 
-  .hiw-step-body { padding-top: 8px; }
-  .hiw-step-title {
-    font-size: clamp(20px, 2.2vw, 26px); font-weight: 700; letter-spacing: -0.02em;
-    color: #fff; margin: 0 0 10px;
+  .hiw-card-panel {
+    display: grid; grid-template-rows: 0fr; min-height: 0; overflow: hidden;
+    transition: grid-template-rows .35s ease;
   }
-  .hiw-step-body p {
-    font-size: 15.5px; line-height: 1.65; color: rgba(255,255,255,0.72); margin: 0 0 12px; max-width: 58ch;
-  }
-  .hiw-step-quote {
-    display: inline-block; margin-top: 4px; padding: 12px 16px; border-radius: 12px;
+  .hiw-card.open .hiw-card-panel { grid-template-rows: 1fr; }
+  .hiw-card-panel-inner { overflow: hidden; min-height: 0; }
+  .hiw-card-body { padding: 0 22px 26px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+  .hiw-card-text { flex: 1 1 260px; min-width: 0; }
+  .hiw-card-text p { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.75); margin: 0 0 12px; }
+  .hiw-card-quote {
+    display: inline-block; margin: 0; padding: 12px 16px; border-radius: 12px;
     background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
-    font-size: 14px; font-style: italic; color: rgba(255,255,255,0.82); max-width: 52ch;
+    font-size: 13.5px; font-style: italic; color: rgba(255,255,255,0.82); max-width: 46ch;
   }
+  .hiw-card-visual { flex: 0 0 auto; }
+
+  /* Visuals reused inside cards */
+  .hiw-collage { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 220px; }
+  .hiw-collage img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 10px; border: 1px solid rgba(255,255,255,.12); }
+
+  .hiw-mock-card {
+    background: rgba(255, 252, 247, 0.96); border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 14px; padding: 16px 18px; width: 240px;
+    box-shadow: 0 16px 36px rgba(20,8,32,.28);
+  }
+  .hiw-mock-card .ttl { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-c); margin-bottom: 8px; }
+  .hiw-mock-card .msg { font-size: 13px; line-height: 1.5; color: #241a2e; }
+  .hiw-mock-card .num { font-size: 30px; font-weight: 700; color: #17101d; letter-spacing: -0.02em; }
+  .hiw-mock-card .num i { font-style: normal; font-size: 14px; color: #8b7f95; margin-left: 2px; }
+  .hiw-mock-card .bar { height: 5px; border-radius: 3px; background: rgba(0,0,0,.08); margin-top: 10px; overflow: hidden; }
+  .hiw-mock-card .bar span { display: block; height: 100%; background: linear-gradient(90deg, var(--c-a), var(--c-b)); width: 86%; }
+
+  .hiw-photo { width: 220px; border-radius: 14px; border: 1px solid rgba(255,255,255,.12); display: block; }
+
+  .hiw-season-row { display: flex; gap: 10px; flex-wrap: wrap; width: 220px; }
+  .hiw-season-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 12px; border-radius: 999px;
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14);
+    font-size: 12.5px; font-weight: 600; color: rgba(255,255,255,.85);
+  }
+  .hiw-season-badge svg { width: 14px; height: 14px; flex: none; }
+  .hiw-season-badge.c-a svg { color: var(--c-a); }
+  .hiw-season-badge.c-b svg { color: var(--c-b); }
+  .hiw-season-badge.c-c svg { color: var(--c-c); }
+
+  .hiw-video-wrap {
+    width: 140px; border-radius: 18px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,.14);
+    box-shadow: 0 16px 36px rgba(20,8,32,.35);
+  }
+  .hiw-video-wrap video { width: 100%; display: block; aspect-ratio: 9 / 16; object-fit: cover; }
+
+  .hiw-metric {
+    max-width: 640px; margin: 56px auto 0; text-align: center;
+    padding: 18px 24px; border-radius: 14px;
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+    font-size: 13.5px; color: rgba(255,255,255,.6);
+  }
+  .hiw-metric strong { color: #fff; font-weight: 700; }
 
   .hiw-closing {
-    max-width: 640px; margin: 88px auto 0; text-align: center;
+    max-width: 640px; margin: 56px auto 0; text-align: center;
   }
   .hiw-closing h2 {
     font-family: var(--font-sans); font-weight: 700; letter-spacing: -0.02em;
@@ -133,60 +210,119 @@
 <main class="hiw-page">
   <div class="hiw-intro">
     <div class="hiw-kicker"><span class="dot"></span> How it works</div>
-    <h1>From scattered data to your next best step.</h1>
-    <p>HealthLink360 connects your medical history, everyday health, and daily life into one story, then helps you act on it. Here is what actually happens behind the scenes.</p>
+    <h1>The trust layer between health data and preventive action.</h1>
+    <p>Access to your records was never the problem. Knowing what to trust, and what to do next, was. Here is how HealthLink360 closes that gap.</p>
+  </div>
+  <div class="hiw-refrain">"No source, <span>no statement.</span>"</div>
+
+  <div class="hiw-hint">Tap a card to see how each step works</div>
+
+  <div class="hiw-grid" id="hiwGrid">
+    <div class="hiw-card" data-index="0">
+      <button class="hiw-card-trigger" aria-expanded="false">
+        <span class="hiw-card-num">1</span>
+        <span class="hiw-card-title">Your health data, together</span>
+        <span class="hiw-card-plus"></span>
+      </button>
+      <div class="hiw-card-panel"><div class="hiw-card-panel-inner"><div class="hiw-card-body">
+        <div class="hiw-card-text">
+          <p>Medical records, wearables, and daily routines, connected in one place instead of scattered across portals, PDFs, and memory. Access alone never built trust. This is where trust starts.</p>
+        </div>
+        <div class="hiw-card-visual hiw-collage">
+          <img src="assets/story-appointment.jpg" alt="The appointment" loading="lazy"/>
+          <img src="assets/story-food.jpg" alt="Food and routines" loading="lazy"/>
+          <img src="assets/story-movement.jpg" alt="Movement and stress" loading="lazy"/>
+          <img src="assets/story-rest.jpg" alt="Rest and reflection" loading="lazy"/>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="hiw-card" data-index="1">
+      <button class="hiw-card-trigger" aria-expanded="false">
+        <span class="hiw-card-num">2</span>
+        <span class="hiw-card-title">No source, no statement</span>
+        <span class="hiw-card-plus"></span>
+      </button>
+      <div class="hiw-card-panel"><div class="hiw-card-panel-inner"><div class="hiw-card-body">
+        <div class="hiw-card-text">
+          <p>Before anything is summarized, every fact is scored for recency and consistency. Conflicting records are surfaced with their sources, not silently merged, so nothing gets stated without something trustworthy behind it.</p>
+        </div>
+        <div class="hiw-card-visual hiw-mock-card">
+          <div class="ttl">Twin Score</div>
+          <div class="num">86<i>%</i></div>
+          <div class="bar"><span></span></div>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="hiw-card" data-index="2">
+      <button class="hiw-card-trigger" aria-expanded="false">
+        <span class="hiw-card-num">3</span>
+        <span class="hiw-card-title">Same record, different responsibility</span>
+        <span class="hiw-card-plus"></span>
+      </button>
+      <div class="hiw-card-panel"><div class="hiw-card-panel-inner"><div class="hiw-card-body">
+        <div class="hiw-card-text">
+          <p>What matters to you looks different from what matters to your care team. HealthLink360 shapes the same trusted record around each role, so it is never a competing version of the truth, just a different lens on one.</p>
+        </div>
+        <div class="hiw-card-visual hiw-season-row">
+          <span class="hiw-season-badge c-c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-5 4 9 2-4h6"/></svg>Get well</span>
+          <span class="hiw-season-badge c-b"><svg viewBox="0 0 24 24"><ellipse cx="8" cy="16" rx="3" ry="4.4" fill="currentColor" transform="rotate(-14 8 16)"/><ellipse cx="16" cy="9" rx="3" ry="4.4" fill="currentColor" transform="rotate(14 16 9)"/></svg>Be well</span>
+          <span class="hiw-season-badge c-a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>Stay well</span>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="hiw-card" data-index="3">
+      <button class="hiw-card-trigger" aria-expanded="false">
+        <span class="hiw-card-num">4</span>
+        <span class="hiw-card-title">One safe next action</span>
+        <span class="hiw-card-plus"></span>
+      </button>
+      <div class="hiw-card-panel"><div class="hiw-card-panel-inner"><div class="hiw-card-body">
+        <div class="hiw-card-text">
+          <p>Coach360 turns the trusted picture into one clear, specific step, not a wall of data to interpret alone.</p>
+          <div class="hiw-card-quote">"Your blood pressure is trending up. Not an emergency. Not nothing. A 10-minute walk after dinner is a good first move."</div>
+        </div>
+        <div class="hiw-card-visual hiw-mock-card">
+          <div class="ttl">Coach360 · this evening</div>
+          <div class="msg">Your next step is ready.</div>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="hiw-card" data-index="4">
+      <button class="hiw-card-trigger" aria-expanded="false">
+        <span class="hiw-card-num">5</span>
+        <span class="hiw-card-title">A picture that keeps learning</span>
+        <span class="hiw-card-plus"></span>
+      </button>
+      <div class="hiw-card-panel"><div class="hiw-card-panel-inner"><div class="hiw-card-body">
+        <div class="hiw-card-text">
+          <p>Your Digital Twin updates as your life changes, a record that does not stop when the encounter ends. Every insight still shows what was noticed, why it may matter, and where it came from.</p>
+        </div>
+        <img class="hiw-card-visual hiw-photo" src="assets/trust-homevisit.jpg" alt="A community health worker explaining a result to a patient during a home visit" loading="lazy"/>
+      </div></div></div>
+    </div>
+
+    <div class="hiw-card" data-index="5">
+      <button class="hiw-card-trigger" aria-expanded="false">
+        <span class="hiw-card-num">6</span>
+        <span class="hiw-card-title">The outcome returns to care</span>
+        <span class="hiw-card-plus"></span>
+      </button>
+      <div class="hiw-card-panel"><div class="hiw-card-panel-inner"><div class="hiw-card-body">
+        <div class="hiw-card-text">
+          <p>Your care team sees the appointment. HealthLink360 helps make sure what happens after it, the choices, the setbacks, the progress, gets counted instead of lost before the next one.</p>
+        </div>
+        <div class="hiw-card-visual hiw-video-wrap">
+          <video src="assets/companion.mp4" autoplay loop muted playsinline aria-hidden="true"></video>
+        </div>
+      </div></div></div>
+    </div>
   </div>
 
-  <div class="hiw-steps">
-    <div class="hiw-step">
-      <div class="hiw-step-num">1</div>
-      <div class="hiw-step-body">
-        <h3 class="hiw-step-title">Connect your health story</h3>
-        <p>Link your medical records, wearables, and daily routines. HealthLink360 draws on 400+ data points, appointments, medications, sleep, food, movement, so nothing about your health lives in its own disconnected silo.</p>
-      </div>
-    </div>
-
-    <div class="hiw-step">
-      <div class="hiw-step-num">2</div>
-      <div class="hiw-step-body">
-        <h3 class="hiw-step-title">Meet your Digital Twin</h3>
-        <p>Your information becomes a living picture of you, a Digital Twin that updates as your life changes. Your Twin Score gives you a fast read on how the pieces are trending together.</p>
-      </div>
-    </div>
-
-    <div class="hiw-step">
-      <div class="hiw-step-num">3</div>
-      <div class="hiw-step-body">
-        <h3 class="hiw-step-title">Get guidance from Coach360</h3>
-        <p>Coach360 turns the fuller picture into a clear, specific next step, grounded in what is actually happening in your life rather than generic advice.</p>
-        <div class="hiw-step-quote">"Your blood pressure is trending up. Not an emergency. Not nothing. A 10-minute walk after dinner is a good first move."</div>
-      </div>
-    </div>
-
-    <div class="hiw-step">
-      <div class="hiw-step-num">4</div>
-      <div class="hiw-step-body">
-        <h3 class="hiw-step-title">Understand the why</h3>
-        <p>Every insight shows what HealthLink360 noticed, why it may matter, and where the information came from, so you are never just told what to do without knowing the reasoning behind it.</p>
-      </div>
-    </div>
-
-    <div class="hiw-step">
-      <div class="hiw-step-num">5</div>
-      <div class="hiw-step-body">
-        <h3 class="hiw-step-title">Take the next step, in your season</h3>
-        <p>Whether you are getting well after something changes, building healthier habits, or protecting progress that is already working, guidance is shaped around where you are right now, not a one-size-fits-all plan.</p>
-      </div>
-    </div>
-
-    <div class="hiw-step">
-      <div class="hiw-step-num">6</div>
-      <div class="hiw-step-body">
-        <h3 class="hiw-step-title">Stay connected, between visits</h3>
-        <p>Your care team sees the appointment. HealthLink360 helps make sure what happens after it, the choices, the setbacks, the progress, does not get lost before the next one.</p>
-      </div>
-    </div>
-  </div>
+  <div class="hiw-metric">Measured in <strong>Meaningful Preventive Actions Completed</strong>, not pages viewed.</div>
 
   <div class="hiw-closing">
     <h2>See where you fit in your own story.</h2>
@@ -197,6 +333,20 @@
     </div>
   </div>
 </main>
+
+<script>
+(function () {
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.hiw-card'));
+  cards.forEach(function (card) {
+    var trigger = card.querySelector('.hiw-card-trigger');
+    trigger.addEventListener('click', function () {
+      var isOpen = card.classList.contains('open');
+      card.classList.toggle('open', !isOpen);
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
