@@ -404,7 +404,7 @@ function TrustProof({ onWaitlist }) {
 
 function Footer() {
   const cols = [
-  { title: "For individuals", links: [["How it works", "#companion"], ["The experience", "#companion"], ["Privacy & security", "#trust"], ["FAQ", "waitlist.html"]] },
+  { title: "For individuals", links: [["How it works", "how-it-works.html"], ["The experience", "#companion"], ["Privacy & security", "#trust"], ["FAQ", "waitlist.html"]] },
   { title: "For care teams", links: [["Overview", "#care-teams"], ["Solutions", "#care-teams"], ["Resources", "#trust"], ["Request a demo", "mailto:partners@healthlink360.ai"]] },
   { title: "For organizations", links: [["Population health", "#trust"], ["Community impact", "#trust"], ["Partnerships", "mailto:partners@healthlink360.ai"]] },
   { title: "About", links: [["Our mission", "#top"], ["Our story", "#top"], ["Contact us", "mailto:info@healthlink360.ai"]] }];
