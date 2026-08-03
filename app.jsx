@@ -1,6 +1,6 @@
 /* HealthLink360: single-page site
    Black / white / magenta / purple brand
-   Sections: Nav, Hero, Problem, Companion, Seasons, Care-teams bridge, Trust & Proof, Closing, Footer
+   Sections: Nav, Hero, Problem, Seasons, Companion, Care-teams bridge, Trust & Proof (with CTA), Footer
 */
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -58,6 +58,25 @@ function PhotoPlaceholder({ label, ratio = "4 / 5", className = "" }) {
 
 }
 
+function Photo({ src, alt, ratio = "4 / 5", className = "" }) {
+  return (
+    <div className={`hl-photo-slot hl-photo-real ${className}`} style={{ aspectRatio: ratio }}>
+      <img src={src} alt={alt} loading="lazy" />
+    </div>);
+
+}
+
+function PhoneFrame({ src, className = "" }) {
+  return (
+    <div className={`hl-phone ${className}`}>
+      <div className="hl-phone-screen">
+        <video src={src} autoPlay loop muted playsInline preload="auto" aria-hidden="true"></video>
+        <div className="hl-phone-island"></div>
+      </div>
+    </div>);
+
+}
+
 /* ============== Sections ============== */
 
 function Logo({ variant = "nav" }) {
@@ -85,6 +104,23 @@ function Nav({ onWaitlist }) {
       </ul>
       <button className="hl-cta" onClick={onWaitlist}>Request Early Access <span>→</span></button>
     </nav>);
+
+}
+
+function HeroTicker() {
+  const label = "ONC's EHIgnite Phase 1 Winner. To learn more, click here.";
+  const chip = (key) =>
+  <span className="hl-ticker-item" key={key}>
+      <MiniIcon k="award" />
+      <span>ONC&rsquo;s EHIgnite Phase 1 Winner.</span>
+      <span className="hl-ticker-link">To learn more, click here.</span>
+    </span>;
+
+  const items = Array.from({ length: 12 }, (_, i) => chip(i));
+  return (
+    <a href="ehignite/" className="hl-hero-ticker" aria-label={label}>
+      <div className="hl-hero-ticker-track" aria-hidden="true">{items}</div>
+    </a>);
 
 }
 
@@ -135,16 +171,18 @@ function Hero({ onWaitlist }) {
           </div>
         </div>
       </div>
+
+      <HeroTicker />
     </header>);
 
 }
 
 function Problem() {
   const moments = [
-  { time: "9:10 AM", icon: "stethoscope", label: "The appointment" },
-  { time: "12:40 PM", icon: "utensils", label: "Food & routines" },
-  { time: "6:15 PM", icon: "footprints", label: "Movement & stress" },
-  { time: "10:05 PM", icon: "moon", label: "Rest & reflection" }];
+  { time: "9:10 AM", icon: "stethoscope", label: "The appointment", img: "assets/story-appointment.jpg" },
+  { time: "12:40 PM", icon: "utensils", label: "Food & routines", img: "assets/story-food.jpg" },
+  { time: "6:15 PM", icon: "footprints", label: "Movement & stress", img: "assets/story-movement.jpg" },
+  { time: "10:05 PM", icon: "moon", label: "Rest & reflection", img: "assets/story-rest.jpg" }];
 
   return (
     <section className="hl-problem">
@@ -166,7 +204,7 @@ function Problem() {
           {moments.map((m, i) =>
           <div key={i} className="hl-problem-tile">
               <div className="hl-problem-tile-photo">
-                <PhotoPlaceholder label={`Photo: ${m.label.toLowerCase()}`} ratio="4 / 5" />
+                <Photo src={m.img} alt={m.label} ratio="4 / 5" />
                 <span className="hl-problem-time">{m.time}</span>
               </div>
               <div className="hl-problem-tile-label"><MiniIcon k={m.icon} /><span>{m.label}</span></div>
@@ -209,7 +247,7 @@ function Companion() {
           <div className="hl-tagline">One body · One connected health story</div>
         </Reveal>
         <Reveal delay={120} className="hl-companion-photo">
-          <PhotoPlaceholder label="Same person, later: cooking dinner at home, calm evening light" ratio="4 / 5" />
+          <PhoneFrame src="assets/companion.mp4" />
           <div className="hl-companion-card">
             <div className="ttl">Coach360 · this evening</div>
             <div className="msg">Your blood pressure is trending up. Not an emergency. Not nothing. A 10-minute walk after dinner is a good first move.</div>
@@ -232,10 +270,14 @@ function Seasons() {
 
   return (
     <section className="hl-seasons">
+      <div className="hl-seasons-bg">
+        <img src="assets/seasons-bg.jpg" alt="" aria-hidden="true" />
+        <div className="hl-seasons-scrim"></div>
+      </div>
       <div className="hl-section-inner">
         <Reveal as="div" className="hl-seasons-intro">
-          <h2 className="hl-h2">Wherever you are in your health, you should not have to start over.</h2>
-          <p className="hl-lede">
+          <h2 className="hl-h2 light">Wherever you are in your health, you should not have to start over.</h2>
+          <p className="hl-lede light">
             Health is not a straight line. You may be recovering in one area, building
             new habits in another, and protecting progress somewhere else. HealthLink360
             keeps the story connected as those needs change.
@@ -283,13 +325,37 @@ function CareTeamsBridge() {
 
 }
 
-function TrustProof() {
-  const pillars = [
-  { icon: "search", title: "Grounded in evidence", body: "Understand what HealthLink360 is noticing, why it may matter, and where the information came from." },
-  { icon: "home", title: "Built around real life", body: "Guidance considers routines, cultures, food traditions, preferences, responsibilities, barriers, environments, and available support, not just an isolated data point." },
-  { icon: "lock", title: "You remain in control", body: "Privacy, security, transparency, permission, and your choices sit at the center. HealthLink360 supports and educates; it does not diagnose or replace medical care." },
-  { icon: "award", title: "Federal recognition", body: "Winner, HHS EHIgnite Challenge. Recognized for helping make fragmented electronic health information more trustworthy, understandable, and actionable." }];
+function LogoTicker() {
+  const logos = [
+  { name: "Johns Hopkins University", img: "assets/logos/johns-hopkins.png" },
+  { name: "University of Baltimore", img: "assets/logos/university-of-baltimore.png" },
+  { name: "NVIDIA" },
+  { name: "AWS" },
+  { name: "Halcyon", img: "assets/logos/halcyon.png" },
+  { name: "Conscious Venture Labs", img: "assets/logos/conscious-venture-labs.png" },
+  { name: "Build In Tulsa", img: "assets/logos/build-in-tulsa.png" },
+  { name: "Visible Hands" }];
 
+  const renderSet = (key) =>
+  <div className="hl-logo-set" key={key}>
+      {logos.map((l, i) =>
+      <span className="hl-logo-item" key={i}>
+          {l.img ? <img src={l.img} alt={l.name} loading="lazy" /> : l.name}
+        </span>
+      )}
+    </div>;
+
+  return (
+    <div className="hl-logo-ticker">
+      <div className="hl-logo-ticker-track">
+        {renderSet("a")}
+        {renderSet("b")}
+      </div>
+    </div>);
+
+}
+
+function TrustProof({ onWaitlist }) {
   const stats = [
   { value: "93%", label: "engagement", context: "in a prior Food-as-Medicine program" },
   { value: "90%", label: "medication adherence", context: "in an adherence-focused pilot" },
@@ -297,26 +363,21 @@ function TrustProof() {
 
   return (
     <section id="trust" className="hl-trust">
+      <div className="hl-trust-bg">
+        <img src="assets/trust-homevisit.jpg" alt="A community health worker sharing a warm conversation with a patient during a home visit" />
+        <div className="hl-trust-scrim"></div>
+      </div>
       <div className="hl-section-inner">
         <Reveal as="div" className="hl-trust-intro">
-          <h2 className="hl-h2">Built to earn your trust, not ask for it.</h2>
-          <p className="hl-lede">
+          <h2 className="hl-h2 light">Built to earn your trust, not ask for it.</h2>
+          <p className="hl-lede light">
             Your health is personal. The guidance you receive should be
             understandable, grounded in evidence, and built around the realities
             of your life.
           </p>
         </Reveal>
         <div className="hl-trust-body">
-          <Reveal delay={100} className="hl-trust-grid">
-            {pillars.map((p, i) =>
-            <div key={i} className="hl-trust-card">
-                <div className="hl-trust-icon"><MiniIcon k={p.icon} /></div>
-                <h3>{p.title}</h3>
-                <p>{p.body}</p>
-              </div>
-            )}
-          </Reveal>
-          <Reveal delay={200} className="hl-trust-stats">
+          <Reveal delay={100} className="hl-trust-stats">
             <div className="hl-trust-stats-kicker">Experience behind the platform</div>
             {stats.map((s, i) =>
             <div key={i} className="hl-trust-stat-row">
@@ -327,36 +388,15 @@ function TrustProof() {
             <div className="hl-trust-stats-note">Early program and pilot outcomes. Results may vary by population, program design, and level of support.</div>
           </Reveal>
         </div>
+        <Reveal delay={240} as="div" className="hl-logo-ticker-wrap"><LogoTicker /></Reveal>
         <Reveal delay={280} as="div" className="hl-trust-footnote">Technology should help you feel more informed, not more overwhelmed.</Reveal>
-      </div>
-    </section>);
-
-}
-
-function Closing({ onWaitlist }) {
-  return (
-    <section id="start" className="hl-waitlist">
-      <div className="hl-section-inner">
-        <div className="hl-waitlist-card">
-          <div className="hl-wl-bg"></div>
-          <div className="hl-wl-inner">
-            <Reveal as="h2" className="hl-h2">You deserve more than health information.<br />You deserve a way forward.</Reveal>
-            <Reveal as="p" delay={80} className="hl-lede">
-              HealthLink360 connects your medical history, everyday health, next
-              steps, and support into one continuing journey, so every change
-              does not require starting again.
-            </Reveal>
-            <Reveal as="p" delay={140} className="hl-wl-price">
-              Reserve your spot in the founding cohort for $80 (was $100). Founding
-              members get priority access and a lifetime price lock.
-            </Reveal>
-            <Reveal delay={200} className="hl-wl-cta-wrap">
-              <button className="hl-cta lg" onClick={onWaitlist}>Reserve my spot <span>→</span></button>
-              <a href="#companion" className="hl-ghost">Explore the experience</a>
-            </Reveal>
-            <Reveal delay={260} as="div" className="hl-tagline light">One body · One connected health story</Reveal>
+        <Reveal delay={320} className="hl-trust-cta">
+          <div className="hl-trust-cta-text">
+            <div className="hl-trust-cta-title">Ready to see it for yourself?</div>
+            <p>Reserve your spot in the founding cohort for $80 (was $100). Founding members get priority access and a lifetime price lock.</p>
           </div>
-        </div>
+          <button className="hl-cta lg" onClick={onWaitlist}>Reserve my spot <span>→</span></button>
+        </Reveal>
       </div>
     </section>);
 
@@ -417,11 +457,10 @@ function App() {
       <Nav onWaitlist={goWaitlist} />
       <Hero onWaitlist={goWaitlist} />
       <Problem />
-      <Companion />
       <Seasons />
+      <Companion />
       <CareTeamsBridge />
-      <TrustProof />
-      <Closing onWaitlist={goWaitlist} />
+      <TrustProof onWaitlist={goWaitlist} />
       <Footer />
 
       <TweaksPanel title="Tweaks">
