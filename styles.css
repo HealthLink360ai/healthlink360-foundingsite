@@ -688,3 +688,63 @@ button { font: inherit; cursor: pointer; }
   .hl-nav ul { display: none; }
   .hl-nav { padding: 14px var(--pad); }
 }
+
+/* ================ Waitlist modal ================ */
+.hl-modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(6,2,12,.72);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  animation: hl-modal-fade .2s ease;
+}
+@keyframes hl-modal-fade { from { opacity: 0; } to { opacity: 1; } }
+.hl-modal {
+  position: relative; width: 100%; max-width: 440px;
+  background: linear-gradient(160deg, #17081f 0%, #0c0414 100%);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--r-xl);
+  padding: 40px 36px;
+  color: #fff;
+  box-shadow: 0 30px 80px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.06);
+  animation: hl-modal-pop .25s ease;
+}
+@keyframes hl-modal-pop { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.hl-modal-close {
+  position: absolute; top: 18px; right: 18px;
+  width: 32px; height: 32px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+  color: rgba(255,255,255,.7); cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.hl-modal-close:hover { background: rgba(255,255,255,.14); color: #fff; }
+.hl-modal-close svg { width: 15px; height: 15px; }
+.hl-modal-title {
+  font-family: var(--font-sans); font-weight: 700; letter-spacing: -0.02em;
+  font-size: 26px; color: #fff; margin: 14px 0 10px;
+}
+.hl-modal-sub { font-size: 14.5px; line-height: 1.55; color: rgba(255,255,255,.7); margin: 0 0 24px; }
+.hl-modal-form { display: flex; flex-direction: column; gap: 12px; }
+.hl-modal-form input[type="text"], .hl-modal-form input[type="email"] {
+  width: 100%; padding: 14px 16px; border-radius: 12px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16);
+  color: #fff; font-size: 15px; font-family: inherit;
+}
+.hl-modal-form input::placeholder { color: rgba(255,255,255,.4); }
+.hl-modal-form input:focus { outline: none; border-color: rgba(var(--c-glow),.55); background: rgba(255,255,255,.09); }
+.hl-modal-form .hl-cta { justify-content: center; margin-top: 4px; width: 100%; }
+.hl-modal-trust {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 18px; font-size: 12px; color: rgba(255,255,255,.45); font-family: var(--font-mono);
+}
+.hl-modal-trust svg { width: 14px; height: 14px; flex: none; }
+.hl-modal-success { text-align: center; padding-top: 6px; }
+.hl-modal-check {
+  width: 52px; height: 52px; border-radius: 50%; margin: 0 auto 8px;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--c-a), var(--c-b));
+  color: #fff;
+}
+.hl-modal-check svg { width: 24px; height: 24px; }
+.hl-modal-success .hl-cta { width: 100%; justify-content: center; margin-top: 8px; }

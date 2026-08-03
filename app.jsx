@@ -402,6 +402,75 @@ function TrustProof({ onWaitlist }) {
 
 }
 
+function WaitlistModal({ open, onClose }) {
+  const [submitted, setSubmitted] = React.useState(false);
+
+  React.useEffect(() => {
+    if (open) setSubmitted(false);
+  }, [open]);
+
+  React.useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div className="hl-modal-overlay" onClick={onClose}>
+      <div className="hl-modal" onClick={(e) => e.stopPropagation()}>
+        <button className="hl-modal-close" onClick={onClose} aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
+        </button>
+
+        {!submitted ?
+        <>
+            <div className="hl-kicker light">Founding Cohort</div>
+            <h3 className="hl-modal-title">Reserve your spot.</h3>
+            <p className="hl-modal-sub">
+              Join the HealthLink360 waitlist and be first in line for early access
+              to your Digital Twin and Coach360.
+            </p>
+            <form
+              action="https://f0a5ce42.sibforms.com/serve/MUIFACTje-SOK-Z9cOMOwdy1-j-CXEdo5LreFJn90jWSHlFg_vjWyRa5AnDaBX7gFyiExMkqmLZ0RyikkDjdgkfWVzdypaNIRpm_ImrgBwuHAO_PJqeeMmpGh8rD_J2BMQ519_hqdxqhWWozAomTcdRAOPHS1Kg2rotp_zWyTNaPVH-hC0kkndLRH8VWDiY1rew8V-KRkIDpHnjDgg=="
+              method="post"
+              target="hl-waitlist-frame"
+              className="hl-modal-form"
+              onSubmit={() => setSubmitted(true)}
+              noValidate>
+
+              <input type="text" name="FIRSTNAME" placeholder="First name" aria-label="First name" required />
+              <input type="email" name="EMAIL" placeholder="you@email.com" aria-label="Email address" required />
+              <div style={{ position: "absolute", left: "-5000px" }} aria-hidden="true">
+                <input type="text" name="email_address_check" tabIndex="-1" defaultValue="" />
+              </div>
+              <input type="hidden" name="locale" value="en" />
+              <input type="hidden" name="html_type" value="simple" />
+              <button type="submit" className="hl-cta lg">Join the waitlist <span>→</span></button>
+            </form>
+            <div className="hl-modal-trust">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+              No payment required · unsubscribe anytime
+            </div>
+          </> :
+
+        <div className="hl-modal-success">
+            <div className="hl-modal-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
+            </div>
+            <h3 className="hl-modal-title">You're on the list.</h3>
+            <p className="hl-modal-sub">We'll email you as soon as your founding-cohort invite is ready.</p>
+            <button className="hl-cta lg" onClick={onClose}>Done</button>
+          </div>
+        }
+      </div>
+      <iframe name="hl-waitlist-frame" title="waitlist-submit" style={{ display: "none" }}></iframe>
+    </div>);
+
+}
+
 function Footer() {
   const cols = [
   { title: "For individuals", links: [["How it works", "how-it-works.html"], ["The experience", "#companion"], ["Privacy & security", "#trust"], ["FAQ", "waitlist.html"]] },
@@ -450,18 +519,20 @@ function App() {
     r.setProperty("--c-glow", palette.glow);
   }, [t.palette]);
 
-  const goWaitlist = () => { window.location.href = "waitlist.html"; };
+  const [waitlistOpen, setWaitlistOpen] = React.useState(false);
+  const openWaitlist = () => setWaitlistOpen(true);
 
   return (
     <div className="hl-root">
-      <Nav onWaitlist={goWaitlist} />
-      <Hero onWaitlist={goWaitlist} />
+      <Nav onWaitlist={openWaitlist} />
+      <Hero onWaitlist={openWaitlist} />
       <Problem />
       <Seasons />
       <Companion />
       <CareTeamsBridge />
-      <TrustProof onWaitlist={goWaitlist} />
+      <TrustProof onWaitlist={openWaitlist} />
       <Footer />
+      <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
 
       <TweaksPanel title="Tweaks">
         <TweakSection label="Palette">
