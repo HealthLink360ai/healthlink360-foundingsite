@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>How It Works | HealthLink360</title>
+<meta name="description" content="Healthcare has more data than ever, but it still sees people in snapshots. See how HealthLink360 connects them into one picture."/>
+<link rel="icon" type="image/png" href="assets/favicon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+<script defer src="/_vercel/insights/script.js"></script>
+<style>
+  body { background: var(--dark); color: #fff; }
+
+  .hiw-page {
+    min-height: 100vh;
+    background:
+      radial-gradient(900px 600px at 85% -10%, rgba(var(--c-glow), 0.22), transparent 60%),
+      radial-gradient(700px 500px at 0% 100%, rgba(124,58,237,0.28), transparent 60%),
+      var(--dark);
+    padding: 120px var(--pad) 100px;
+  }
+
+  .hiw-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px var(--pad);
+    background: rgba(8,3,15,0.78);
+    backdrop-filter: saturate(180%) blur(18px);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    color: #fff;
+  }
+  .hiw-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 14px; color: rgba(255,255,255,.7);
+    padding: 8px 14px; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.04);
+    transition: background .2s, border-color .2s, color .2s;
+  }
+  .hiw-back:hover { color: #fff; background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.24); }
+
+  .hiw-intro {
+    max-width: 720px; margin: 0 auto 8px; text-align: center;
+  }
+  .hiw-kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em;
+    color: var(--c-a); padding: 6px 12px; border-radius: 999px;
+    background: rgba(var(--c-glow), 0.16);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hiw-intro h1 {
+    font-family: var(--font-sans); font-weight: 700; letter-spacing: -0.03em;
+    font-size: clamp(32px, 4.6vw, 50px); line-height: 1.1; margin: 0 0 20px; color: #fff;
+    text-wrap: balance;
+  }
+  .hiw-intro h1 em {
+    font-family: var(--font-display); font-style: italic; font-weight: 400;
+    background: linear-gradient(120deg, var(--c-a) 0%, #fff 50%, var(--c-b) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hiw-intro p {
+    font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: rgba(255,255,255,0.72);
+    margin: 0 auto; max-width: 62ch;
+  }
+
+  .hiw-progress-wrap {
+    max-width: 340px; margin: 32px auto 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hiw-progress-track { flex: 1; height: 4px; border-radius: 2px; background: rgba(255,255,255,.1); overflow: hidden; }
+  .hiw-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--c-a), var(--c-b)); transition: width .4s ease; }
+  .hiw-progress-label { font-family: var(--font-mono); font-size: 12px; color: rgba(255,255,255,.55); white-space: nowrap; }
+
+  .hiw-hint {
+    text-align: center; font-size: 13px; color: rgba(255,255,255,.45);
+    margin-bottom: 32px; letter-spacing: 0.02em;
+  }
+
+  .hiw-grid {
+    max-width: 980px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  @media (max-width: 860px) { .hiw-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .hiw-grid { grid-template-columns: 1fr; } }
+
+  .hiw-piece {
+    grid-column: span 1;
+    border-radius: 20px;
+    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    overflow: hidden;
+    transition: background .3s, border-color .3s;
+  }
+  .hiw-piece.solved { border-color: rgba(255,255,255,.22); }
+  .hiw-piece.open { grid-column: span 2; background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.22); }
+  @media (max-width: 860px) { .hiw-piece.open { grid-column: span 2; } }
+  @media (max-width: 560px) { .hiw-piece.open { grid-column: span 1; } }
+
+  .hiw-piece-trigger {
+    width: 100%; display: flex; align-items: center; gap: 14px;
+    padding: 20px 20px; background: none; border: none; cursor: pointer;
+    text-align: left; color: #fff; font-family: inherit;
+  }
+  .hiw-piece-icon {
+    flex: none; width: 40px; height: 40px; border-radius: 12px;
+    display: grid; place-items: center;
+    background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.16);
+    transition: background .3s, border-color .3s;
+  }
+  .hiw-piece-icon svg { width: 20px; height: 20px; color: rgba(255,255,255,.7); }
+  .hiw-piece.solved .hiw-piece-icon {
+    background: linear-gradient(135deg, var(--c-a), var(--c-b));
+    border-color: transparent;
+  }
+  .hiw-piece.solved .hiw-piece-icon svg { color: #fff; }
+  .hiw-piece-label-wrap { flex: 1; }
+  .hiw-piece-title { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; display: block; }
+  .hiw-piece-sub { font-size: 11.5px; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: 0.06em; }
+  .hiw-piece-plus { flex: none; width: 22px; height: 22px; position: relative; }
+  .hiw-piece-plus::before, .hiw-piece-plus::after {
+    content: ""; position: absolute; background: rgba(255,255,255,.6);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    transition: transform .3s ease, opacity .3s ease;
+  }
+  .hiw-piece-plus::before { width: 14px; height: 2px; }
+  .hiw-piece-plus::after { width: 2px; height: 14px; }
+  .hiw-piece.open .hiw-piece-plus::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+
+  .hiw-piece-panel {
+    display: grid; grid-template-rows: 0fr; min-height: 0; overflow: hidden;
+    transition: grid-template-rows .35s ease;
+  }
+  .hiw-piece.open .hiw-piece-panel { grid-template-rows: 1fr; }
+  .hiw-piece-panel-inner { overflow: hidden; min-height: 0; }
+  .hiw-piece-body { padding: 0 20px 24px; }
+  .hiw-piece-body .sees { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.85); margin: 0 0 10px; }
+  .hiw-piece-body .sees strong { color: var(--c-a); font-weight: 700; }
+  .hiw-piece-body .misses { font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,0.6); margin: 0; }
+  .hiw-piece-body .misses strong { color: rgba(255,255,255,.8); font-weight: 700; }
+
+  /* Completion reveal, hidden until all pieces are solved */
+  .hiw-reveal {
+    max-width: 720px; margin: 20px auto 0;
+    max-height: 0; opacity: 0; overflow: hidden;
+    transition: max-height .6s ease, opacity .6s ease, margin .6s ease;
+  }
+  .hiw-reveal.shown {
+    max-height: 900px; opacity: 1; margin-top: 56px;
+  }
+  .hiw-reveal-card {
+    text-align: center; padding: 40px clamp(20px, 5vw, 48px);
+    border-radius: 24px;
+    background: linear-gradient(160deg, rgba(var(--c-glow),.14), rgba(124,58,237,.14));
+    border: 1px solid rgba(255,255,255,.18);
+  }
+  .hiw-reveal-kicker {
+    font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--c-a); margin-bottom: 14px;
+  }
+  .hiw-reveal-card h2 {
+    font-family: var(--font-sans); font-weight: 700; letter-spacing: -0.02em;
+    font-size: clamp(24px, 3vw, 32px); color: #fff; margin: 0 0 16px; text-wrap: balance;
+  }
+  .hiw-reveal-card p { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.78); margin: 0 auto 12px; max-width: 56ch; }
+  .hiw-reveal-quote {
+    display: inline-block; margin: 16px 0 0; padding: 14px 20px; border-radius: 14px;
+    background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14);
+    font-size: 14px; font-style: italic; color: rgba(255,255,255,0.85); max-width: 52ch;
+  }
+
+  .hiw-metric {
+    max-width: 640px; margin: 40px auto 0; text-align: center;
+    padding: 18px 24px; border-radius: 14px;
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+    font-size: 13.5px; color: rgba(255,255,255,.6);
+  }
+  .hiw-metric strong { color: #fff; font-weight: 700; }
+
+  .hiw-closing {
+    max-width: 640px; margin: 56px auto 0; text-align: center;
+  }
+  .hiw-closing h2 {
+    font-family: var(--font-sans); font-weight: 700; letter-spacing: -0.02em;
+    font-size: clamp(26px, 3vw, 34px); color: #fff; margin: 0 0 16px;
+  }
+  .hiw-closing p { font-size: 15.5px; color: rgba(255,255,255,0.7); margin: 0 0 28px; }
+  .hiw-closing-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<nav class="hiw-nav">
+  <a href="HealthLink360 Website.html" class="hl-logo hl-logo-nav" aria-label="HealthLink360 AI">
+    <img src="assets/logo.png" alt="HealthLink360 AI" style="object-fit:cover; padding:25px 0 0;"/>
+  </a>
+  <a href="HealthLink360 Website.html" class="hiw-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back
+  </a>
+</nav>
+
+<main class="hiw-page">
+  <div class="hiw-intro">
+    <div class="hiw-kicker"><span class="dot"></span> How it works</div>
+    <h1>Healthcare has more data than ever.<br/>It still only sees you in <em>snapshots.</em></h1>
+    <p>A wearable, a lab result, a portal, a pharmacy record, a care visit: each one sees a piece of you, and misses the rest. HealthLink360 connects them into one picture.</p>
+  </div>
+
+  <div class="hiw-progress-wrap">
+    <div class="hiw-progress-track"><div class="hiw-progress-fill" id="hiwFill"></div></div>
+    <div class="hiw-progress-label"><span id="hiwCount">0</span>/6 pieces placed</div>
+  </div>
+  <div class="hiw-hint">Tap each snapshot to see what it shows, and what it misses on its own</div>
+
+  <div class="hiw-grid" id="hiwGrid">
+    <div class="hiw-piece" data-index="0">
+      <button class="hiw-piece-trigger" aria-expanded="false">
+        <span class="hiw-piece-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="3"/><path d="M9 6h6"/></svg></span>
+        <span class="hiw-piece-label-wrap"><span class="hiw-piece-title">Wearable</span><span class="hiw-piece-sub">Snapshot 1 of 6</span></span>
+        <span class="hiw-piece-plus"></span>
+      </button>
+      <div class="hiw-piece-panel"><div class="hiw-piece-panel-inner"><div class="hiw-piece-body">
+        <p class="sees"><strong>Sees:</strong> Heart rate, steps, and sleep, tracked in real time.</p>
+        <p class="misses"><strong>Misses:</strong> It knows your heart rate spiked Tuesday. It has no idea you also skipped two doses of your blood pressure medication that week.</p>
+      </div></div></div>
+    </div>
+
+    <div class="hiw-piece" data-index="1">
+      <button class="hiw-piece-trigger" aria-expanded="false">
+        <span class="hiw-piece-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-4"/><path d="M9 15l10-10M22 2l-4 1 3 3z"/></svg></span>
+        <span class="hiw-piece-label-wrap"><span class="hiw-piece-title">Lab results</span><span class="hiw-piece-sub">Snapshot 2 of 6</span></span>
+        <span class="hiw-piece-plus"></span>
+      </button>
+      <div class="hiw-piece-panel"><div class="hiw-piece-panel-inner"><div class="hiw-piece-body">
+        <p class="sees"><strong>Sees:</strong> The numbers your last panel came back with.</p>
+        <p class="misses"><strong>Misses:</strong> An A1c can look fine in isolation. It does not show the two stressful months that got you there, or the plan to change it.</p>
+      </div></div></div>
+    </div>
+
+    <div class="hiw-piece" data-index="2">
+      <button class="hiw-piece-trigger" aria-expanded="false">
+        <span class="hiw-piece-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 4v16"/></svg></span>
+        <span class="hiw-piece-label-wrap"><span class="hiw-piece-title">Patient portal</span><span class="hiw-piece-sub">Snapshot 3 of 6</span></span>
+        <span class="hiw-piece-plus"></span>
+      </button>
+      <div class="hiw-piece-panel"><div class="hiw-piece-panel-inner"><div class="hiw-piece-body">
+        <p class="sees"><strong>Sees:</strong> Visit notes and a list of medications.</p>
+        <p class="misses"><strong>Misses:</strong> It shows what was prescribed. It has no idea whether you can afford to fill it, or whether it fits into a day that is already full.</p>
+      </div></div></div>
+    </div>
+
+    <div class="hiw-piece" data-index="3">
+      <button class="hiw-piece-trigger" aria-expanded="false">
+        <span class="hiw-piece-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="6" rx="3"/><line x1="12" y1="9" x2="12" y2="15"/></svg></span>
+        <span class="hiw-piece-label-wrap"><span class="hiw-piece-title">Pharmacy record</span><span class="hiw-piece-sub">Snapshot 4 of 6</span></span>
+        <span class="hiw-piece-plus"></span>
+      </button>
+      <div class="hiw-piece-panel"><div class="hiw-piece-panel-inner"><div class="hiw-piece-body">
+        <p class="sees"><strong>Sees:</strong> What was filled, and when.</p>
+        <p class="misses"><strong>Misses:</strong> A late refill shows up as a data point. It does not show the ride that fell through, or the copay that had to wait until payday.</p>
+      </div></div></div>
+    </div>
+
+    <div class="hiw-piece" data-index="4">
+      <button class="hiw-piece-trigger" aria-expanded="false">
+        <span class="hiw-piece-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-5 4 9 2-4h6"/></svg></span>
+        <span class="hiw-piece-label-wrap"><span class="hiw-piece-title">Daily life</span><span class="hiw-piece-sub">Snapshot 5 of 6</span></span>
+        <span class="hiw-piece-plus"></span>
+      </button>
+      <div class="hiw-piece-panel"><div class="hiw-piece-panel-inner"><div class="hiw-piece-body">
+        <p class="sees"><strong>Sees:</strong> Meals, movement, and mood, logged on your own.</p>
+        <p class="misses"><strong>Misses:</strong> It sees a rough week. On its own, it never connects that week to what your last lab result was already trying to tell you.</p>
+      </div></div></div>
+    </div>
+
+    <div class="hiw-piece" data-index="5">
+      <button class="hiw-piece-trigger" aria-expanded="false">
+        <span class="hiw-piece-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></span>
+        <span class="hiw-piece-label-wrap"><span class="hiw-piece-title">Care team visit</span><span class="hiw-piece-sub">Snapshot 6 of 6</span></span>
+        <span class="hiw-piece-plus"></span>
+      </button>
+      <div class="hiw-piece-panel"><div class="hiw-piece-panel-inner"><div class="hiw-piece-body">
+        <p class="sees"><strong>Sees:</strong> One conversation, one point in time.</p>
+        <p class="misses"><strong>Misses:</strong> Your care team sees the appointment. On its own, that visit cannot see everything that happens in the weeks before or after it.</p>
+      </div></div></div>
+    </div>
+  </div>
+
+  <div class="hiw-reveal" id="hiwReveal">
+    <div class="hiw-reveal-card">
+      <div class="hiw-reveal-kicker">All 6 snapshots placed</div>
+      <h2>This is what one connected picture looks like.</h2>
+      <p>Reconciled into a single, trustworthy record, off which HealthLink360 can tell the patient, the community health worker, and the clinician exactly what needs attention, right now, and why.</p>
+      <p>Our goal is not to replace your care team. It is to decode the whispers before they become emergencies.</p>
+      <div class="hiw-reveal-quote">"An agentic system that turns overwhelming health data into exactly which patients need attention, right now, and why."</div>
+    </div>
+  </div>
+
+  <div class="hiw-metric">Measured in <strong>Meaningful Preventive Actions Completed</strong>, not pages viewed.</div>
+
+  <div class="hiw-closing">
+    <h2>See where you fit in your own picture.</h2>
+    <p>Reserve your spot in the founding cohort and be among the first to get a Digital Twin and Coach360 access.</p>
+    <div class="hiw-closing-actions">
+      <a href="waitlist.html" class="hl-cta lg">Request Early Access <span>→</span></a>
+      <a href="HealthLink360 Website.html#trust" class="hl-ghost">See what backs it</a>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  var pieces = Array.prototype.slice.call(document.querySelectorAll('.hiw-piece'));
+  var solved = new Set();
+  var fill = document.getElementById('hiwFill');
+  var count = document.getElementById('hiwCount');
+  var reveal = document.getElementById('hiwReveal');
+
+  function updateProgress() {
+    count.textContent = solved.size;
+    fill.style.width = (solved.size / pieces.length * 100) + '%';
+    if (solved.size === pieces.length) {
+      reveal.classList.add('shown');
+      reveal.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  pieces.forEach(function (piece) {
+    var trigger = piece.querySelector('.hiw-piece-trigger');
+    trigger.addEventListener('click', function () {
+      var isOpen = piece.classList.contains('open');
+      piece.classList.toggle('open', !isOpen);
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+      if (!isOpen) {
+        piece.classList.add('solved');
+        solved.add(piece.dataset.index);
+        updateProgress();
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
