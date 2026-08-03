@@ -183,7 +183,7 @@ button { font: inherit; cursor: pointer; }
   display: grid; grid-template-columns: 1fr 320px; gap: 40px;
   align-items: end; min-height: calc(100vh - 220px);
 }
-.hl-hero-copy { max-width: 640px; }
+.hl-hero-copy { max-width: 640px; align-self: start; margin-top: 190px; }
 .hl-hero-floats {
   display: flex; flex-direction: column; gap: 16px; align-items: stretch;
   justify-content: flex-end; min-width: 0;
@@ -281,9 +281,9 @@ button { font: inherit; cursor: pointer; }
 
 .hl-stats {
   display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
-  margin-top: 40px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 .hl-stats > div { display: flex; flex-direction: column; gap: 4px; }
 .hl-stats b { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; color: #fff; font-feature-settings: "tnum"; }

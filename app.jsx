@@ -146,16 +146,16 @@ function Hero({ onWaitlist }) {
             life, helping you understand what matters and take the next step, through
             appointments, setbacks, everyday choices, and the work of staying well.
           </Reveal>
-          <Reveal as="div" delay={160} className="hl-hero-actions">
-            <button className="hl-cta lg" onClick={onWaitlist}>Request Early Access <span>→</span></button>
-            <a href="#companion" className="hl-ghost">See the experience <span aria-hidden="true">→</span></a>
-          </Reveal>
-          <Reveal as="div" delay={240} className="hl-stats">
+          <Reveal as="div" delay={160} className="hl-stats">
             <div><b>400+</b><span>data ingestion points</span></div>
             <div className="sep"></div>
             <div><b>93%</b><span>retention in pilots</span></div>
             <div className="sep"></div>
             <div><b>21d</b><span>to first measurable change</span></div>
+          </Reveal>
+          <Reveal as="div" delay={240} className="hl-hero-actions">
+            <button className="hl-cta lg" onClick={onWaitlist}>Request Early Access <span>→</span></button>
+            <a href="#companion" className="hl-ghost">See the experience <span aria-hidden="true">→</span></a>
           </Reveal>
         </div>
 
