@@ -109,17 +109,15 @@ function Nav({ onWaitlist }) {
 
 function HeroTicker() {
   const label = "ONC's EHIgnite Phase 1 Winner. To learn more, click here.";
-  const chip = (key) =>
-  <span className="hl-ticker-item" key={key}>
-      <MiniIcon k="award" />
-      <span>ONC&rsquo;s EHIgnite Phase 1 Winner.</span>
-      <span className="hl-ticker-link">To learn more, click here.</span>
-    </span>;
-
-  const items = Array.from({ length: 12 }, (_, i) => chip(i));
   return (
     <a href="ehignite/" className="hl-hero-ticker" aria-label={label}>
-      <div className="hl-hero-ticker-track" aria-hidden="true">{items}</div>
+      <div className="hl-hero-ticker-track" aria-hidden="true">
+        <span className="hl-ticker-item">
+          <MiniIcon k="award" />
+          <span>ONC&rsquo;s EHIgnite Phase 1 Winner.</span>
+          <span className="hl-ticker-link">To learn more, click here.</span>
+        </span>
+      </div>
     </a>);
 
 }
@@ -336,20 +334,16 @@ function LogoTicker() {
   { name: "Build In Tulsa", img: "assets/logos/build-in-tulsa.png" },
   { name: "Visible Hands" }];
 
-  const renderSet = (key) =>
-  <div className="hl-logo-set" key={key}>
-      {logos.map((l, i) =>
-      <span className="hl-logo-item" key={i}>
-          {l.img ? <img src={l.img} alt={l.name} loading="lazy" /> : l.name}
-        </span>
-      )}
-    </div>;
-
   return (
     <div className="hl-logo-ticker">
       <div className="hl-logo-ticker-track">
-        {renderSet("a")}
-        {renderSet("b")}
+        <div className="hl-logo-set">
+          {logos.map((l, i) =>
+          <span className="hl-logo-item" key={i}>
+              {l.img ? <img src={l.img} alt={l.name} loading="lazy" /> : l.name}
+            </span>
+          )}
+        </div>
       </div>
     </div>);
 

@@ -208,17 +208,12 @@ button { font: inherit; cursor: pointer; }
   text-decoration: none;
   cursor: pointer;
 }
-.hl-hero-ticker:hover .hl-hero-ticker-track { animation-play-state: paused; }
 .hl-hero-ticker-track {
-  display: flex; align-items: center; gap: 56px;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
   height: 100%;
-  width: max-content;
+  width: 100%;
   white-space: nowrap;
-  padding-left: 56px;
-  animation: hl-ticker-scroll 26s linear infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .hl-hero-ticker-track { animation: none; }
+  padding: 0 16px;
 }
 .hl-ticker-item {
   display: inline-flex; align-items: center; gap: 10px;
@@ -230,10 +225,6 @@ button { font: inherit; cursor: pointer; }
   color: #fff; text-decoration: underline; text-underline-offset: 3px;
 }
 .hl-hero-ticker:hover .hl-ticker-item .hl-ticker-link { color: var(--c-a); }
-@keyframes hl-ticker-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
 
 .hl-hero-inner {
   position: relative; z-index: 2;
@@ -572,18 +563,11 @@ button { font: inherit; cursor: pointer; }
 }
 .hl-logo-ticker {
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
 .hl-logo-ticker-track {
-  display: flex; width: max-content;
-  animation: hl-logo-scroll 32s linear infinite;
+  display: flex; flex-wrap: wrap; width: 100%; justify-content: center;
 }
-.hl-logo-ticker:hover .hl-logo-ticker-track { animation-play-state: paused; }
-@media (prefers-reduced-motion: reduce) {
-  .hl-logo-ticker-track { animation: none; flex-wrap: wrap; width: 100%; justify-content: center; }
-}
-.hl-logo-set { display: flex; align-items: center; flex: none; }
+.hl-logo-set { display: flex; align-items: center; flex-wrap: wrap; justify-content: center; flex: none; }
 .hl-logo-item {
   position: relative;
   display: inline-flex; align-items: center; justify-content: center;
@@ -592,7 +576,7 @@ button { font: inherit; cursor: pointer; }
   color: var(--ink-mute); opacity: 0.75;
   white-space: nowrap; padding: 0 26px;
 }
-.hl-logo-item::after {
+.hl-logo-item:not(:last-child)::after {
   content: ""; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
   width: 4px; height: 4px; border-radius: 50%; background: var(--ink-mute); opacity: 0.4;
 }
@@ -600,10 +584,6 @@ button { font: inherit; cursor: pointer; }
   height: 100%; width: auto; max-width: 140px; object-fit: contain;
   filter: grayscale(1); opacity: 0.7;
   display: block;
-}
-@keyframes hl-logo-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
 }
 
 /* Trust-section closing CTA */
