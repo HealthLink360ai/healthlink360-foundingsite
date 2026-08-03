@@ -355,6 +355,16 @@ function LogoTicker() {
 
 }
 
+function LogoBar() {
+  return (
+    <section className="hl-logobar">
+      <div className="hl-section-inner">
+        <LogoTicker />
+      </div>
+    </section>);
+
+}
+
 function TrustProof({ onWaitlist }) {
   const stats = [
   { value: "93%", label: "engagement", context: "in a prior Food-as-Medicine program" },
@@ -388,7 +398,6 @@ function TrustProof({ onWaitlist }) {
             <div className="hl-trust-stats-note">Early program and pilot outcomes. Results may vary by population, program design, and level of support.</div>
           </Reveal>
         </div>
-        <Reveal delay={240} as="div" className="hl-logo-ticker-wrap"><LogoTicker /></Reveal>
         <Reveal delay={280} as="div" className="hl-trust-footnote">Technology should help you feel more informed, not more overwhelmed.</Reveal>
         <Reveal delay={320} className="hl-trust-cta">
           <div className="hl-trust-cta-text">
@@ -427,7 +436,6 @@ function WaitlistModal({ open, onClose }) {
 
         {!submitted ?
         <>
-            <div className="hl-kicker light">Founding Cohort</div>
             <h3 className="hl-modal-title">Reserve your spot.</h3>
             <p className="hl-modal-sub">
               Join the HealthLink360 waitlist and be first in line for early access
@@ -442,7 +450,14 @@ function WaitlistModal({ open, onClose }) {
               noValidate>
 
               <input type="text" name="FIRSTNAME" placeholder="First name" aria-label="First name" required />
+              <input type="text" name="LASTNAME" placeholder="Last name" aria-label="Last name" required />
               <input type="email" name="EMAIL" placeholder="you@email.com" aria-label="Email address" required />
+              <select name="INTEREST_TYPE" aria-label="Interest type" defaultValue="" required>
+                <option value="" disabled>I am a...</option>
+                <option value="User">User</option>
+                <option value="Care Team">Care Team</option>
+                <option value="Community Health Worker">Community Health Worker</option>
+              </select>
               <div style={{ position: "absolute", left: "-5000px" }} aria-hidden="true">
                 <input type="text" name="email_address_check" tabIndex="-1" defaultValue="" />
               </div>
@@ -526,6 +541,7 @@ function App() {
     <div className="hl-root">
       <Nav onWaitlist={openWaitlist} />
       <Hero onWaitlist={openWaitlist} />
+      <LogoBar />
       <Problem />
       <Seasons />
       <Companion />
