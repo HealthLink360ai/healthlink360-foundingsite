@@ -317,7 +317,7 @@ function CareTeamsBridge() {
             workflow.
           </p>
         </div>
-        <a href="mailto:partners@healthlink360.ai" className="hl-cta">Explore for care teams <span>→</span></a>
+        <a href="/providers.html" className="hl-cta">Explore for care teams <span>→</span></a>
       </div>
     </section>);
 
