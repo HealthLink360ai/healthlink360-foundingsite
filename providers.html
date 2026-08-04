@@ -139,28 +139,43 @@
   }
   .pv-loop-tag b { color: var(--pv-accent); }
 
-  /* ---- Full-bleed photo band ---- */
-  .pv-photo-band {
-    position: relative; isolation: isolate; overflow: hidden;
-    padding: 110px var(--pv-pad); color: #fff; text-align: center;
+  /* ---- Generic photo placeholder (until real photography exists) ---- */
+  .pv-placeholder {
+    position: relative; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(160deg, rgba(var(--pv-glow),.10) 0%, rgba(124,58,237,.08) 100%);
+    border: 1.5px dashed rgba(124,58,237,.3);
+    border-radius: var(--pv-r-lg);
+    overflow: hidden;
   }
-  .pv-photo-band img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; z-index: 0; }
-  .pv-photo-scrim {
-    position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(180deg, rgba(8,3,15,.82) 0%, rgba(8,3,15,.62) 45%, rgba(8,3,15,.88) 100%);
+  .pv-placeholder span {
+    max-width: 80%; text-align: center; padding: 12px;
+    font-family: var(--pv-mono); font-size: 10.5px; line-height: 1.5;
+    color: var(--pv-ink-mute); letter-spacing: 0.01em;
   }
-  .pv-photo-band-inner { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; }
-  .pv-photo-band .pv-eyebrow-sm { color: #ff8bd9; }
-  .pv-photo-band h2 { color: #fff; margin: 0 auto 16px; }
-  .pv-photo-band p { color: rgba(255,255,255,.78); font-size: 16px; line-height: 1.6; max-width: 60ch; margin: 0 auto; }
 
-  /* ---- Why section: photo + cards ---- */
-  .pv-why-grid { display: grid; grid-template-columns: minmax(260px, 34%) 1fr; gap: 28px; align-items: start; margin-top: 38px; }
-  @media (max-width: 900px) { .pv-why-grid { grid-template-columns: 1fr; } }
-  .pv-why-photo { border-radius: var(--pv-r-lg); overflow: hidden; border: 1px solid var(--pv-line); position: sticky; top: 96px; }
-  @media (max-width: 900px) { .pv-why-photo { position: static; } }
-  .pv-why-photo img { width: 100%; aspect-ratio: 51 / 91; object-fit: cover; display: block; }
-  .pv-diff.pv-why-cards { margin-top: 0; }
+  /* ---- Quote card with a small framed photo (not full-bleed) ---- */
+  .pv-quote-card {
+    background: var(--pv-bg-alt); border: 1px solid var(--pv-line); border-radius: var(--pv-r-xl);
+    padding: clamp(28px, 4vw, 44px); display: flex; gap: 32px; align-items: center;
+  }
+  @media (max-width: 720px) { .pv-quote-card { flex-direction: column; text-align: center; } }
+  .pv-quote-frame {
+    flex: none; width: 168px; height: 168px; border-radius: 16px;
+    transform: rotate(-2deg);
+    box-shadow: 0 10px 26px rgba(20,8,32,.12);
+  }
+  .pv-quote-frame .pv-placeholder { width: 100%; height: 100%; border-radius: 14px; }
+  .pv-quote-card blockquote {
+    margin: 0; font-size: clamp(17px, 1.8vw, 20px); line-height: 1.5; font-weight: 500;
+    color: var(--pv-ink); text-wrap: pretty;
+  }
+  .pv-quote-card .pv-quote-attrib { margin-top: 12px; font-size: 13px; color: var(--pv-ink-mute); }
+
+  /* ---- Why section: photo tiles mixed into the card grid ---- */
+  .pv-photo-tile { padding: 0 !important; overflow: hidden; display: flex; flex-direction: column; }
+  .pv-photo-tile .pv-placeholder { aspect-ratio: 4 / 3; border-radius: 0; border-width: 1.5px 0 0 0; border-top: 1.5px dashed rgba(124,58,237,.3); border-left: none; border-right: none; border-bottom: none; }
+  .pv-photo-tile .pv-photo-tile-cap { padding: 16px 20px 20px; font-size: 13px; color: var(--pv-ink-mute); }
+  .pv-photo-tile .pv-photo-tile-cap b { color: var(--pv-ink); display: block; font-size: 14px; margin-bottom: 3px; }
 
   /* ---- Generic content ---- */
   .pv-eyebrow-sm { font-family: var(--pv-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pv-accent); font-weight: 700; margin-bottom: 10px; }
@@ -168,8 +183,10 @@
   .pv-lede2 { font-size: clamp(15.5px, 1.2vw, 17.5px); line-height: 1.6; color: var(--pv-ink-soft); max-width: 62ch; }
 
   .pv-cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 38px; }
-  .pv-diff { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 38px; }
-  @media (max-width: 860px) { .pv-cols-3, .pv-diff { grid-template-columns: 1fr; } }
+  .pv-diff { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 38px; }
+  @media (max-width: 900px) { .pv-diff { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 860px) { .pv-cols-3 { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .pv-diff { grid-template-columns: 1fr; } }
 
   .pv-card { background: #fff; border: 1px solid var(--pv-line); border-radius: var(--pv-r-lg); padding: 26px; }
   .pv-card .num { font-family: var(--pv-mono); font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--pv-accent); margin-bottom: 10px; }
@@ -320,7 +337,7 @@
         <div class="pv-loop-step">
           <div class="pv-loop-dot">4</div>
           <b>Return the evidence</b>
-          <span>A clinician-reviewed Digital Twin Snapshot lands back in your EHR workflow.</span>
+          <span>A clinician-reviewed evidence summary lands back in your EHR workflow.</span>
         </div>
       </div>
       <div class="pv-loop-tag">North Star metric: <b>Meaningful Preventive Actions Completed</b></div>
@@ -328,14 +345,18 @@
   </div>
 </header>
 
-<!-- ============ PHOTO BAND ============ -->
-<section class="pv-photo-band">
-  <img src="assets/trust-homevisit.jpg" alt="A community health worker sharing a warm conversation with a patient during a home visit"/>
-  <div class="pv-photo-scrim"></div>
-  <div class="pv-photo-band-inner">
-    <p class="pv-eyebrow-sm">Built for the people doing the work</p>
-    <h2 class="pv-h2">CHWs and care teams already do this work. We just help it show up.</h2>
-    <p>Every conversation, every follow-up, every barrier a CHW talks a patient through between visits, HealthLink360 turns it into evidence your clinicians and your funders can actually see.</p>
+<!-- ============ QUOTE + PHOTO ============ -->
+<section class="pv-section" style="padding-top:64px; padding-bottom:64px;">
+  <div class="pv-wrap">
+    <div class="pv-quote-card">
+      <div class="pv-quote-frame">
+        <div class="pv-placeholder"><span>PHOTO NEEDED: CHW visiting a patient at home, candid, warm lighting</span></div>
+      </div>
+      <div>
+        <blockquote>"CHWs and care teams already do this work. We just help it show up, every conversation, every follow-up, every barrier talked through between visits, turned into evidence your clinicians and funders can actually see."</blockquote>
+        <div class="pv-quote-attrib">— How HealthLink360 fits into the CHW workflow</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -385,8 +406,8 @@
       <div class="pv-card">
         <div class="num">03</div>
         <h3>Return evidence to the chart</h3>
-        <p>Every offer, decision, action, barrier, and response is tracked through the preventive measure lifecycle. Your clinicians review a concise Digital Twin Snapshot, evidence in, not another portal to check.</p>
-        <div class="pv-pill-row"><span class="pv-pill">Clinician-reviewed write-back</span><span class="pv-pill">Digital Twin Snapshot</span><span class="pv-pill">Audit-ready</span></div>
+        <p>Every offer, decision, action, barrier, and response is tracked through the preventive measure lifecycle. Your clinicians review a concise evidence summary, evidence in, not another portal to check.</p>
+        <div class="pv-pill-row"><span class="pv-pill">Clinician-reviewed write-back</span><span class="pv-pill">Source-linked evidence</span><span class="pv-pill">Audit-ready</span></div>
       </div>
     </div>
   </div>
@@ -397,20 +418,20 @@
   <div class="pv-wrap">
     <p class="pv-eyebrow-sm">Why HealthLink360</p>
     <h2 class="pv-h2">Built to complement your stack, and to earn your community's trust</h2>
-    <div class="pv-why-grid">
-      <div class="pv-why-photo">
-        <img src="assets/story-appointment.jpg" alt="A patient and provider reviewing information together during an appointment" loading="lazy"/>
-      </div>
-      <div class="pv-diff pv-why-cards">
+    <div class="pv-diff">
       <div class="pv-card">
         <div class="pv-glyph">🔗</div>
         <div><h3>Works with Oracle Health, Epic &amp; your EHR</h3>
-          <p>Your EHR stays the clinical system of record. HealthLink360 is the system of <b>action evidence</b>, read-only ingestion in, clinician-reviewed snapshots back. No second EHR, no swivel-chair workflow.</p></div>
+          <p>Your EHR stays the clinical system of record. HealthLink360 is the system of <b>action evidence</b>, read-only ingestion in, clinician-reviewed summaries back. No second EHR, no swivel-chair workflow.</p></div>
       </div>
       <div class="pv-card">
         <div class="pv-glyph">🛡️</div>
         <div><h3>Governed AI, not a black box</h3>
           <p>Every agent capability declares what it needs, what it may do, and who is accountable, before it acts. You can phase deployment feature by feature and audit every activation.</p></div>
+      </div>
+      <div class="pv-card pv-photo-tile">
+        <div class="pv-placeholder"><span>PHOTO NEEDED: CHW at a laptop reviewing a patient's plan, FQHC office setting</span></div>
+        <div class="pv-photo-tile-cap"><b>Built alongside CHWs</b>Designed with the people who do this work every day.</div>
       </div>
       <div class="pv-card">
         <div class="pv-glyph">🤝</div>
@@ -422,6 +443,9 @@
         <div><h3>One metric that can't be gamed</h3>
           <p>We measure <b>Meaningful Preventive Actions Completed</b>, with opportunity denominators, verification, barriers, and equity built into the definition. Not screens fired. Not referrals sent. Actions completed.</p></div>
       </div>
+      <div class="pv-card pv-photo-tile">
+        <div class="pv-placeholder"><span>PHOTO NEEDED: FQHC clinic exterior or waiting room, welcoming, community feel</span></div>
+        <div class="pv-photo-tile-cap"><b>Rooted in the community</b>Built for the health centers already serving your neighbors.</div>
       </div>
     </div>
   </div>
