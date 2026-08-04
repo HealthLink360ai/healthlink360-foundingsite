@@ -317,7 +317,7 @@ function CareTeamsBridge() {
             workflow.
           </p>
         </div>
-        <a href="/providers.html" className="hl-cta">Explore for care teams <span>→</span></a>
+        <a href="/providers" className="hl-cta">Explore for care teams <span>→</span></a>
       </div>
     </section>);
 

@@ -4,6 +4,7 @@
   ],
   "rewrites": [
     { "source": "/", "destination": "/HealthLink360%20Website.html" },
-    { "source": "/ehignite/", "destination": "/ehignite/index.html" }
+    { "source": "/ehignite/", "destination": "/ehignite/index.html" },
+    { "source": "/providers", "destination": "/providers.html" }
   ]
 }
