@@ -5,6 +5,7 @@
   "rewrites": [
     { "source": "/", "destination": "/HealthLink360%20Website.html" },
     { "source": "/ehignite/", "destination": "/ehignite/index.html" },
+    { "source": "/careteams", "destination": "/providers.html" },
     { "source": "/providers", "destination": "/providers.html" },
     { "source": "/foodasmedicine", "destination": "/food-as-medicine.html" },
     { "source": "/food-as-medicine", "destination": "/food-as-medicine.html" }

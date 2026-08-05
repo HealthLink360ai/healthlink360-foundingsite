@@ -98,7 +98,8 @@ function Nav({ onWaitlist }) {
       <Logo />
       <ul>
         <li><a href="#top">Individuals</a></li>
-        <li><a href="#care-teams">Care Teams</a></li>
+        <li><a href="/careteams">Care Teams</a></li>
+        <li><a href="/foodasmedicine">Food as Medicine</a></li>
         <li><a href="#trust">Trust</a></li>
         <li><a href="#about">About</a></li>
       </ul>
@@ -317,7 +318,7 @@ function CareTeamsBridge() {
             workflow.
           </p>
         </div>
-        <a href="/providers" className="hl-cta">Explore for care teams <span>→</span></a>
+        <a href="/careteams" className="hl-cta">Explore for care teams <span>→</span></a>
       </div>
     </section>);
 
@@ -483,8 +484,8 @@ function WaitlistModal({ open, onClose }) {
 function Footer() {
   const cols = [
   { title: "For individuals", links: [["How it works", "how-it-works.html"], ["The experience", "#companion"], ["Privacy & security", "#trust"], ["FAQ", "waitlist.html"]] },
-  { title: "For care teams", links: [["Overview", "#care-teams"], ["Solutions", "#care-teams"], ["Resources", "#trust"], ["Request a demo", "mailto:partners@healthlink360.ai"]] },
-  { title: "For organizations", links: [["Population health", "#trust"], ["Community impact", "#trust"], ["Partnerships", "mailto:partners@healthlink360.ai"]] },
+  { title: "For care teams", links: [["Overview", "/careteams"], ["Solutions", "/careteams"], ["Resources", "#trust"], ["Request a demo", "mailto:partners@healthlink360.ai"]] },
+  { title: "For organizations", links: [["Food as Medicine", "/foodasmedicine"], ["Population health", "#trust"], ["Community impact", "#trust"], ["Partnerships", "mailto:partners@healthlink360.ai"]] },
   { title: "About", links: [["Our mission", "#top"], ["Our story", "#top"], ["Contact us", "mailto:info@healthlink360.ai"]] }];
 
   return (
